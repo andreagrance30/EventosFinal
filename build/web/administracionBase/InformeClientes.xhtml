@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="plantilla.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:define name="content">
+
+        <h:form id="cantidadPersonasForm">
+            <p:growl id="growl" showDetail="false" />
+
+            <h:panelGroup>
+            <b>    <h:outputText style="font-size: 15px" value="INFORME DE APERTURA Y CIERRE DE CAJA "/> </b>
+            <br/> <br/>
+                 <h:outputText style="" value="Ingrese fechas"/>
+                 <br/><br/>
+                <h:outputText value="Desde: "/>
+               <!--     <h:inputText  id="inputCantidad" value="{controladorProducto.productoSeleccionado.cantidad}" />-->
+                 <p:calendar value="#{cantidadPersonas.fechaInicial}" effect="fadeIn" pattern="dd/MM/yyyy">
+                    <p:ajax event="change" listener="#{cantidadPersonas.actualizarFechaInicio}"/>
+                </p:calendar> 
+            </h:panelGroup>
+            <br/><br/>
+            <h:panelGroup>
+                <h:outputText style="" value="Hasta: "/>
+                <p:calendar value="#{cantidadPersonas.fechaFinal}" effect="fadeIn" pattern="dd/MM/yyyy">
+                    <p:ajax event="change" listener="#{cantidadPersonas.actualizarFechaFin}"/>
+                </p:calendar>
+                 <!--   <h:inputText  id="inputCanti" value="{controladorProducto.productoSeleccionado.cantidad}" /> -->
+            </h:panelGroup>
+            <br/><br/>
+
+            <p:commandButton
+                style=""
+                ajax="false"
+                value="Ver Resultado"
+                image="ui-icon ui-icon-print"
+                action="#{cantidadPersonas.actualizarResultado}">
+            </p:commandButton>
+
+
+            <br/><br/>
+            <h:outputText value="Opciones rápidas: "/>
+            <br/><br/>
+            <p:commandButton
+                style=""
+                ajax="false"
+                value="Usuario"
+                image="ui-icon ui-icon-print"
+                action="#{cantidadPersonas.setPeriodoSemana}">
+            </p:commandButton>
+      <!--     <p:commandButton
+                style="margin-left:1em"
+                ajax="false"
+                value="Medio de Pago"
+                image="ui-icon ui-icon-print"
+                action="{cantidadPersonas.setPeriodoMes}">
+            </p:commandButton> -->
+            <br/><br/>
+            <h:outputText value="Elemento Seleccionado: "/>
+            <br/>
+             <h:inputText  id="inputCan10" value="#{controladorProducto.productoSeleccionado.cantidad}" />
+             <br/><br/>
+             
+             <p:commandButton
+                style="margin-left:1em"
+                ajax="false"
+                value="Imprimir Informe"
+                image="ui-icon ui-icon-print"
+                action="#{cantidadPersonas.setPeriodoAnho}">
+            </p:commandButton> 
+             
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+

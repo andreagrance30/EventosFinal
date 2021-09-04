@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene Scope="Project" version="2">
+    <Scope Scope="Faces Configuration Only"/>
+    <Scope Scope="Project">
+        <Node id="recursos/plantillas/formCuentasPagarPlantilla.xhtml" x="650" y="5100" zoom="true"/>
+        <Node id="recursos/componentes/menuRecursosHumanos.xhtml" x="8400" y="900" zoom="true"/>
+        <Node id="recursos/componentes/menuModulosBox.xhtml" x="400" y="3000" zoom="true"/>
+        <Node id="recursos/plantillas/formFuerzaVentasPlantilla.xhtml" x="1400" y="1650" zoom="true"/>
+        <Node id="recursos/componentes/menuImportacionesRef.xhtml" x="5900" y="1650" zoom="true"/>
+        <Node id="administracionBase/inicio.xhtml" x="4400" y="750" zoom="true"/>
+        <Node id="administracionBase/componentes/audDialogListadoTablas.xhtml" x="1900" y="750" zoom="true"/>
+        <Node id="recursos/componentes/menuRepartos.xhtml" x="150" y="1800" zoom="true"/>
+        <Node id="recursos/plantillas/paginaInicioPlantilla.xhtml" x="1150" y="2250" zoom="true"/>
+        <Node id="administracionBase/componentes/nuevoTipoCambioDialog.xhtml" x="650" y="2100" zoom="true"/>
+        <Node id="administracionBase/componentes/editarEmpresaDialog.xhtml" x="400" y="1650" zoom="true"/>
+        <Node id="administracionBase/componentes/selectModulo.xhtml" x="1150" y="450" zoom="true"/>
+        <Node id="administracionBase/componentes/selectPersonaDialog.xhtml" x="2400" y="750" zoom="true"/>
+        <Node id="administracionBase/componentes/selectEmpresa.xhtml" x="5150" y="600" zoom="true"/>
+        <Node id="recursos/Error.xhtml" x="2400" y="600" zoom="true"/>
+        <Node id="administracionBase/componentes/selectMonedaDialog.xhtml" x="3400" y="300" zoom="true"/>
+        <Node id="administracionBase/componentes/selectGrupoUsuario.xhtml" x="1650" y="450" zoom="true"/>
+        <Node id="administracionBase/componentes/selectPermisoOpciones.xhtml" x="3150" y="1650" zoom="true"/>
+        <Node id="administracionBase/componentes/editarTipoCambioDialog.xhtml" x="2400" y="1650" zoom="true"/>
+        <Node id="recursos/plantillas/default.xhtml" x="1150" y="1650" zoom="true"/>
+        <Node id="recursos/componentes/menuCuentasPagar.xhtml" x="1900" y="2700" zoom="true"/>
+        <Node id="administracionBase/sessionTimeOut.xhtml" x="4900" y="750" zoom="true"/>
+        <Node id="recursos/plantillas/formCuentasCobrarPlantilla.xhtml" x="400" y="600" zoom="true"/>
+        <Node id="recursos/componentes/menuAdministracionBase.xhtml" x="150" y="1950" zoom="true"/>
+        <Node id="recursos/plantillas/formAdministracionBasePlantilla.xhtml" x="4150" y="1050" zoom="true"/>
+        <Node id="administracionBase/componentes/grupoUsuarioTabla.xhtml" x="4900" y="450" zoom="true"/>
+        <Node id="administracionBase/componentes/selectAccesoGrupo.xhtml" x="650" y="300" zoom="true"/>
+        <Node id="recursos/componentes/menuImportaciones.xhtml" x="5900" y="300" zoom="true"/>
+        <Node id="administracionBase/componentes/selectEjercicio.xhtml" x="400" y="3150" zoom="true"/>
+        <Node id="recursos/plantillas/formStockPlantilla.xhtml" x="4150" y="750" zoom="true"/>
+        <Node id="recursos/plantillas/formImportacionesRefPlantilla.xhtml" x="4650" y="2250" zoom="true"/>
+        <Node id="administracionBase/componentes/selectPaisProvinciaDialog.xhtml" x="2900" y="1350" zoom="true"/>
+        <Node id="administracionBase/CambioClave.xhtml" x="400" y="150" zoom="true"/>
+        <Node id="administracionBase/componentes/selectMonedaTipoCambioDialog.xhtml" x="1650" y="1050" zoom="true"/>
+        <Node id="recursos/componentes/menuVentas.xhtml" x="1650" y="1650" zoom="true"/>
+        <Node id="administracionBase/Pedidos.xhtml" x="8900" y="750" zoom="true"/>
+        <Node id="administracionBase/login.xhtml" x="4650" y="450" zoom="true"/>
+        <Node id="recursos/plantillas/formRecursosHumanosPlantilla.xhtml" x="5900" y="2400" zoom="true"/>
+        <Node id="administracionBase/plantilla.xhtml" x="2400" y="300" zoom="true"/>
+        <Node id="recursos/componentes/menuCuentasCobrar.xhtml" x="2150" y="2250" zoom="true"/>
+        <Node id="recursos/componentes/menuStock.xhtml" x="1900" y="2400" zoom="true"/>
+        <Node id="recursos/plantillas/formImportacionesPlantilla.xhtml" x="1150" y="4350" zoom="true"/>
+        <Node id="administracionBase/Clientes.xhtml" x="9150" y="600" zoom="true"/>
+        <Node id="administracionBase/componentes/audDialogListadoUsuarios.xhtml" x="3900" y="1200" zoom="true"/>
+        <Node id="index.jsp" x="6150" y="1050" zoom="true"/>
+        <Node id="recursos/plantillas/formTesoreriaPlantilla.xhtml" x="2150" y="3450" zoom="true"/>
+        <Node id="recursos/componentes/menuPrimeFacesModulos.xhtml" x="150" y="750" zoom="true"/>
+        <Node id="recursos/componentes/menuServiciosMecanicos.xhtml" x="1650" y="4950" zoom="true"/>
+        <Node id="administracionBase/componentes/selectSucursalDialog.xhtml" x="400" y="450" zoom="true"/>
+        <Node id="recursos/componentes/mensajesJSFModalBox.xhtml" x="2900" y="1800" zoom="true"/>
+        <Node id="recursos/plantillas/formRepartosPlantilla.xhtml" x="650" y="2250" zoom="true"/>
+        <Node id="recursos/plantillas/formServiciosMecanicosPlantilla.xhtml" x="5900" y="2250" zoom="true"/>
+        <Node id="recursos/componentes/menuTesoreria.xhtml" x="1900" y="3000" zoom="true"/>
+        <Node id="recursos/componentes/menuFuerzaVentas.xhtml" x="400" y="3300" zoom="true"/>
+        <Node id="administracionBase/ConsultarPrecios.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="administracionBase/consultaAuditoria.xhtml" x="900" y="1500" zoom="true"/>
+        <Node id="administracionBase/inicioAdministracionBase.xhtml" x="2650" y="150" zoom="true"/>
+        <Node id="administracionBase/componentes/selectUsuario.xhtml" x="3650" y="450" zoom="true"/>
+        <Node id="administracionBase/componentes/resultadosBusquedaAuditoria.xhtml" x="2150" y="1950" zoom="true"/>
+        <Node id="administracionBase/componentes/nuevaEmpresaDialog.xhtml" x="2900" y="450" zoom="true"/>
+        <Node id="recursos/plantillas/formVentasPlantilla.xhtml" x="900" y="150" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations"/>
+</Scene>

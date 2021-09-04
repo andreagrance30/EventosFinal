@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jstl/core"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <h:panelGrid id="EmpresaPanelGriddisplay" columns="2" style="background-color: #ACCFE8">
+      <h:outputText id="EmpresaLabeldisplay" styleClass="label" value="Empresa: " />
+      <h:inputText  id="Empresadisplay" value="#{empresaControlador.empresaSeleccionada.codEmpresa}" size="40" maxlength="5" style="text-transform: uppercase" />
+      <h:outputText id="EmpresadescripLabeldisplay" styleClass="label" value="Descripcion: " />
+      <h:inputText  id="Empresadescripdisplay" value="#{empresaControlador.empresaSeleccionada.descripcion}" size="40" style="text-transform: uppercase" onkeyup="return cUpper(this);"  />
+      <h:outputText id="EmpresaTitRepLabeldisplay" styleClass="label" value="Titulo de Reportes: " />
+      <h:inputText  id="EmpresaTitRepdisplay" value="#{empresaControlador.empresaSeleccionada.tituloReportes}" size="40" style="text-transform: uppercase" onkeyup="return cUpper(this);" />
+      <h:outputText id="EmpresapersJurLabeldisplay" styleClass="label" value="Persona Juridica: " />
+      <h:inputText  id="EmpresapersJurdisplay" value="#{empresaControlador.empresaSeleccionada.bswPersonas.codPersona}" size="40" onclick="dialogSelectPersona.show()" />
+      <h:outputText id="EmpresapersJurNombreLabeldisplay" styleClass="label" value="Nombre Persona: " />
+      <h:inputText  id="EmpresapersJurNombredisplay" value="#{empresaControlador.empresaSeleccionada.bswPersonas.nombre}" size="40" disabled="true" />
+      <h:outputText id="EmpresaMonedaLabeldisplay" styleClass="label" value="Moneda: " />
+      <h:inputText  id="EmpresaMonedadisplay" value="#{empresaControlador.empresaSeleccionada.bswMonedas.codMoneda}" size="40" onclick="dialogSelectMoneda.show()" />
+      <h:outputText id="EmpresaMonedaNombreLabeldisplay" styleClass="label" value="Descripcion Moneda: " />
+      <h:inputText  id="EmpresaMonedaNombredisplay" value="#{empresaControlador.empresaSeleccionada.bswMonedas.descripcion}" size="40" disabled="true" />
+    </h:panelGrid>
+
+    <h:panelGrid id="empresasBotonesPanelGriddisplay" columns="3" style=" ">
+        <h:commandButton styleClass="boton" value="Guardar"  action="#{empresaControlador.guardar}"  style="position: relative" rendered="#{empresaControlador.puedeActualizar}"  />
+        <h:commandButton styleClass="boton" value="Eliminar" action="#{empresaControlador.borrar}" rendered="#{empresaControlador.puedeBorrar}" />
+      <h:commandButton styleClass="boton" value="Cancelar" onclick="dialogEditEmpresa.hide()" type="button" />
+    </h:panelGrid>
+</ui:composition>

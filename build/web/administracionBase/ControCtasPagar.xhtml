@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="plantilla.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:define name="content">
+
+        <h:form>
+            <p:growl id="growl" showDetail="false" />
+            <h:panelGrid id="pg">
+                <h:panelGroup>
+                    <h:outputText id="cuentas"
+                                  value="Lista de Cuentas a Pagar"
+                                  styleClass="tituloTabla" />
+                    <br/><br/>
+
+                </h:panelGroup>
+
+                <p:dataTable id="formasTabla2"  paginator="true" selectionMode="single" rows="15"
+                             paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown} " 
+                             rowsPerPageTemplate="10,15,20" var="cuentas"  value="#{controladorCtasPagar.listaCuentasPagar}"
+                             rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx"
+                             update="display panelGridModificar" onselectComplete="dialogoModificar.show()"
+                             selection="#{controladorCtasPagar.cuentasSeleccionado}">
+                    <p:column id="colNro" style="width: 50%" sortBy="#{cuentas.nroFactura}" filterBy="#{cuentas.nroFactura}">
+                        <f:facet name="header">Numero de Factura</f:facet>
+                        <h:outputText id="nombreCiudad" value="#{cuentas.nroFactura}">
+                        </h:outputText>
+                    </p:column>
+                    <p:column id="colFecha" style="width: 50%" sortBy="#{cuentas.fechaEmision}" filterBy="#{cuentas.fechaEmision}">
+                        <f:facet name="header">Fecha de Emision</f:facet>
+                        <p:calendar value="#{cuentas.fechaEmision}" effect="fadeIn" pattern="dd/MM/yyyy">
+                            <!--    <p:ajax event="change" listener="{controladorAjustes.actualizarFechaAjuste}"/>  -->
+                        </p:calendar>
+                    </p:column>
+                    <p:column id="colFecha2" style="width: 50%" sortBy="#{cuentas.fechaVencimiento}" filterBy="#{cuentas.fechaVencimiento}">
+                        <f:facet name="header">Fecha Vencimiento</f:facet>
+                        <p:calendar value="#{cuentas.fechaVencimiento}" effect="fadeIn" pattern="dd/MM/yyyy">
+                            <!--    <p:ajax event="change" listener="{controladorAjustes.actualizarFechaAjuste}"/>  -->
+                        </p:calendar>
+                    </p:column>
+                    <p:column id="colDescripcion" style="width: 50%" sortBy="#{cuentas.descripcion}" filterBy="#{cuentas.descripcion}">
+                        <f:facet name="header">Descripcion</f:facet>
+                        <h:outputText id="nombreDescri" value="#{cuentas.descripcion}">
+                        </h:outputText>
+                    </p:column>
+                    <p:column id="colMonto" style="width: 50%" sortBy="#{cuentas.monto}" filterBy="#{cuentas.monto}">
+                        <f:facet name="header">Monto</f:facet>
+                        <h:outputText id="nombreMonto" value="#{cuentas.monto}">
+                        </h:outputText>
+                    </p:column>
+                    <p:column id="colEstado" style="width: 50%" sortBy="#{cuentas.estado}" filterBy="#{cuentas.estado}">
+                        <f:facet name="header">Estado</f:facet>
+                        <h:outputText id="nombreEstado" value="#{cuentas.estado}" >
+                        </h:outputText>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGrid>
+
+
+            <p:dialog header="Modificar datos de cuentas"
+                      widgetVar="dialogoModificar"
+                      width="420"
+                      styleClass="outputpanel"
+                      height="200"
+                      closable="true"
+                      closeOnEscape="true"
+                      modal="true">
+
+                <p:outputPanel id="panelModificar"
+                               layout="inline">
+                    <h:panelGrid id="panelGridModificar"
+                                 columns="3"
+                                 styleClass="bgpanelgrid">
+                        <h:outputText styleClass="etiqueta"  value="Numero de Factura" />
+                        <h:inputText  id="inputNroFac" value="#{controladorCtasPagar.cuentasSeleccionado.nroFactura}" disabled="true" />
+                        <br/>
+                        <h:outputText styleClass="etiqueta"  value="Fecha de Emision" />
+                        <p:calendar value="#{controladorCtasPagar.cuentasSeleccionado.fechaEmision}" effect="fadeIn" pattern="dd/MM/yyyy" disabled="true">
+                        </p:calendar>
+                        <br/>
+                        <h:outputText styleClass="etiqueta"  value="Vencimiento" />
+                        <p:calendar value="#{controladorCtasPagar.cuentasSeleccionado.fechaVencimiento}" effect="fadeIn" pattern="dd/MM/yyyy" disabled="true">
+                        </p:calendar>
+                        <br/>
+                        <h:outputText styleClass="etiqueta"  value="Descripcion" />
+                        <h:inputText  id="inputDescripcion" value="#{controladorCtasPagar.cuentasSeleccionado.descripcion}" disabled="true"/>
+                        <br/>
+                        <h:outputText styleClass="etiqueta"  value="Monto" />
+                        <h:inputText  id="inputMonto" value="#{controladorCtasPagar.cuentasSeleccionado.monto}" disabled="true"/>
+                        <br/>
+                        <h:outputText styleClass="etiqueta"  value="Estado" />
+                        <h:selectOneRadio id="inputEstado" value="#{controladorCtasPagar.cuentasSeleccionado.estado}"
+                                          layout="pageDirection" style="font-size: 15px;" styleClass="bgpanelgridGray" 
+                                          disabled="#{controladorCtasPagar.estaPagado}">
+                            <f:selectItem itemLabel="Pagado" itemValue="pagado"  />
+                            <f:selectItem itemLabel="Pendiente" itemValue="pendiente" />
+                        </h:selectOneRadio>
+                        <br/>
+                    </h:panelGrid>
+
+                    <h:panelGroup>
+
+                        <p:commandButton image="ui-icon-disk"
+                                         value="#{i18n.boton_guardar}"
+                                         action="#{controladorCtasPagar.update}"
+                                         style="position: absolute; left: 30px; width: 100px"
+                                         onclick="cuentas" >
+                                         <p:ajax update="inputEstado" />
+                        </p:commandButton>
+
+                        <p:commandButton image="ui-icon-trash"
+                                         value="#{i18n.boton_eliminar}"
+                                         style="position: absolute; left: 140px; width: 100px"
+                                         action="#{controladorCtasPagar.delete()}"
+                                         onclick="cuentas"
+                                         update="pg"/>
+
+                        <p:commandButton image="ui-icon ui-icon-close"
+                                         value="#{i18n.boton_salir}"
+                                         style="position: absolute; left: 260px; width: 100px"
+                                         onclick="dialogoModificar.hide()"/>
+
+                    </h:panelGroup>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

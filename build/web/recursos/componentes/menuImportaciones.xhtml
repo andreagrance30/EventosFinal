@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:component>
+        <div id="menu_horizontal">
+            <h:form id="menuImportaciones">
+                <p:menubar styleClass="menuTipoLetra">
+                    <p:submenu label="Definiciones">
+                        <p:menuitem value="Proveedores" rendered="#{cmwProveedoresControlador.puedeConsultar}" url="../importaciones/CmwProveedores.xhtml"/>
+                        <p:menuitem value="Condiciones Compras" rendered="#{cmwCondicionesComprasControlador.puedeConsultar}" url="../importaciones/CmwCondicionesCompras.xhtml"/>
+                        <p:menuitem value="Aranceles" rendered="#{cmwArancelesControlador.puedeConsultar}" url="../importaciones/CmwAranceles.xhtml"/>
+                        <p:menuitem value="Vias" rendered="#{cmwViasControlador.puedeConsultar}" url="../importaciones/CmwVias.xhtml"/>
+                        <p:menuitem value="Aduanas" rendered="#{cmwAduanasControlador.puedeConsultar}" url="../importaciones/CmwAduanas.xhtml"/>
+                        <p:menuitem value="Puertos" rendered="#{cmwPuertosControlador.puedeConsultar}" url="../importaciones/CmwPuertos.xhtml"/>
+                        <p:menuitem>
+                            <h:link value="Personas" rendered="#{bswPersonasControlador.puedeConsultar}" outcome="../administracionBase/BswPersonas.xhtml">
+                                <f:param name="menu" value="/recursos/componentes/menuImportaciones.xhtml"/>
+                            </h:link>
+                        </p:menuitem>
+                        <p:menuitem>
+                            <h:link value="Paises"  outcome="../administracionBase/BswPaises.xhtml">
+                                <f:param name="menu" value="/recursos/componentes/menuImportaciones.xhtml"/>
+                            </h:link>
+                        </p:menuitem>
+                        <p:menuitem>
+                            <h:link value="Departamentos" rendered="#{provinciasControlador.puedeConsultar}" outcome="../administracionBase/BswProvincias.xhtml">
+                                <f:param name="menu" value="/recursos/componentes/menuImportaciones.xhtml"/>
+                            </h:link>
+                        </p:menuitem>
+                        <p:menuitem>
+                            <h:link value="Ciudades" rendered="#{bswCiudadesControlador.puedeConsultar}" outcome="../administracionBase/BswCiudades.xhtml">
+                                <f:param name="menu" value="/recursos/componentes/menuImportaciones.xhtml"/>
+                            </h:link>
+                        </p:menuitem>
+                        <p:menuitem>
+                            <h:link value="Barrios" rendered="#{bswBarriosControlador.puedeConsultar}" outcome="../administracionBase/BswBarrios.xhtml">
+                                <f:param name="menu" value="/recursos/componentes/menuImportaciones.xhtml"/>
+                            </h:link>
+                        </p:menuitem>
+                        <p:menuitem>
+                            <h:link value="Conceptos Gastos" rendered="#{bswSubTiposTranControlador.puedeConsultar}" outcome="../administracionBase/BswSubTiposTransaccion.xhtml">
+                                <f:param name="menu" value="/recursos/componentes/menuImportaciones.xhtml"/>
+                            </h:link>
+                        </p:menuitem>
+                    </p:submenu>
+                    <p:submenu label="Movimientos">
+                        <p:menuitem value="Pedidos" rendered="#{cmwMovimientosPedidoControlador.puedeConsultar}" url="../importaciones/CmwMovimientosPedidos.xhtml"/>
+                        <p:menuitem value="Proformas" rendered="#{cmwMovimientosProformasControlador.puedeConsultar}" url="../importaciones/CmwMovimientosProformas.xhtml"/>
+                        <p:menuitem value="Embarques" rendered="#{cmwEmbarquesControlador.puedeConsultar}" url="../importaciones/CmwEmbarques.xhtml"/>
+                        <p:menuitem value="Rutas de embarque" rendered="#{cmwRutasEmbarquesControlador.puedeConsultar}" url="../importaciones/CmwRutasEmbarques.xhtml"/>
+                        <p:menuitem value="Confirmación de Compra Local" rendered="#{cmwRutasEmbarquesControlador.puedeConsultar}" url="../importaciones/CmwConfirmacionCompraLocal.xhtml"/>
+                        <p:menuitem value="Anulación de Despacho" rendered="#{cmwRutasEmbarquesControlador.puedeConsultar}" url="../importaciones/CmwAnulacionDespacho.xhtml"/>
+                        <p:menuitem value="Gastos" rendered="#{cmwGastosControlador.puedeConsultar}" url="../importaciones/CmwGastos.xhtml"/>
+                        <p:menuitem value="Gastos de Exportacion" rendered="#{cmwGastosExControlador.puedeConsultar}" url="../importaciones/CmwGastosEx.xhtml"/>
+                        <p:menuitem value="Despachos" rendered="#{cmwGastosControlador.puedeConsultar}" url="../importaciones/CmwDespachos.xhtml"/>
+                        <p:menuitem value="Despachos Exportacion" rendered="#{cmwGastosControlador.puedeConsultar}" url="../importaciones/CmwDespachosEx.xhtml"/>
+                        <p:menuitem value="Factura" url="../importaciones/CmwFacturas.xhtml" rendered="#{cmwDespachosExControlador.puedeConsultar}"/>
+                        <p:menuitem value="Factura Exportacion" rendered="#{cmwFacturaExControlador.puedeConsultar}"  url="../importaciones/CmwFacturaEx.xhtml"/>
+                    </p:submenu>
+
+                    <p:submenu label="Reportes">
+                        <p:submenu label="Comparativos">
+                            <p:menuitem value="Comparativo de Costos" url="../importaciones/CmwComparativoCostos.xhtml" rendered="#{cmwComparativoCostosControlador.puedeConsultar}"/>
+                            <p:menuitem value="Comparativo de Costos RDA Suc. 96" rendered="#{cmwComparativoCostosSuc96Controlador.puedeConsultar}" url="../importaciones/CmwComparativoCostosSuc96.xhtml"/>
+                            <p:menuitem value="Comparativo de Ventas/Importaciones" rendered="#{cmwComparativoVentasImportacionesControlador.puedeConsultar}" url="../importaciones/CmwComparativoVentasImportaciones.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="Pedidos">
+                            <p:menuitem value="Productos pendientes en Pedidos" rendered="#{cmwPedidosPorNumeroControlador.puedeConsultar}" url="../importaciones/CmwPedidosPorNumero.xhtml"/>
+                            <p:menuitem value="Productos pendientes en Proveedor" rendered="#{cmwPedidosPorProveedorControlador.puedeConsultar}" url="../importaciones/CmwPedidosPorProveedor.xhtml"/>
+                            <p:menuitem value="Productos pendientes en Embarque" rendered="#{cmwPedidosPorEmbarqueControlador.puedeConsultar}" url="../importaciones/CmwPedidosPorEmbarque.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="Proformas">
+                            <p:menuitem value="Proformas por Número" rendered="#{cmwProformasPorNumeroControlador.puedeConsultar}" url="../importaciones/CmwProformasPorNumero.xhtml"/>
+                            <p:menuitem value="Proformas por Proveedor" rendered="#{cmwProformasPorProveedorControlador.puedeConsultar}" url="../importaciones/CmwProformasPorProveedor.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="Definiciones">
+                            <p:menuitem value="Aduanas" rendered="#{cmwRptAduanasControlador.puedeConsultar}" url="../importaciones/CmwRptAduanas.xhtml"/>
+                            <p:menuitem value="Puertos" rendered="#{cmwRptPuertosControlador.puedeConsultar}" url="../importaciones/CmwRptPuertos.xhtml"/>
+                            <p:menuitem value="Aranceles" rendered="#{cmwRptArancelesControlador.puedeConsultar}" url="../importaciones/CmwRptAranceles.xhtml"/>
+                            <p:menuitem value="Proveedores" rendered="#{cmwRptProveedoresControlador.puedeConsultar}" url="../importaciones/CmwRptProveedores.xhtml"/>
+                            <p:menuitem value="Condiciones de compras" rendered="#{cmwRptCondicionesComprasControlador.puedeConsultar}" url="../importaciones/CmwRptCondicionesCompras.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="Movimientos">
+                            <p:menuitem value="Embarques" url="../importaciones/CmwRptEmbarques.xhtml" rendered="#{cmwRptEmbarquesControlador.puedeConsultar}"/>
+                            <p:menuitem value="Rutas de Embarques" url="../importaciones/CmwRptRutasEmbarques.xhtml" rendered="#{cmwRptRutasEmbarquesControlador.puedeConsultar}"/>
+                            <p:menuitem value="Despachos" url="../importaciones/CmwRptDespachos.xhtml" rendered="#{cmwRptDespachosControlador.puedeConsultar}"/>
+                            <p:menuitem value="Gastos" url="../importaciones/CmwRptGastos.xhtml" rendered="#{cmwRptGastosControlador.puedeConsultar}"/>
+                            <p:menuitem value="Facturas" url="../importaciones/CmwRptFacturas.xhtml" rendered="#{cmwRptFacturasControlador.puedeConsultar}"/>
+                            <p:menuitem value="Articulos Nuevos" url="../importaciones/CmwReporteArticulosNuevos.xhtml" rendered="#{cmwReporteArticulosNuevosControlador.puedeConsultar}"/>
+                        </p:submenu>
+                        <p:submenu label="Reportes por Proveedor">
+                            <p:menuitem value="Importaciones por Proveedor" rendered="#{cmwRptImportacionesProvControlador.puedeConsultar}" url="../importaciones/CmwRptImportacionesProv.xhtml"/>
+                            <p:menuitem value="Movimientos por Proveedor" rendered="#{cmwResumenMovProveedorControlador.puedeConsultar}" url="../importaciones/CmwResumenMovProveedor.xhtml"/>
+                        </p:submenu>
+                        <p:menuitem value="Productos pendientes en Pedidos" url="../importaciones/CmwReporteProductosPendientesPedidos.xhtml" rendered="#{cmwReporteProductosPendientesPedidosControlador.puedeConsultar}"/>
+                        <p:menuitem value="Productos pendientes en Proformas" rendered="#{cmwRptPendientesProformasControlador.puedeConsultar}" url="../importaciones/CmwRptPendientesProformas.xhtml" />
+                        <p:menuitem value="Existencia con utilidad y precio base c/ descuento" rendered="#{cmwExistenciaUtilidadPrecioBaseControlador.puedeConsultar}" url="../importaciones/CmwExistenciaUtilidadPrecioBase.xhtml"/>
+                        <p:menuitem value="Productos a Pedir" url="../importaciones/CmwRptProductosPedir.xhtml" rendered="#{cmwReporteProductosPendientesPedidosControlador.puedeConsultar}"/>
+                        <p:menuitem value="Resumen de Productos en Tránsito" url="../importaciones/CmwResumenProductosTransito.xhtml" rendered="#{cmwResumenProductosTransitoControlador.puedeConsultar}"/>
+                        <p:menuitem value="Histórico de Importaciones por Artículo" url="../importaciones/CmwHistoricoImportaciones.xhtml" rendered="#{cmwHistoricoImportacionesControlador.puedeConsultar}"/>
+                    </p:submenu>
+                    <p:submenu label="Ventana">
+                        <p:menuitem value="Cascada" url="http://www.youtube.com" />
+                        <p:menuitem value="Mosaico" url="http://www.break.com" />
+                        <p:menuitem value="Organizar Iconos" url="http://www.break.com" />
+                        <p:menuitem value="1. Menu Inicial del Sistema" url="http://www.break.com" />
+                    </p:submenu>
+                </p:menubar>
+            </h:form>
+        </div>
+        <div align="right">
+            <h:form>
+                <h:outputText value="#{menuControlador.userNombre}"   styleClass="etiqueta"/>
+                <h:outputText value="|" styleClass="etiqueta"/>
+                <h:commandLink value="#{i18n.cambio_pass}" action="../administracionBase/BswCambioClave.xhtml" styleClass="etiqueta"/>
+                <h:outputText value="|" styleClass="etiqueta"/>
+                <h:commandLink value="#{i18n.cerrar_sesion}" action="#{menuControlador.logout}" styleClass="etiqueta"/>
+            </h:form>
+        </div>
+    </ui:component>
+</html>
+
+
+

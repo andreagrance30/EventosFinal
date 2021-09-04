@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config version="2.0"
+    xmlns="http://java.sun.com/xml/ns/javaee" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+
+    <navigation-rule>
+        <from-view-id>/administracionBase/consultaAuditoria.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>resultadosBusquedaAuditoria</from-outcome>
+            <to-view-id>/administracionBase/componentes/resultadosBusquedaAuditoria.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/administracionBase/componentes/resultadosBusquedaAuditoria.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>consultaAuditoria</from-outcome>
+            <to-view-id>/administracionBase/consultaAuditoria.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>login</from-outcome>
+            <to-view-id>/administracionBase/login.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>inicio</from-outcome>
+            <to-view-id>/administracionBase/inicio.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <application>
+<!--        <locale-config>
+            <default-locale>es</default-locale>
+            <supported-locale>en</supported-locale>
+            <supported-locale>es</supported-locale>
+            <supported-locale>es_PY</supported-locale>
+        </locale-config>-->
+        <resource-bundle>
+            <base-name>i18n</base-name>
+            <var>i18n</var>
+        </resource-bundle>
+    </application>
+    <managed-bean>
+       <managed-bean-name>ErrorControlador</managed-bean-name>
+       <managed-bean-class>py.com.invweb.utilitarios.cdi.ErrorControlador</managed-bean-class>
+       <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <converter>
+        <converter-id>BooleanConverter</converter-id>
+        <converter-class>py.com.invweb.utilitarios.converter.BooleanConverter</converter-class>
+    </converter>
+
+</faces-config>

@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:component>
+        <div id="menu_horizontal">
+             <h:form id="menuImportacionesRef">
+                 <p:menubar styleClass="menuTipoLetra">
+
+                        <p:submenu label="Movimientos">
+                             <p:menuitem value="Actualizar costos de Origen"
+                                         rendered="#{cmwActualizaCostoOrigenControlador.puedeConsultar}"
+                                         url="../importacionesRef/CmwActualizaCostosOrigen.xhtml"/>
+                        </p:submenu>
+                     
+                        <p:submenu label="Reportes">
+                                <p:menuitem value="Costos de Artículos en Origen"
+                                        url="../importacionesRef/CrwCostosOrigen.xhtml"
+                                        rendered="#{crwCostosOrigenControlador.puedeConsultar}" />
+                                 <p:menuitem value="Costos de Artículos con Utilidad"
+                                        url="../importacionesRef/CrwCostosUtilidad.xhtml"
+                                        rendered="#{crwCostosUtilidadControlador.puedeConsultar}"
+                                        />
+                                 <p:menuitem>
+                                    <h:link value="Comparativo de Costos" rendered="#{cmwComparativoCostosControlador.puedeConsultar}"  outcome="../importaciones/CmwComparativoCostos.xhtml">
+                                        <f:param name="menu" value="/recursos/componentes/menuImportacionesRef.xhtml"/>
+                                    </h:link>
+                                </p:menuitem>
+                                  <p:menuitem value="Detalle de Ventas por Origen y Grupos de Artículos (en US$)"
+                                        url="../importacionesRef/CmwDetalleLineaOrigen.xhtml"
+                                        rendered="#{cmwDetalleLineaOrigenControlador.puedeConsultar}" />
+                                <p:menuitem>
+                                    <h:link value="Resumen de Ventas de Origen y Línea con costos (en US$)" rendered="#{vtwVentasPaisLineaCostosControlador.puedeConsultar}" outcome="../ventasFacturacion/VtwVentasPaisLineaCostos.xhtml">
+                                        <f:param name="menu" value="/recursos/componentes/menuImportacionesRef.xhtml"/>
+                                    </h:link>
+                                </p:menuitem>
+                               <p:menuitem>
+                                    <h:link value="Resumen de Ventas de Origen y Grupo de Artículos (en US$)" rendered="#{vtwVentasOrigenGrupoArticulosControlador.puedeConsultar}" outcome="../ventasFacturacion/VtwVentasOrigenGrupoArticulos.xhtml">
+                                        <f:param name="menu" value="/recursos/componentes/menuImportacionesRef.xhtml"/>
+                                    </h:link>
+                                </p:menuitem>
+                               <p:menuitem>
+                                    <h:link value="Histórico de Importaciones por Artículos"  rendered="#{cmwHistoricoImportacionesControlador.puedeConsultar}" outcome="../importaciones/CmwHistoricoImportaciones.xhtml">
+                                        <f:param name="menu" value="/recursos/componentes/menuImportacionesRef.xhtml"/>
+                                    </h:link>
+                                </p:menuitem>
+                               <p:menuitem value="Proforma con Costo Origen"
+                                        url="../importacionesRef/CmwProformaCostoOrigen.xhtml"
+                                        rendered="#{cmwProformaCostoOrigenControlador.puedeConsultar}" />
+                        </p:submenu>
+                <p:submenu label="Ventana">
+                    <p:menuitem value="Cascada" url="http://www.youtube.com" />
+                    <p:menuitem value="Mosaico" url="http://www.break.com" />
+                    <p:menuitem value="Organizar Iconos" url="http://www.break.com" />
+                    <p:menuitem value="1. Menu Inicial del Sistema" url="http://www.break.com" />
+                </p:submenu>
+                </p:menubar>
+            </h:form>
+        </div>
+        <div align="right">
+            <h:form>
+                <h:outputText value="#{menuControlador.userNombre}"   styleClass="etiqueta"/>
+                <h:outputText value="|" styleClass="etiqueta"/>
+                <h:commandLink value="#{i18n.cambio_pass}" action="../administracionBase/BswCambioClave.xhtml" styleClass="etiqueta"/>
+                <h:outputText value="|" styleClass="etiqueta"/>
+                <h:commandLink value="#{i18n.cerrar_sesion}" action="#{menuControlador.logout}" styleClass="etiqueta"/>
+            </h:form>
+        </div>
+    </ui:component>
+</html>
+
+
+

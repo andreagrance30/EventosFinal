@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="./../../resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="./../../resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <link href="./../../resources/css/metre-style.css" rel="stylesheet" type="text/css" />
+        <title>Rios Repuestos</title>
+
+        <script type="text/javascript">
+     
+        function cUpper(cObj){
+            cObj.value=cObj.value.toUpperCase();
+        }
+        function esNumero(cObj)
+        {
+
+          if (isNaN(cObj.value))
+          {
+            alert("El valor introducido debe ser numerico");
+            form.cObj.focus();
+            return false;
+          }
+        }
+
+        function isAlphabet(elem, helperMsg){
+            var alphaExp = /^[a-zA-Z]+$/;
+            if(elem.value.match(alphaExp)){
+                    cUpper(elem);
+                    return true;
+            }else{
+                    alert(helperMsg);
+                    elem.focus();
+                    return false;
+            }
+       }
+
+       function permite(elEvento, permitidos) {
+  // Variables que definen los caracteres permitidos
+  var numeros = "0123456789";
+  var caracteres = " abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+  var numeros_caracteres = numeros + caracteres;
+  var teclas_especiales = [8, 37, 39, 46, 09];
+  // 8 = BackSpace, 46 = Supr, 37 = flecha izquierda, 39 = flecha derecha
+
+
+  // Seleccionar los caracteres a partir del parámetro de la función
+  switch(permitidos) {
+    case 'num':
+      permitidos = numeros;
+      break;
+    case 'car':
+      permitidos = caracteres;
+      break;
+    case 'num_car':
+      permitidos = numeros_caracteres;
+      break;
+  }
+
+  // Obtener la tecla pulsada
+  var evento = elEvento || window.event;
+  var codigoCaracter = evento.charCode || evento.keyCode;
+  var caracter = String.fromCharCode(codigoCaracter);
+
+  // Comprobar si la tecla pulsada es alguna de las teclas especiales
+  // (teclas de borrado y flechas horizontales)
+  var tecla_especial = false;
+  for(var i in teclas_especiales) {
+    if(codigoCaracter == teclas_especiales[i]) {
+      tecla_especial = true;
+      break;
+    }
+  }
+
+  // Comprobar si la tecla pulsada se encuentra en los caracteres permitidos
+  // o si es una tecla especial
+  return permitidos.indexOf(caracter) != -1 || tecla_especial;
+}
+
+function ejecutarGuardarNuevo(){
+
+var obj = document.getElementById('botonGuardarNuevo');
+    if(obj){
+
+        obj.click();
+
+    }
+}
+
+function ejecutarGuardarViejo(){
+
+var obj = document.getElementById('botonGuardarViejo');
+    if(obj){
+
+        obj.click();
+
+    }
+}
+
+function ejecutarLimpiar(){
+
+var obj = document.getElementById('botonLimpiar');
+if(obj){
+
+    obj.click();
+
+}
+}
+
+function ejecutarBuscar(e){
+
+
+var obj = document.getElementById('botonBuscarLupa')
+  if(e.keyCode == 13){
+      obj.click()
+
+}
+
+}
+   function ControTeclado(val, ev){
+    if( window.event )
+        var key = window.event.keyCode;//codigo de tecla.
+    else
+        var key = ev.which;
+
+      switch(key){
+
+        case 40:
+        alert('abajo');
+        break;
+
+        case 38:
+        alert('arriba');
+        break;
+
+      }
+   }
+
+        function openDialog(e, win){
+            if(e.keyCode == 120)
+                win.show();
+        }
+        function pulsar(e) {
+            tecla=(document.all) ? e.keyCode : e.which;
+            if(tecla==13) {
+                return false;
+            }else if(tecla == 121){
+                ejecutarGuardarNuevo();
+                ejecutarGuardarViejo();
+            }else if(tecla == 118){
+                ejecutar('botonBusqueda');
+            }else if (tecla == 119){
+                ejecutar('botonBuscar');
+            }
+        }
+        
+        function ejecutar(boton){
+            var obj = document.getElementById(boton);
+            if(obj){
+                obj.click();
+            }
+        }
+        </script>
+    </h:head>
+
+    <h:body onkeydown="return pulsar(event);">
+
+
+        <div id="top" class="top">
+            <ui:insert name="top">
+                <ui:include src="./../componentes/menuStock.xhtml"/>
+            </ui:insert>
+        </div>
+        <div>
+            <div id="left">
+                <ui:insert name="left">
+                    <ui:include src="./../componentes/menuPrimeFacesModulos.xhtml"/>
+                </ui:insert>
+            </div>
+            <div id="content" class="left_content">
+                <ui:insert name="content"></ui:insert>
+            </div>
+        </div>
+    </h:body>
+
+</html>

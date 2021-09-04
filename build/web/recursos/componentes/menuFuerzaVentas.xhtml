@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:root="http://java.sun.com/jsf/composite/root"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:c="http://java.sun.com/jsp/jstl/core"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:p="http://primefaces.prime.com.tr/ui">
+
+    <div id="menu_horizontal">
+        <h:form id="menubase">
+            <p:menubar styleClass="menuTipoLetra">
+                <p:submenu label="Definiciones">
+                  <p:submenu label="Periodos">
+                    <p:menuitem value="Periodos de Comisiones" rendered="#{fvwPeriodosComisionControlador.puedeConsultar}" url="FvwPeriodosComisiones.xhtml"/>
+                    <p:menuitem value="Periodos de Metas" rendered="#{fvwPeriodosMetasControlador.puedeConsultar}" url="FvwPeriodosMetas.xhtml"/>
+                  </p:submenu>
+                    <p:submenu label="Comisiones">
+                    <p:menuitem value="Comisiones a Facturadores" rendered="#{fvwPeriodosComisionControlador.puedeConsultar}" url="FvwComisionesFacturadores.xhtml"/>
+                    <p:menuitem value="Comision por Grupos" rendered="#{fvwGruposGruposComisionesControlador.puedeConsultar}" url="FvwGruposGruposComisiones.xhtml"/>
+                    <p:menuitem value="Comision por Metas Alcanzadas" rendered="#{fvwGruposGruposComisionesControlador.puedeConsultar}" url="FvwComisionesPorMetas.xhtml"/>
+                    </p:submenu>
+                    <p:menuitem value="Grupos de Articulos p/Comision"  rendered="#{fvwGruposArticulosControlador.puedeConsultar}" url="FvwGruposArticulos.xhtml" />
+                    <p:menuitem value="Grupos de Vendedores p/Comision" rendered="#{fvwGruposComisionControlador.puedeConsultar}" url="fvwGruposComision.xhtml" />
+                    <p:submenu label="Presupuestos">
+                    <p:menuitem value="Presupuesto por lineas" rendered="#{fvwPresupuestoLineasControlador.puedeConsultar}" url="FvwPresupuestoLineas.xhtml" />
+                    <p:menuitem value="Presupuesto por vendedores" rendered="#{fvwPresupuestoVendedoresControlador.puedeConsultar}" url="FvwPresupuestoVendedores.xhtml" />
+                    </p:submenu>
+                    <p:menuitem value="Premios por Promocion" rendered="#{fvwPremiosControlador.puedeConsultar}" url="FvwPremios.xhtml" />
+                    <p:menuitem value="Premios en promocion por Grupos" rendered="#{fvwPremiosGruposControlador.puedeConsultar}" url="FvwPremiosGrupos.xhtml" />
+                    <p:menuitem value="Grupo de Promociones" url="FvwGrupoPromociones.xhtml"
+                                rendered="#{fvwGrupoPromocionesControlador.puedeConsultar}" />
+                    <p:menuitem value="Vendedores" url="FvwVendedores.xhtml" 
+                                rendered="#{fvwVendedorControlador.puedeConsultar}" />
+                    <p:menuitem value="Grupo de Vendedores" rendered="#{fvwGruposVendedoresControlador.puedeConsultar}" url="FvwGruposVendedores.xhtml"/>
+                    <p:menuitem value="Directorio de Imagenes" url="FvwImagenes.xhtml"
+                                rendered="#{fvwImagenesControlador.puedeConsultar}"/>
+                    <p:menuitem value="Salir" url="../administracionBase/inicio.xhtml" />
+                </p:submenu>
+                <p:submenu label="Movimientos">
+                    <p:menuitem value="Promociones por Articulo" rendered="#{fvwPromocionesArticulosControlador.puedeConsultar}" url="FvwPromocionesArticulo.xhtml" />
+                    <p:menuitem value="Promociones por Grupo de Articulos" rendered="#{fvwPromocionesCabGrupoControlador.puedeConsultar}" url="FvwPromocionesGrupoArticulos.xhtml" />
+                    <p:menuitem value="Entrega de Premios" rendered="#{fvwEntregaPremiosControlador.puedeConsultar}" url="FvwEntregaPremios.xhtml" />
+                    <p:menuitem value="Entrega de Premios en Promocion por Grupos de Art." rendered="#{fvwEntregaPremiosGruposControlador.puedeConsultar}" url="FvwEntregaPremiosGrupos.xhtml" />
+                </p:submenu>
+                <p:submenu label="Reportes">
+                    <p:submenu label="Comparativo de ventas">
+                        <p:menuitem value="Comparativo de Ventas por Vendedor"  url="reporteComparativoVentasVendedor.xhtml"
+                                    rendered="#{fvwComparativoVentasVendedorXCantidadControlador.puedeConsultar}"/>
+                        <p:menuitem value="Comparativo de Ventas por Linea"   rendered="#{fvwComparativoVentasLineaControlador.puedeConsultar}"   url="FvwComparativoVentasLinea.xhtml" >
+                        </p:menuitem>
+                        <p:menuitem value="Comparativo de Ventas por Linea por Cantidades" rendered="#{fvwComparativoVentasLineaControlador.puedeConsultar}" url="FvwComparativoVentasLineaXCantidad.xhtml" />
+                        <p:menuitem value="Comparativo de Ventas del Mes por Vendedor" rendered="#{fvwComparativoVentasMesVendedorControlador.puedeConsultar}" url="FvwComparativoVentasMesVendedor.xhtml" />
+                        <p:menuitem value="Comparativo de Ventas del Mes por Linea" rendered="#{fvwComparativoVentasXMesLineaControlador.puedeConsultar}" url="FvwComparativoVentasXMesLinea.xhtml" />
+                        <p:menuitem value="Comparativo de Ventas del Mes por Linea por Cantidades" rendered="#{fvwComparativoVentasMesLineaEnCantidadesControlador.puedeConsultar}" url="FvwComparativoVentasLineaMesEnCantidades.xhtml" />
+                    </p:submenu>
+                    <p:menuitem value="Valorizacion de Ventas Perdidas por Linea" url="FvwValorizacionVentasPerdidasLinea.xhtml"
+                                rendered="#{fvwValorizacionVentasPerdidasLineaControlador.puedeConsultar}"/>
+                    <p:menuitem value="Porcentajes por Grupo de Comision" url="reporteGrupoGruposComision.xhtml"
+                                rendered="#{reporteGrupoGruposComisionControlador.puedeConsultar}"/>
+
+                    <p:submenu label="Comisiones">
+                        <p:submenu label="Resumen de comisiones de Vendedores">
+                            <p:menuitem value="Formato Viejo" rendered="#{fvwComisionesVendedoresControlador.puedeConsultar}" url="FvwReporteResumenComisionesVendedores.xhtml" />
+                            <p:menuitem value="Formato Nuevo" rendered="#{fvwComisionesVendedoresControlador.puedeConsultar}" url="FvwReporteResumenComisionesVendedores.xhtml" />
+                        </p:submenu>
+                        <p:menuitem value="Detalle de Comisiones de Vendedores" rendered="#{fvwComisionesVendedoresControlador.puedeConsultar}" url="FvwReporteDetalleComisionesVendedores.xhtml" />
+                        <p:menuitem value="Resumen de Comisiones de Cobradores" rendered="#{fvwRptComisionesCobradoresResumenControlador.puedeConsultar}" url="FvwRptComisionesCobradoresResumen.xhtml" />
+                        <p:menuitem value="Premios por Metas Alcanzadas" rendered="#{fvwComisionesVendedoresControlador.puedeConsultar}" url="FvwReporteMetasxComisionesVend.xhtml" />
+                        <p:menuitem value="Detalles de Comisiones de Cobradores" rendered="#{fvwRptComisionesCobradoresDetControlador.puedeConsultar}" url="FvwRptComisionesCobradoresDetalle.xhtml" />
+                        <p:menuitem value="Resumen de Comisiones de Facturadores" rendered="#{fvwComisionesFacturadoresResControlador.puedeConsultar}" url="FvwReporteDetalleComisionesFacturadoresRes.xhtml" />
+                        <p:menuitem value="Detalle de Comisiones de Facturadores" rendered="#{fvwComisionesFacturadoresControlador.puedeConsultar}" url="FvwReporteDetalleComisionesFacturadores.xhtml" />
+                    </p:submenu>
+                    <p:menuitem value="Estadistica Diaria de Ventas por Lineas" url="FvwEstadisticaDiariaVentasLinea.xhtml"
+                                rendered="#{fvwEstadisticaDiariaVentasLineaControlador.puedeConsultar}" />
+                   
+                    <p:menuitem value="Premios a Clientes" rendered="#{fvwPremiosClientesPromocionControlador.puedeConsultar}" url="FvwPremiosClientesPromocion.xhtml" />
+                    <p:menuitem value="Premios a Clientes en Promocion por Grupos de Art." rendered="#{fvwPremiosClientesPromocionGruposControlador.puedeConsultar}" url="FvwPremiosClientesPromocionGrupos.xhtml" />
+                    <p:menuitem value="Articulos no Incluidos en Promociones" url="FvwArticulosNoIncluidosPromociones.xhtml"
+                                rendered="#{fvwArticulosNoIncluidosPromocionesControlador.puedeConsultar}"/>
+                    <p:menuitem value="Clientes con Premios Entregados" rendered="#{fvwClientesConPremiosControlador.puedeConsultar}" url="FvwClientesConPremios.xhtml" />
+                    <p:menuitem value="Clientes con Premios Entragados por Grupo" rendered="#{fvwClientesConPremiosGruposControlador.puedeConsultar}" url="FvwClientesConPremiosGrupos.xhtml" />
+                </p:submenu>
+                <p:submenu label="Ventana">
+                    <p:menuitem value="Cascada" url="http://www.youtube.com" />
+                    <p:menuitem value="Mosaico" url="http://www.break.com" />
+                    <p:menuitem value="Organizar Iconos" url="http://www.break.com" />
+                    <p:menuitem value="1. Menu Inicial del Sistema" url="http://www.break.com" />
+                </p:submenu>
+            </p:menubar>
+        </h:form>
+    </div>
+    <div align="right">
+        <h:form>
+            <h:outputText value="#{menuControlador.userNombre}"   styleClass="etiqueta"/>
+            <h:outputText value="|" styleClass="etiqueta"/>
+            <h:commandLink value="#{i18n.cambio_pass}" action="../administracionBase/BswCambioClave.xhtml" styleClass="etiqueta"/>
+            <h:outputText value="|" styleClass="etiqueta"/>
+            <h:commandLink value="#{i18n.cerrar_sesion}" action="#{menuControlador.logout}" styleClass="etiqueta"/>
+        </h:form>
+    </div>
+</ui:component>
+

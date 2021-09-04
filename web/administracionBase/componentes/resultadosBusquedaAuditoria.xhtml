@@ -1,0 +1,244 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <script type="text/javascript">
+        function cUpper(cObj){
+            cObj.value=cObj.value.toUpperCase();
+        }
+        </script>
+</head>
+
+    <body>
+
+        <ui:composition template="./../../recursos/plantillas/formAdministracionBasePlantilla.xhtml">
+
+            <ui:define name="content">
+
+                <h:form>
+                <p:growl id="growl" showDetail="false" />
+                <h:panelGrid>
+                    <h:panelGroup>
+                            <h:outputText id="ConsultaAuditoria"
+                            value="Consulta de Auditoria"
+                            styleClass="tituloTabla" />
+                             <p:toolbar>
+                                <p:toolbarGroup align="left">
+                                    <p:commandButton
+                                                      value="Volver"
+                                                      onclick="consultaAuditoria"
+                                                      action="#{auditoriaResultControlador.volver}"/>
+
+                                    <p:divider />
+
+                                        <p:commandButton type="push"
+                                                         title="Ayuda"
+                                                         image="ui-icon-help"
+                                                         onclick="dialogoAyuda.show();"/>
+                                        <p:commandButton type="push"
+                                                         title="Acerca de"
+                                                         image="ui-icon-info"
+                                                         onclick="dialogoAcercaDe.show();"/>
+                                        <p:commandButton type="push"
+                                                         title="Empresa"
+                                                         image="ui-icon-home"/>
+                                </p:toolbarGroup>
+
+                                <p:divider />
+
+                                <p:toolbarGroup align="right">
+                                    <p:menuButton value="Navigate">
+                                            <p:menuitem value="Home"/>
+                                            <p:menuitem value="ShowCase"/>
+                                            <p:menuitem value="TouchFaces"/>
+                                    </p:menuButton>
+                                </p:toolbarGroup>
+
+                            </p:toolbar>
+                    </h:panelGroup>
+             </h:panelGrid>
+
+                <h:panelGrid id="resultadosPanelGrid">
+
+                <p:dataTable id="BusquedaAuditoriaTabla"
+                           selectionMode="single"
+                           rows="15"
+                           style="width:300px"
+                           paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown} "
+                           rowsPerPageTemplate="10,15,20"
+                           height="400"
+                           var="g"
+                           value="#{auditoriaResultControlador.resultadoBusquedaLista}"
+                           rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}"
+                           rowIndexVar="rowIx"  update="display"
+                           onselectComplete="dialog.show()"
+                           selection="#{auditoriaResultControlador.resultadoSeleccionado}"
+                           >
+                <p:column id="nroOperacion"
+                          sortBy="#{g.nroOperacion}"
+                          filterBy="#{g.nroOperacion}"
+                          style="width:50px"   >
+                  <f:facet name="header" >Operacion</f:facet>
+                  <h:outputText id="nroOperacionoutputText"
+                                value="#{g.nroOperacion}"/>
+                </p:column>
+
+                <p:column id="codUsuario"
+                          sortBy="#{g.codUsuarioAud}"
+                          filterBy="#{g.codUsuarioAud}"
+                          style="width:100px"   >
+                  <f:facet name="header">Usuario</f:facet>
+                  <h:outputText id="codUsuariooutputText"
+                                value="#{g.codUsuarioAud}"/>
+                </p:column>
+
+                <p:column id="codModulo"
+                          sortBy="#{g.bswModulos.codModulo}"
+                          filterBy="#{g.bswModulos.codModulo}"
+                          style="width:100px"  >
+                  <f:facet name="header">Modulo</f:facet>
+                  <h:outputText id="codModulooutputText"
+                                value="#{g.bswModulos.codModulo}"/>
+                </p:column>
+
+                <p:column id="nomTabla"
+                          sortBy="#{g.nomTabla}"
+                          filterBy="#{g.nomTabla}"
+                          style="width:100px"  >
+                  <f:facet name="header">Tabla</f:facet>
+                  <h:outputText id="nomTablaoutputText"
+                                value="#{g.nomTabla}"/>
+                </p:column>
+
+                <p:column id="fecOcurrencia"
+                          sortBy="#{g.fecOcurrencia}"
+                          filterBy="#{g.fecOcurrencia}"
+                          style="width:100px"  >
+                  <f:facet name="header">Fecha</f:facet>
+                  <h:outputText id="fecOcurrenciaoutputText"
+                                value="#{g.fecOcurrencia}">
+                     <f:convertDateTime dateStyle="default"
+                                        pattern="dd/MM/yyyy"
+                                        for="fecOcurrenciaoutputText"/>
+                  </h:outputText>
+                </p:column>
+
+                <p:column id="operacion"
+                          sortBy="#{g.operacion}"
+                          filterBy="#{g.operacion}"
+                          style="width:100px"   >
+                  <f:facet name="header">Operacion</f:facet>
+                  <h:outputText id="operacionoutputText"
+                                value="#{g.operacion}"/>
+                </p:column>
+
+                <p:column id="terminal"
+                          sortBy="#{g.terminal}"
+                          filterBy="#{g.terminal}"
+                          style="width:100px"   >
+                  <f:facet name="header">Terminal</f:facet>
+                  <h:outputText id="terminaloutputText"
+                                value="#{g.terminal}"/>
+                </p:column>
+
+                <p:column id="maquina"
+                          sortBy="#{g.maquina}"
+                          filterBy="#{g.maquina}"
+                          style="width:100px"   >
+                  <f:facet name="header">NombrePC</f:facet>
+                  <h:outputText id="maquinaoutputText"
+                                value="#{g.maquina}"/>
+                </p:column>
+
+                <p:column id="direccionIp"
+                          sortBy="#{g.direccionIp}"
+                          filterBy="#{g.direccionIp}"
+                          style="width:100px"   >
+                  <f:facet name="header">DireccionIP</f:facet>
+                  <h:outputText id="direccionIpoutputText"
+                                value="#{g.direccionIp}"/>
+                </p:column>
+
+                <p:column id="usuarioSo"
+                          sortBy="#{g.usuarioSo}"
+                          filterBy="#{g.usuarioSo}"
+                          style="width:100px"   >
+                  <f:facet name="header">UsuarioSO</f:facet>
+                  <h:outputText id="usuarioSooutputText"
+                                value="#{g.usuarioSo}"/>
+                </p:column>
+              </p:dataTable>
+                </h:panelGrid>
+
+
+     <p:dialog header="Registro Seleccionado"
+               widgetVar="dialog"
+               width="400"
+               styleClass="outputpanel" height="500" closable="true" closeOnEscape="true">
+
+      <p:outputPanel id="display" layout="inline">
+        <h:panelGrid >
+            <h:panelGrid id="auditoriaSelectedBotonesPanelGriddisplay" columns="2"
+                         styleClass="bgpanelgrid"
+                         style=" ">
+                 <h:outputText id="tablaTipo"
+                               value="Tabla : #{auditoriaResultControlador.resultadoSeleccionado.nomTabla}"
+                      styleClass="etiqueta"  />
+                 <p:commandButton styleClass="boton" style="position:relative;" value="Volver" onclick="dialog.hide()" type="button" />
+        </h:panelGrid>
+
+        <p:dataTable id="columnasTabla"
+                     selectionMode="single"
+                     style="width:250px; height: 400px;"
+                     var="columnas"
+                     value="#{auditoriaResultControlador.columnasList}"
+                     rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}"
+                     rowIndexVar="rowIx"
+                    >
+
+          <p:column id="colColumnas"
+                    style="width:100px;">
+                <f:facet name="header">Nombre</f:facet>
+                <h:outputText value="#{columnas.nombreColumnas}">
+                  </h:outputText>
+          </p:column>
+
+          <p:column id="coldatosViejos"
+                    style="width:100px;">
+                <f:facet name="header">Datos Viejos</f:facet>
+                <h:outputText id="NomdatosViejos" value="#{columnas.datosViejos}">
+                </h:outputText>
+          </p:column>
+
+          <p:column id="colDatosNuevos"
+                    style="width:100px;">
+                <f:facet name="header">Datos Nuevos</f:facet>
+                <h:outputText id="NomDatosNuevos" value="#{columnas.datosNuevos}">
+                </h:outputText>
+          </p:column>
+
+         <p:column id="colDatosAlterados"
+                    style="width:100px;">
+                <f:facet name="header">Datos Alterados</f:facet>
+                <h:outputText id="NomDatosAlterados" value="#{columnas.datosAlterados}">
+                </h:outputText>
+          </p:column>
+            
+        </p:dataTable>
+    </h:panelGrid>
+         </p:outputPanel>
+     </p:dialog>
+
+      </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>
+

@@ -1,0 +1,238 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="plantilla.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:define name="content">
+
+        <h:form id="presupuestoForm">
+            <p:growl id="growl" showDetail="false" />
+            <h:panelGrid styleClass="bgpanelgridGray" >
+                <h:panelGroup>
+                    <p:toolbar>
+                        <p:toolbarGroup align="left">
+
+                            <p:commandButton
+                                value="Guardar"
+                                image="ui-icon ui-icon-disk"
+                                onclick="confirmacionPresupuesto.show()"
+                                >
+                            </p:commandButton>
+
+                            <p:divider/>
+
+                            <p:commandButton
+                                ajax="false"
+                                value="Limpiar"
+                                image="ui-icon ui-icon-document"
+                                action="#{controladorPresupuesto.limpiar}">
+                            </p:commandButton>
+                        </p:toolbarGroup>
+                    </p:toolbar>
+                </h:panelGroup>
+            </h:panelGrid>
+
+            <h:panelGroup>
+                <h:outputText value="Nuevo Presupuesto"/>
+                <p:outputPanel id="panelModificar"
+                               layout="inline">
+                    <h:panelGrid id="panelGridModificar" styleClass="bgpanelgridGray" columns="2" style="width: 50%; margin-left: 0;" >
+
+                        <h:outputText styleClass="etiqueta"  value="Cliente:" />
+                        <h:panelGroup>
+                            <h:inputText  id="inputCliente"
+                                          readonly="true"
+                                          value="#{controladorPresupuesto.clienteSeleccionado.nombre}" />
+                            <p:commandButton    image="ui-icon-search"
+                                                style="margin-left: 10px; font-size: 12px;"
+                                                onclick="selectClienteDialog.show()" />
+                        </h:panelGroup>
+                        
+                         <h:outputText styleClass="etiqueta"  value="Sucursal:" />
+                         <h:panelGroup>
+                            <h:inputText  id="inputSucursal"
+                                          readonly="true"
+                                          value="#{controladorPresupuesto.sucursalSeleccionado.descripcion}" />
+                            <p:commandButton    image="ui-icon-search"
+                                                style="margin-left: 10px; font-size: 12px;"
+                                                onclick="selectSucursalDialog.show()" />
+                        </h:panelGroup>
+                        <h:outputText styleClass="etiqueta" value="Hora Inicio:" />
+                        <p:calendar value="#{controladorPresupuesto.horaInicio}" effect="fadeHide" pattern="HH:mm"  >
+                        </p:calendar>
+                        <h:outputText styleClass="etiqueta" value="Hora Fin:" />
+                        <p:calendar value="#{controladorPresupuesto.horaFin}" effect="fadeHide" pattern="HH:mm"  >
+                        </p:calendar>
+                        <h:outputText styleClass="etiqueta"  value="Fecha del Presupuesto:" />
+                        <p:calendar value="#{controladorPresupuesto.fechaEvento}" effect="fadeIn" pattern="dd/MM/yyyy">   
+                        </p:calendar>
+                        <h:outputText styleClass="etiqueta"  value="Fecha de Cotizacion:" />
+                        <p:calendar value="#{controladorPresupuesto.fechaCotizacion}" effect="fadeIn" pattern="dd/MM/yyyy">
+                        </p:calendar>
+                        <h:outputText styleClass="etiqueta"  value="Fecha de Devolucion:" />
+                        <p:calendar value="#{controladorPresupuesto.fechaDevolucion}" effect="fadeIn" pattern="dd/MM/yyyy">
+                        </p:calendar>
+                        <h:outputText styleClass="etiqueta" value="Cantidad de Personas:" />
+                        <h:inputText  id="inputCanti" 
+                                      value="#{controladorPresupuesto.cantidadPersonas}"
+                                      />
+                        <h:outputText styleClass="etiqueta" value="Direccion:" />
+                        <h:inputText  id="inputDir" 
+                                      value="#{controladorPresupuesto.direccion}"
+                                      />
+                        <h:outputText  styleClass="etiqueta" value="Descripcion:" />
+                        <h:inputText  id="inputDes"
+                                      value="#{controladorPresupuesto.descripcion}"  />
+                        
+                        <h:outputText styleClass="etiqueta" value=" Estado:" />
+                        <h:inputText  id="inputEstado"
+                                      value="#{controladorPresupuesto.estado}"/>
+
+                        <h:outputText styleClass="etiqueta"  value="Costo Total:"/>
+                        <h:inputText  id="txtTotalPresupuesto"
+                                      disabled="true"
+                                      value="#{controladorPresupuesto.totalPagar}"  />
+                    </h:panelGrid>
+                </p:outputPanel>
+            </h:panelGroup>
+
+
+            <b><h:outputText value="Detalles del Presupuesto"/></b>
+            <br/><br/>
+            <h:panelGroup>
+                <h:outputText value="Producto :" style="font-size: 14px;" />
+                <h:inputText  id="inputProducto"
+                              readonly="true"
+                              value="#{controladorPresupuesto.productoSeleccionado.descripcion}"
+                              style="width: 30%; margin-left: 10px; margin-right: 10px;"  />
+                <p:commandButton image="ui-icon-search"
+                                 style="font-size: 12px;"
+                                 onclick="selectProductoDialog.show()" />
+                                     
+                <p:commandButton value="Agregar a lista"
+                                 image="ui-icon-plusthick"
+                                 style="margin-left: 10px; font-size: 12px;"
+                                 update="pgDetalles tablaDetalles txtTotalPresupuesto"
+                                 ajax="false"
+                                 action="#{controladorPresupuesto.agregarItem}"/>
+                <br/>
+                <h:outputText value="Cantidad:" style="font-size: 14px;" />
+                <h:inputText  id="inputCantidadProducto"
+                              value="#{controladorPresupuesto.cantidadItem}"
+                              style="width: 30%; margin-left: 85px; margin-right: 10px;"  />
+                <br/>
+                <h:outputText value="Costo:" style="font-size: 14px;" />
+                <h:inputText  id="inputCostoProducto"
+                               readonly="true"
+                               value="#{controladorPresupuesto.productoSeleccionado.precio}"
+                              style="width: 30%; margin-left: 107px; margin-right: 10px;"  />
+                <br/>
+                <br/>
+
+            </h:panelGroup>
+            <br/><br/>
+
+            <h:panelGrid id="pgDetalles" styleClass="bgpanelgridGray" >
+                <p:dataTable id="tablaDetalles"  paginator="false" selectionMode="single" rows="10" rowsPerPageTemplate="3,5,10"
+                             rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx"
+                             var="item" update="display panelGridModificar" selection="#{controladorPresupuesto.detallePresupuestoSeleccionado}"
+                             value="#{controladorPresupuesto.detallePresupuesto}">
+                    <p:column style="width: 40%">
+                        <f:facet name="header">Producto</f:facet>
+                        <h:outputText id="nombreProducto" value="#{item.productoid.descripcion}" />
+                    </p:column>
+                    <p:column style="width: 20%">
+                        <f:facet name="header">Cantidad</f:facet>
+                        <h:outputText id="categoriaProducto" value="#{item.cantidad}"/>
+                    </p:column>
+                    <p:column style="width: 20%">
+                        <f:facet name="header">Costo unitario</f:facet>
+                        <h:outputText id="costo" value="#{item.precioUnitario}">
+                            <f:convertNumber locale="es-PY" />
+                        </h:outputText>
+                    </p:column>
+                   
+                    <p:column id="colDelete" style="width: 15%">
+                        <!-- p:commandButton image="ui-icon-close"
+                                style="font-size: 12px;"
+                                onclick="confirmarBorrado.show()" / -->
+                        <p:commandButton image="ui-icon-close" style="font-size: 12px;"
+                                         action="#{controladorCompras.eliminarDetalle(item)}" ajax="false"/>
+
+                    </p:column>
+                </p:dataTable>
+            </h:panelGrid>
+            <p:confirmDialog message="¿Está seguro que desea registrar el evento según los detalles seleccionados?"
+                             hideEffect="explode" width="400" header="Confirmación" styleClass="panelConfirmacion"
+                             widgetVar="confirmacionPresupuesto">
+
+                <p:commandButton value="Aceptar" style="font-size: 12px; margin-left: 75px;"  action="#{controladorPresupuesto.guardar}" oncomplete="confirmacionPresupuesto.hide()" ajax="false"/>
+                <p:commandButton value="Cancelar" style="font-size: 12px; margin-left: 75px;" onclick="confirmacionPresupuesto.hide()" type="button" />
+
+            </p:confirmDialog>
+
+            <p:confirmDialog message="¿Está seguro que desea eliminar este ítem de la lista de presupuesto?"
+                             hideEffect="explode" width="400" header="Confirmación" styleClass="panelConfirmacion"
+                             widgetVar="confirmarBorrado">
+
+                <p:commandButton value="SI" style="font-size: 12px; margin-left: 75px;"  action="#{controladorPresupuesto.eliminarDetalle()}" oncomplete="confirmarBorrado.hide()" ajax="false"/>
+                <p:commandButton value="NO" style="font-size: 12px; margin-left: 75px;" onclick="confirmarBorrado.hide()" type="button" />
+
+            </p:confirmDialog>
+
+
+            <p:dialog header="Selección de Cliente" widgetVar="selectClienteDialog"  width="400" styleClass="outputpanel" height="500" closable="true" closeOnEscape="true" modal="true">
+                <p:dataTable var="cliente" value="#{controladorPresupuesto.listaCliente}"  paginator="true" rows="10"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             rowsPerPageTemplate="10,15"  selection="#{controladorPresupuesto.clienteSeleccionado}"
+                             update="inputCliente" onselectComplete="selectClienteDialog.hide()" selectionMode="single">
+                    <p:column filterBy="#{cliente.nombre}">          
+                        <f:facet name="header">
+                            <h:outputText value="Nombre" />
+                        </f:facet>
+                        <h:outputText value="#{cliente.nombre}" />
+                    </p:column>
+                </p:dataTable>
+            </p:dialog>
+            
+            <p:dialog header="Selección de Sucursal" widgetVar="selectSucursalDialog"  width="400" styleClass="outputpanel" height="500" closable="true" closeOnEscape="true" modal="true">
+                <p:dataTable var="sucursal" value="#{controladorPresupuesto.listaSucursal}"  paginator="true" rows="10"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             rowsPerPageTemplate="10,15"  selection="#{controladorPresupuesto.sucursalSeleccionado}"
+                             update="inputSucursal" onselectComplete="selectSucursalDialog.hide()" selectionMode="single">
+                    <p:column filterBy="#{sucursal.descripcion}">          
+                        <f:facet name="header">
+                            <h:outputText value="Sucursal" />
+                        </f:facet>
+                        <h:outputText value="#{sucursal.descripcion}" />
+                    </p:column>
+                </p:dataTable>
+            </p:dialog>
+
+            <p:dialog header="Selección de Productos" widgetVar="selectProductoDialog"  width="400" styleClass="outputpanel" height="500" closable="true" closeOnEscape="true" modal="true">
+                <p:dataTable var="producto" value="#{controladorPresupuesto.producto}"  paginator="true" rows="10"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             rowsPerPageTemplate="10,15"  selection="#{controladorPresupuesto.productoSeleccionado}"
+                             update="inputProducto inputCostoProducto" onselectComplete="selectProductoDialog.hide()" selectionMode="single">
+                    <p:column filterBy="#{producto.descripcion}">
+                        <f:facet name="header">
+                            <h:outputText value="Nombre" />
+                        </f:facet>
+                        <h:outputText value="#{producto.descripcion}" />
+                    </p:column>
+                    <p:column filterBy="#{producto.precio}">
+                        <f:facet name="header">
+                            <h:outputText value="Precio" />
+                        </f:facet>
+                        <h:outputText value="#{producto.precio}" />
+                    </p:column>
+                </p:dataTable>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

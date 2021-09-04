@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:component>
+        <div id="menu_horizontal">
+             <h:form id="menuServiciosMecanicos">
+                 <p:menubar styleClass="menuTipoLetra">
+                        <p:submenu label="Definiciones">
+                            <p:menuitem value="Especialidades Mecanicas" rendered="#{smwEspecialidadesControlador.puedeConsultar}" url="../serviciosMecanicos/SmwEspecialidades.xhtml"/>
+                            <p:menuitem value="Mecanicos" rendered="#{smwMecanicosControlador.puedeConsultar}" url="../serviciosMecanicos/SmwMecanicos.xhtml"/>
+                            <p:menuitem value="Tareas" rendered="#{smwTareasControlador.puedeConsultar}" url="../serviciosMecanicos/SmwTareas.xhtml"/>
+                            <p:menuitem value="Modelos" rendered="#{smwModelosControlador.puedeConsultar}" url="../serviciosMecanicos/SmwModelos.xhtml"/>
+                            <p:menuitem value="Marcas" rendered="#{smwMarcasControlador.puedeConsultar}" url="../serviciosMecanicos/SmwMarcas.xhtml"/>
+                            <p:menuitem value="Motivos de Servicios" rendered="#{smwMotServControlador.puedeConsultar}" url="../serviciosMecanicos/SmwMotServ.xhtml"/>                            
+                            <p:menuitem>
+                                <h:link value="Clientes" rendered="#{ccwClientesControlador.puedeConsultar}" outcome="../cuentasCobrar/CcwClientes.xhtml">
+                                <f:param name="menu" value="/recursos/componentes/menuServiciosMecanicos.xhtml"/>
+                            </h:link>
+                            </p:menuitem>
+                            <p:menuitem>
+                                <h:link value="Permisos" rendered="#{bswPermisosOpcionesControlador.puedeConsultar}" outcome="../controlStock/PermisosOpcionesUsuarios.xhtml">
+                                <f:param name="menu" value="/recursos/componentes/menuServiciosMecanicos.xhtml"/>
+                            </h:link>
+                            </p:menuitem>
+
+                        </p:submenu>
+
+                        <p:submenu label="Movimientos">
+                            <p:menuitem value="Presupuesto" rendered="#{smwPresupuestoControlador.puedeConsultar}" url="../serviciosMecanicos/SmwPresupuesto.xhtml"/>
+                            <p:menuitem value="Orden de Trabajo" rendered="#{smwOrdenTrabajoControlador.puedeConsultar}" url="../serviciosMecanicos/SmwOrdenTrabajo.xhtml"/>
+                        </p:submenu>
+
+                    <p:submenu label="Reportes">
+                        <p:menuitem value="Mecanicos Vs. Especialidades" rendered="#{smwRptMecanicosEspecialidadesControlador.puedeConsultar}" url="../serviciosMecanicos/SmwRptMecanicosEspecialidades.xhtml"/>
+                        <p:menuitem value="Marcas y Modelos" rendered="#{smwRptMarcasModeloControlador.puedeConsultar}" url="../serviciosMecanicos/SmwRptMarcasModelos.xhtml"/>
+                        <p:menuitem value="Resumen de Facturacion" rendered="#{smwRptFacturacionPorOrdenesControlador.puedeConsultar}" url="../serviciosMecanicos/SmwRptFacturacionPorOrdenes.xhtml"/>
+                        <p:menuitem value="Clientes Morosos en Compr. de Servicios" rendered="#{smwRptClientesMorososControlador.puedeConsultar}" url="../serviciosMecanicos/SmwRptClientesMorosos.xhtml"/>
+
+                    </p:submenu>
+
+                <p:submenu label="Ventana">
+                    <p:menuitem value="Cascada" url="http://www.youtube.com" />
+                    <p:menuitem value="Mosaico" url="http://www.break.com" />
+                    <p:menuitem value="Organizar Iconos" url="http://www.break.com" />
+                    <p:menuitem value="1. Menu Inicial del Sistema" url="http://www.break.com" />
+                </p:submenu>
+                </p:menubar>
+            </h:form>
+        </div>
+        <div align="right">
+            <h:form>
+                <h:outputText value="#{menuControlador.userNombre}"   styleClass="etiqueta"/>
+                <h:outputText value="|" styleClass="etiqueta"/>
+                <h:commandLink value="#{i18n.cambio_pass}" action="../administracionBase/BswCambioClave.xhtml" styleClass="etiqueta"/>
+                <h:outputText value="|" styleClass="etiqueta"/>
+                <h:commandLink value="#{i18n.cerrar_sesion}" action="#{menuControlador.logout}" styleClass="etiqueta"/>
+            </h:form>
+        </div>
+    </ui:component>
+</html>
+
+
+

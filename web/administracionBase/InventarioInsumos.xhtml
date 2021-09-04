@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="plantilla.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:define name="content">
+
+        <h:form>
+            <p:growl id="growl" showDetail="false" />
+            <h:panelGrid id="pg">
+                <h:panelGroup>
+                    <h:outputText id="insumos"
+                                  value="Lista de Insumos Registrados"
+                                  styleClass="tituloTabla" />
+                    <br/><br/>
+                    <p:toolbar>
+                        <p:toolbarGroup align="left">
+                            <p:commandButton type="push"
+                                             value="#{i18n.boton_nuevo}"
+                                             image="ui-icon-document"
+                                             onclick="dialogoAgregar.show();"/>
+                        </p:toolbarGroup>
+
+                    </p:toolbar>
+                </h:panelGroup>
+
+                <p:dataTable id="formasTabla2"  paginator="true" selectionMode="single" rows="15"
+                             paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown} " 
+                             rowsPerPageTemplate="10,15,20" var="insumo"  value="#{inventarioInsumos.listaInsumos}"
+                             rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx"
+                             update="display panelGridModificar" onselectComplete="dialogoModificar.show()"
+                             selection="#{inventarioInsumos.insumoSeleccionado}">
+                    <p:column id="colNombre" style="width: 50%" sortBy="#{insumo.nombre}" filterBy="#{insumo.nombre}">
+                        <f:facet name="header">Nombre</f:facet>
+                        <h:outputText id="nombreInsumo" value="#{insumo.nombre}">
+                        </h:outputText>
+                    </p:column>
+                    <p:column id="colMedida" style=" width: 25%" sortBy="#{insumo.medida}"
+                              filterBy="#{insumo.medida}">
+                        <f:facet name="header">Unidad de Medida</f:facet>
+                        <h:outputText id="medidaInsumo" value="#{insumo.medida}">
+                        </h:outputText>
+                    </p:column>
+                    <p:column id="colStock" style=" width: 25%" sortBy="#{insumo.stock}"
+                              filterBy="#{insumo.stock}">
+                        <f:facet name="header">Stock Actual</f:facet>
+                        <h:outputText id="stockInsumo" value="#{insumo.stock}">
+                        </h:outputText>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGrid>
+
+
+            <p:dialog header="Modificar datos de insumo"
+                      widgetVar="dialogoModificar"
+                      width="500"
+                      styleClass="outputpanel"
+                      height="500"
+                      closable="true"
+                      closeOnEscape="true"
+                      modal="true">
+
+                <p:outputPanel id="panelModificar"
+                               layout="inline">
+                    <h:panelGrid id="panelGridModificar"
+                                 columns="2"
+                                 styleClass="bgpanelgrid">
+
+                        <h:outputText styleClass="etiqueta"  value="Nombre" />
+                        <h:inputText  id="inputNombreInsumo" value="#{inventarioInsumos.insumoSeleccionado.nombre}" />
+
+                        <h:outputText styleClass="etiqueta"  value="Unidad de Medida" />
+                        <h:inputText id="inputMedidaInsumo" value="#{inventarioInsumos.insumoSeleccionado.medida}" />
+
+                        <h:outputText styleClass="etiqueta"  value="Stock Actual" />
+                        <h:inputText id="inputStockInsumo" value="#{inventarioInsumos.insumoSeleccionado.stock}" />
+
+                    </h:panelGrid>
+
+                    <h:panelGroup>
+                        <p:commandButton image="ui-icon-disk"
+                                         value="#{i18n.boton_guardar}"
+                                         action="#{inventarioInsumos.update}"
+                                         style="position: absolute; left: 140px; width: 100px"
+                                         onclick="insumos" />
+
+                        <p:commandButton image="ui-icon-trash"
+                                         value="#{i18n.boton_eliminar}"
+                                         style="position: absolute; left: 260px; width: 100px"
+                                         action="#{inventarioInsumos.delete}"
+                                         onclick="insumos"
+                                         update="pg"/>
+                        <p:commandButton image="ui-icon ui-icon-close"
+                                         value="#{i18n.boton_salir}"
+                                         style="position: absolute; left: 380px; width: 100px"
+                                         onclick="dialogoModificar.hide()"/>
+
+                    </h:panelGroup>
+                </p:outputPanel>
+            </p:dialog>
+
+
+            <p:dialog header="Registrar nuevo insumo"
+                      widgetVar="dialogoAgregar"
+                      width="500"
+                      styleClass="outputpanel"
+                      height="500"
+                      closable="true"
+                      closeOnEscape="true"
+                      modal="true">
+
+                <p:outputPanel id="panelAgregar"
+                               layout="inline">
+                    <h:panelGrid id="panelGridAgregar"
+                                 columns="2"
+                                 styleClass="bgpanelgrid">
+
+                        <h:outputText styleClass="etiqueta"  value="Nombre" />
+                        <h:inputText  id="addNombreInsumo" value="#{inventarioInsumos.insumoNuevo.nombre}" />
+
+                        <h:outputText styleClass="etiqueta"  value="Unidad de Medida" />
+                        <h:inputText id="addMedidaInsumo" value="#{inventarioInsumos.insumoNuevo.medida}" />
+
+                        <h:outputText styleClass="etiqueta"  value="Stock Inicial" />
+                        <h:inputText id="addStockInsumo" value="#{inventarioInsumos.insumoNuevo.stock}" />
+
+                    </h:panelGrid>
+
+                    <h:panelGroup>
+                        <p:commandButton image="ui-icon-disk"
+                                         value="Guardar"
+                                         action="#{inventarioInsumos.add}"
+                                         style="position: absolute; left: 260px; width: 100px"
+                                         onclick="insumos"
+                                         update="grilla"/>
+
+
+                        <p:commandButton image="ui-icon ui-icon-close"
+                                         value="Salir"
+                                         style="position: absolute; left: 380px; width: 100px"
+                                         onclick="dialogoAgregar.hide()"
+                                         action="#{inventarioInsumos.resetearCampos}"
+                                         update="panelGridAgregar"/>
+
+                    </h:panelGroup>
+                </p:outputPanel>
+            </p:dialog>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+

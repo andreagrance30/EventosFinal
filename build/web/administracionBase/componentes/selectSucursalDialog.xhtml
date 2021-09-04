@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jstl/core"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+
+        <p:dataTable id="sucursalesTabla"  paginator="true" selectionMode="single" rows="10"
+                                     paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown} " rowsPerPageTemplate="10,15"
+                                     var="sucursal"  value="#{menuControlador.listaSucursales}" rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}"
+                                     rowIndexVar="rowIx" update="sucActual"
+                                      onselectComplete="selectSucursalDialog.hide()"  selection="#{menuControlador.sucursalSeleccionada}">
+
+                            <p:column id="colSucursal" sortBy="#{sucursal.codSucursal}" filterBy="#{sucursal.codSucursal}" style="width: 10px ">
+                                <f:facet name="header">Sucursal</f:facet>
+                                <h:outputText id="codSucursal" value="#{sucursal.codSucursal}">
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column id="colSucursalDescripcion" sortBy="#{sucursal.descripcion}" filterBy="#{sucursal.descripcion}" style="width: 390px">
+                                <f:facet name="header">Descripcion</f:facet>
+                                <h:outputText id="codSucursalDescripcion" value="#{sucursal.descripcion}">
+                                </h:outputText>
+                            </p:column>
+       </p:dataTable>
+  </ui:composition>

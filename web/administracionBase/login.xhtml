@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=250; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+        <title>Eventos - Administración</title>
+        <link href="#{request.contextPath}/resources/css/metre-style.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <h:messages id="msgs" globalOnly="true" showDetail="false" styleClass="loginMensaje"  ></h:messages>
+        <div id="login">
+            <h:form>
+                <h:outputText value="La sesión ha expirado. Recargue la página." rendered="#{param.reason == 'expirado'}" />
+                <h:outputText style="position: relative;left: 35%;" value="Inicio de sesión"/>
+                <h:panelGrid columns="2">
+                    <h:outputLabel for="username">Usuario:</h:outputLabel>
+                    <h:inputText id="username" style="width: 150px;color: #FFBF00;" value="#{loginControlador.username}"/>
+                    <h:outputLabel for="password">Contraseña:</h:outputLabel>
+                    <h:inputSecret id="password" style="width: 150px;" value="#{loginControlador.password}"/>
+
+                </h:panelGrid>
+
+                <h:commandButton style="position: relative;left: 40%;" value="Ingresar" action="#{loginControlador.login}"/>
+            </h:form>
+            
+        </div>
+    </body>
+</html>

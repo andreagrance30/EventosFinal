@@ -1,0 +1,267 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="plantilla.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:define name="content">
+
+        <h:form>
+            <p:growl id="growl" showDetail="false" />
+            <h:panelGrid id="pg">
+                <h:panelGroup>
+                    <h:outputText id="producto"
+                                  value="Lista de Productos Registrados"
+                                  styleClass="tituloTabla" />
+                    <br/><br/>
+                    <p:toolbar>
+                        <p:toolbarGroup align="left">
+                            <p:commandButton type="push"
+                                             value="#{i18n.boton_nuevo}"
+                                             image="ui-icon-document"
+                                             onclick="dialogoAgregar.show();"/>
+                        </p:toolbarGroup>
+                    </p:toolbar>
+                </h:panelGroup>
+
+
+                <p:dataTable id="formasTabla2"  paginator="true" selectionMode="single" rows="15"
+                             paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown} " 
+                             rowsPerPageTemplate="10,15,20" var="producto"  value="#{controladorProducto.listaProducto}"
+                             rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx"
+                             update="display panelGridModificar" onselectComplete="dialogoModificar.show()"
+                             selection="#{controladorProducto.productoSeleccionado}">
+                    <p:column id="coldescripcionPro" style="width: 50%" sortBy="#{producto.descripcion}" filterBy="#{producto.descripcion}">
+                        <f:facet name="header">Descripcion</f:facet>
+                        <h:outputText id="descriProveedor" value="#{producto.descripcion}">
+                        </h:outputText>
+                    </p:column>
+                    <p:column id="colStockPro" style="width: 50%" sortBy="#{producto.cantidad}" filterBy="#{producto.cantidad}">
+                        <f:facet name="header">Stock</f:facet>
+                        <h:outputText id="descriStock" value="#{producto.cantidad}">
+                        </h:outputText>
+                    </p:column>
+                    <p:column id="colPrecio" style="width: 50%" sortBy="#{producto.precio}" filterBy="#{producto.precio}">
+                        <f:facet name="header">Precio</f:facet>
+                        <h:outputText id="descriPrecio" value="#{producto.precio}">
+                        </h:outputText>
+                    </p:column>
+                    <p:column id="colPreMulta" style="width: 50%" sortBy="#{producto.precioMulta}" filterBy="#{producto.precioMulta}">
+                        <f:facet name="header">Precio Multa</f:facet>
+                        <h:outputText id="descriPreMulta" value="#{producto.precioMulta}">
+                        </h:outputText>
+                    </p:column>
+                    <p:column id="colTipo" style="width: 50%" sortBy="#{producto.tipoProductoid.descripcion}" filterBy="#{producto.tipoProductoid.descripcion}">
+                        <f:facet name="header">Tipo de Producto</f:facet>
+                        <h:outputText id="descriTipo" value="#{producto.tipoProductoid.descripcion}">
+                        </h:outputText>
+                    </p:column>
+                    <p:column id="colClasi" style="width: 50%" sortBy="#{producto.clasificacionProductoid.descripcion}" filterBy="#{producto.clasificacionProductoid.descripcion}">
+                        <f:facet name="header">Clasificacion de Producto</f:facet>
+                        <h:outputText id="descriClasi" value="#{producto.clasificacionProductoid.descripcion}">
+                        </h:outputText>
+                    </p:column>
+               
+                </p:dataTable>
+
+            </h:panelGrid>
+
+            <p:dialog header="Selección de Tipo de Producto" widgetVar="selectTipoDialog"  width="400" styleClass="outputpanel" height="500" closable="true" closeOnEscape="true" modal="true">
+                <p:dataTable var="tipoProducto" value="#{controladorProducto.tipoProducto}"  paginator="true" rows="10"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             rowsPerPageTemplate="10,15"  selection="#{controladorProducto.tipoProductoSeleccionado}"
+                             update="inputTipo inputModTipo" onselectComplete="selectTipoDialog.hide()" selectionMode="single">
+                    <p:column filterBy="#{tipoProducto.descripcion}">
+                        <f:facet name="header"> Tipo de Producto</f:facet>
+                        <h:outputText id="descriTipo2" value="#{tipoProducto.descripcion}"></h:outputText>
+                    </p:column>
+                </p:dataTable>
+            </p:dialog>
+
+            <p:dialog header="Selección de Clasificacion de Producto" widgetVar="selectClasiDialog"  width="400" styleClass="outputpanel" height="500" closable="true" closeOnEscape="true" modal="true">
+                <p:dataTable var="clasi" value="#{controladorProducto.listaClasi}"  paginator="true" rows="10"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             rowsPerPageTemplate="10,15"  selection="#{controladorProducto.clasiSeleccionado}"
+                             update="inputClasi inputModClasi" onselectComplete="selectClasiDialog.hide()" selectionMode="single">
+                    <p:column filterBy="#{clasi.descripcion}">
+                        <f:facet name="header"> Clasificacion de Producto</f:facet>
+                        <h:outputText id="descriClasi" value="#{clasi.descripcion}"></h:outputText>
+                    </p:column>
+                </p:dataTable>
+            </p:dialog>
+
+            <p:dialog header="Modificar datos del Producto"
+                      widgetVar="dialogoModificar"
+                      width="420"
+                      styleClass="outputpanel"
+                      height="250"
+                      closable="true"
+                      closeOnEscape="true"
+                      modal="true">
+
+                <p:outputPanel id="panelModificar"
+                               layout="inline">
+                    <h:panelGrid id="panelGridModificar"
+                                 columns="3"
+                                 styleClass="bgpanelgrid">
+
+                        <h:outputText styleClass="etiqueta"  value="Descripcion" />
+                        <h:inputText  id="inputDescriPro" value="#{controladorProducto.productoSeleccionado.descripcion}" />
+                        <h:panelGroup />
+                        
+                        <h:outputText styleClass="etiqueta"  value="Stock" />
+                        <h:inputText  id="inputStockPro" value="#{controladorProducto.productoSeleccionado.cantidad}" />
+                        <h:panelGroup />
+
+                        <h:outputText styleClass="etiqueta"  value="Precio" />
+                        <h:inputText  id="inputPrecio" value="#{controladorProducto.productoSeleccionado.precio}" />
+                        <h:panelGroup />
+
+                        <h:outputText styleClass="etiqueta"  value="Precio Multa" />
+                        <h:inputText  id="inputPreMulta" value="#{controladorProducto.productoSeleccionado.precioMulta}" />
+                        <h:panelGroup />
+
+                        <h:outputText styleClass="etiqueta"  value="Tipo de Producto" />
+                        <h:inputText  id="inputModTipo"  readonly="true" value="#{controladorProducto.productoSeleccionado.tipoProductoid.descripcion}" />
+                        <p:commandButton    image="ui-icon-search"
+                                            style="margin-left: 10px; font-size: 12px;"
+                                            onclick="selectTipoDialog.show()" /> 
+
+                        <h:outputText styleClass="etiqueta"  value="Clasificacion de Producto" />
+                        <h:inputText  id="inputModClasi"  readonly="true" value="#{controladorProducto.productoSeleccionado.clasificacionProductoid.descripcion}" />
+                        <p:commandButton    image="ui-icon-search"
+                                            style="margin-left: 10px; font-size: 12px;"
+                                            onclick="selectClasiDialog.show()" /> 
+                    </h:panelGrid>
+                    <br/>
+                    <h:panelGroup>
+                        <p:commandButton image="ui-icon-disk"
+                                         value="#{i18n.boton_guardar}"
+                                         action="#{controladorProducto.update()}"
+                                         style="position: absolute; left: 30px; width: 100px"
+                                         onclick="producto2" />
+
+                        <p:commandButton image="ui-icon-trash"
+                                         value="#{i18n.boton_eliminar}"
+                                         style="position: absolute; left: 150px; width: 100px"
+                                         action="#{controladorProducto.delete}"
+                                         onclick="producto2"
+                                         update="pg"/>
+                        <p:commandButton image="ui-icon ui-icon-close"
+                                         value="#{i18n.boton_salir}"
+                                         style="position: absolute; left: 270px; width: 100px"
+                                         onclick="dialogoModificar.hide()"/>
+
+                    </h:panelGroup>
+                </p:outputPanel>
+            </p:dialog>
+
+
+            <p:dialog header="Registrar nuevo Producto"
+                      widgetVar="dialogoAgregar"
+                      width="330"
+                      styleClass="outputpanel"
+                      height="240"
+                      closable="true"
+                      closeOnEscape="true"
+                      modal="true">
+
+                <p:outputPanel id="panelAgregar"
+                               layout="inline">
+                    <h:panelGrid id="panelGridAgregar"
+                                 columns="1"
+                                 styleClass="bgpanelgrid" >
+                        <p:row>
+                            <p:column> 
+                                <h:outputText styleClass="etiqueta"  value="Descripcion" />
+                            </p:column>
+                            <p:column>       
+                                <h:inputText  id="addDescriPro" value="#{controladorProducto.productoNuevo.descripcion}" 
+                                              style="position: relative; left: 10px;"/>
+                            </p:column>
+                        </p:row>
+                        
+                        <p:row>
+                            <p:column> 
+                                <h:outputText styleClass="etiqueta"  value="Stock" />
+                            </p:column>
+                            <p:column>       
+                                <h:inputText  id="addStockPro" value="#{controladorProducto.productoNuevo.cantidad}" 
+                                              style="position: relative; left: 10px;"/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>       
+                                <h:outputText styleClass="etiqueta"  value="Precio" />
+                            </p:column>
+                            <p:column>       
+                                <h:inputText  id="addPrecio" value="#{controladorProducto.productoNuevo.precio}" />
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>       
+                                <h:outputText styleClass="etiqueta"  value="Precio Multa" />
+                            </p:column>
+                            <p:column>       
+                                <h:inputText  id="addPreMulta" value="#{controladorProducto.productoNuevo.precioMulta}"
+                                              style="position: relative; left: 7px;"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>        
+                                <h:outputText styleClass="etiqueta"  value="Tipo de Producto" />
+                            </p:column>
+                            <p:column>           
+                                <h:inputText  id="inputTipo"
+                                              readonly="true"
+                                              value="#{controladorProducto.tipoProductoSeleccionado.descripcion}"
+                                              style="position: relative; left: 20px;"/>
+                                <p:commandButton    image="ui-icon-search"
+                                                    style="margin-left: 40px; font-size: 12px;"
+                                                    onclick="selectTipoDialog.show()" /> 
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>        
+                                <h:outputText styleClass="etiqueta"  value="Clas de Producto" />
+                            </p:column>
+                            <p:column>           
+                                <h:inputText  id="inputClasi"
+                                              readonly="true"
+                                              value="#{controladorProducto.clasiSeleccionado.descripcion}"
+                                              style="position: relative; left: 20px;"/>
+                                <p:commandButton    image="ui-icon-search"
+                                                    style="margin-left: 40px; font-size: 12px;"
+                                                    onclick="selectClasiDialog.show()" /> 
+                            </p:column>
+                        </p:row>
+
+                    </h:panelGrid>
+                    <br/>
+                    <h:panelGroup>
+                        <p:commandButton image="ui-icon-disk"
+                                         value="Guardar"
+                                         action="#{controladorProducto.add}"
+                                         style="position: absolute; left: 40px; width: 100px"
+                                         onclick="producto2"
+                                         update="grilla"/>
+
+                        <p:commandButton image="ui-icon ui-icon-close"
+                                         value="Salir"
+                                         style="position: absolute; left: 150px; width: 100px"
+                                         onclick="dialogoAgregar.hide()"
+                                         action="#{controladorProducto.resetearCampos}"
+                                         update="panelGridAgregar"/>
+
+                    </h:panelGroup>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="plantilla.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:define name="content">
+
+        <h:form>
+            <p:growl id="growl" showDetail="false" />
+            <h:panelGrid id="pg">
+                <h:panelGroup>
+                    <h:outputText id="ajustes"
+                                  value="Lista de Ajustes Registrados"
+                                  styleClass="tituloTabla" />
+                    <br/><br/>
+                    <p:toolbar>
+                        <p:toolbarGroup align="left">
+                            <p:commandButton type="push"
+                                             value="#{i18n.boton_nuevo}"
+                                             image="ui-icon-document"
+                                             onclick="dialogoAgregar.show();"/>
+                        </p:toolbarGroup>
+
+                    </p:toolbar>
+                </h:panelGroup>
+
+
+                <p:dataTable id="formasTabla2"  paginator="true" selectionMode="single" rows="15"
+                             paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown} " 
+                             rowsPerPageTemplate="10,15,20" var="ajustes"  value="#{controladorAjustes.listaAjustes}"
+                             rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx"
+                             update="display panelGridModificar" onselectComplete="dialogoModificar.show()"
+                             selection="#{controladorAjustes.ajustesSeleccionado}">
+                    <p:column id="colFecha" style="width: 50%" sortBy="#{ajustes.fechaAjuste}" filterBy="#{ajustes.fechaAjuste}">
+                        <f:facet name="header">FechaAjuste</f:facet>
+                        <p:calendar value="#{ajustes.fechaAjuste}" effect="fadeIn" pattern="dd/MM/yyyy">
+                        <!--    <p:ajax event="change" listener="{controladorAjustes.actualizarFechaAjuste}"/>  -->
+                        </p:calendar>
+                    </p:column>
+                    <p:column id="colDescripcion" style="width: 50%" sortBy="#{ajustes.descripcion}" filterBy="#{ajustes.descripcion}">
+                        <f:facet name="header">Descripcion</f:facet>
+                        <h:outputText id="nombreDescripcion" value="#{ajustes.descripcion}">
+                        </h:outputText>
+                    </p:column>
+                    <p:column id="colCantidad" style="width: 50%" sortBy="#{ajustes.cantidad}" filterBy="#{ajustes.cantidad}">
+                        <f:facet name="header">Cantidad</f:facet>
+                        <h:outputText id="nombreCantidad" value="#{ajustes.cantidad}">
+                        </h:outputText>
+                    </p:column>
+                    <p:column id="colProducto" style="width: 50%" sortBy="#{ajustes.productoid.descripcion}" filterBy="#{ajustes.productoid.descripcion}">
+                        <f:facet name="header">Producto</f:facet>
+                        <h:outputText id="nombrePro" value="#{ajustes.productoid.descripcion}">
+                        </h:outputText>
+                    </p:column>
+                    <p:column id="inputNroCu" style="width: 50%" sortBy="#{ajustes.tipoajuste}" filterBy="#{ajustes.tipoajuste}">
+                        <f:facet name="header">Tipo de Ajuste</f:facet>
+                        <h:outputText id="nombreTipo" value="#{ajustes.tipoajuste}">
+                        </h:outputText>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGrid>
+
+
+            <p:dialog header="Registrar nuevo Ajustes"
+                      widgetVar="dialogoAgregar"
+                      width="330"
+                      styleClass="outputpanel"
+                      height="360"
+                      closable="true"
+                      closeOnEscape="true"
+                      modal="true">
+
+                <p:outputPanel id="panelAgregar"
+                               layout="inline">
+                    <h:panelGrid id="panelGridAgregar"
+                                 columns="1"
+                                 styleClass="bgpanelgrid" >
+                        <p:row>
+                            <p:column> 
+                                <h:outputText styleClass="etiqueta"  value="FechaAjuste" />
+                            </p:column>
+                            <p:column>       
+                                <p:calendar value="#{controladorAjustes.ajustesNuevo.fechaAjuste}" effect="fadeIn" pattern="dd/MM/yyyy">
+                                <!--    <p:ajax event="change" listener="{controladorAjustes.actualizarFechaAjuste}"/> -->
+                                </p:calendar>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>       
+                                <h:outputText styleClass="etiqueta"  value="Descripcion" />
+                            </p:column>
+                            <p:column>       
+                                <h:inputText  id="addDescripcion" style="position: relative; left: 7px;" value="#{controladorAjustes.ajustesNuevo.descripcion}" />
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>       
+                                <h:outputText styleClass="etiqueta"  value="Cantidad" />
+                            </p:column>
+                            <p:column>       
+                                <h:inputText  id="addCantidad" value="#{controladorAjustes.ajustesNuevo.cantidad}"
+                                              style="position: relative; left: 25px;"/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>       
+                                <h:outputText styleClass="etiqueta"  value="Producto" />
+                            </p:column>
+                            <p:column>       
+                                <h:inputText  id="addProd"
+                                              readonly="true"
+                                              value="#{controladorAjustes.productoSeleccionado.descripcion}"
+                                              style="position: relative; left: 23px;"/>
+                                <p:commandButton image="ui-icon-search"
+                                                 style="font-size: 12px;"
+                                                 onclick="selectProductoDialog.show()" />
+
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>       
+                                <h:outputText styleClass="etiqueta"  value="Tipo de Ajuste" />
+                            </p:column>
+                            <p:column>      
+                                <h:selectOneRadio id="tipoAjuste" value="#{controladorAjustes.ajustesNuevo.tipoajuste}"
+                                                  layout="pageDirection" style="font-size: 15px;"  >
+                                    <f:selectItem itemLabel="Salida" itemValue="salida" />
+                                    <f:selectItem itemLabel="Entrada" itemValue="entrada" />
+                                    <!--    <p:ajax update="inputNroCu" /> -->
+                                </h:selectOneRadio>
+                                <!--     <h:inputText  id="addTipo" value="{controladorAjustes.ajustesNuevo.tipoajuste}"
+                                                   style="position: relative; left: 7px;"/> -->
+                            </p:column>
+                        </p:row>
+
+
+
+                    </h:panelGrid>
+                    <br/>
+                    <h:panelGroup>
+                        <p:commandButton image="ui-icon-disk"
+                                         value="Guardar"
+                                         action="#{controladorAjustes.add}"
+                                         style="position: absolute; left: 40px; width: 100px"
+                                         onclick="ajustes2"
+                                         update="grilla"/>
+
+                        <p:commandButton image="ui-icon ui-icon-close"
+                                         value="Salir"
+                                         style="position: absolute; left: 150px; width: 100px"
+                                         onclick="dialogoAgregar.hide()"
+                                         action="#{controladorAjustes.resetearCampos}"
+                                         update="panelGridAgregar"/>
+
+                    </h:panelGroup>
+                </p:outputPanel>
+            </p:dialog>
+
+            <p:dialog header="Selección de Productos" widgetVar="selectProductoDialog"  width="400" styleClass="outputpanel" height="500" closable="true" closeOnEscape="true" modal="true">
+                <p:dataTable var="producto" value="#{controladorAjustes.producto}"  paginator="true" rows="10"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             rowsPerPageTemplate="10,15"  selection="#{controladorAjustes.productoSeleccionado}"
+                             update="addProd " onselectComplete="selectProductoDialog.hide()" selectionMode="single">
+                    <p:column filterBy="#{producto.descripcion}">
+                        <f:facet name="header">
+                            <h:outputText value="Nombre" />
+                        </f:facet>
+                        <h:outputText value="#{producto.descripcion}" />
+                    </p:column>
+                </p:dataTable>
+            </p:dialog>
+
+        </h:form>
+    </ui:define>
+</ui:composition>
+

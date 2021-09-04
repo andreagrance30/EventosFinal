@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    
+    <body>
+        
+        <ui:composition template="./../recursos/plantillas/paginaInicioPlantilla.xhtml">
+            
+            <ui:define name="content">
+                <h:form>
+                    <div align="right">
+                        <h:outputText value="#{menuControlador.userNombre}" styleClass="etiqueta" />
+                        <h:commandLink value=" | #{i18n.cambio_pass}" action="BswCambioClave.xhtml" />
+                        <h:commandLink value=" | #{i18n.cerrar_sesion}" action="#{menuControlador.logout}" />
+                    </div>
+                <div >
+                    <div style="position:absolute; left:400px; top: 160px; font-size: 40px; color: #ACCFE8">
+
+                        <h:outputText id="empresaActual"  value="#{menuControlador.empresaLogueada.descripcion}" />
+
+                    </div>
+                    <div style="position:absolute; left:380px; top: 220px; font-size: 35px; color: #ACCFE8">
+                        <h:outputText id="sucActual"  value="#{menuControlador.sucursalActual.descripcion}" />
+                    </div>
+                    
+                    <div style="position:absolute; left:350px; top: 270px; font-size: 25px; color: #ACCFE8">
+                         <h:outputText id="ejer"  value="Ejercicio " />
+                        <h:outputText id="ejercioActualDesde"  value="#{menuControlador.ejercicioActual.fecInicio}" >
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText id="al"  value=" al " />
+                        <h:outputText id="ejercioActualHasta"  value="#{menuControlador.ejercicioActual.fecFinal}" >
+                              <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </div>
+
+
+                    <div style="position:absolute; left:370px; top: 320px; font-size: 35px; color: #ACCFE8">
+                        EDICION&nbsp;EMPRESARIAL
+                    </div>
+
+                   <div style="position:absolute; left:1150px; top: 580px">
+                      <p:commandButton value="#{i18n.boton_sucursal}"
+                        image="ui-icon-home" onclick="selectSucursalDialog.show()"
+                        rendered="#{menuControlador.puedeCambiarSucursal}"  />
+                   </div>
+
+                   <div style="position:absolute; left:1040px; top: 580px">
+                      <p:commandButton value="#{i18n.boton_empresa}"
+                        image=" " onclick="selectEmpresaDialog.show()"
+                        rendered="#{menuControlador.puedeCambiarEmpresa}"  />
+                   </div>
+
+                   <div style="position:absolute; left:930px; top: 580px">
+                      <p:commandButton value="#{i18n.boton_ejercicio}"
+                        image=" " onclick="selectEjercicioDialog.show()"
+                        rendered="#{menuControlador.puedeCambiarEjercicio}"  />
+                   </div>
+                </div>
+
+              <p:dialog header="#{i18n.stw_reporte_ent_sal_seleccionar_sucursal}" widgetVar="selectSucursalDialog"  width="600" styleClass="outputpanel" height="500" closable="true" closeOnEscape="true" modal="true">
+                   <ui:include src="componentes/selectSucursalDialog.xhtml" />
+              </p:dialog>
+
+              <p:dialog header="#{i18n.listado_empresas}" widgetVar="selectEmpresaDialog"  width="600" styleClass="outputpanel" height="500" closable="true" closeOnEscape="true" modal="true">
+                   <ui:include src="componentes/selectEmpresa.xhtml" />
+              </p:dialog>
+
+               <p:dialog header="#{i18n.listado_ejercicios}" widgetVar="selectEjercicioDialog"  width="600" styleClass="outputpanel" height="500" closable="true" closeOnEscape="true" modal="true">
+                   <ui:include src="componentes/selectEjercicio.xhtml" />
+              </p:dialog>
+              </h:form> 
+            </ui:define>
+
+            
+
+        </ui:composition>
+        
+    </body>
+</html>

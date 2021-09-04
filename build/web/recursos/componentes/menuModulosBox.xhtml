@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ <ui:component xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:root="http://java.sun.com/jsf/composite/root"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.prime.com.tr/ui">
+
+        <!-- COLUMNA MENU -->
+        <div id="menuv">
+            <h:form>
+                <h:graphicImage  width="149px" alt="logo" id="logoImagen" url="#{request.contextPath}/InventivaWeb1_0/faces/recursos/img/logoInventiva.jpg"/>
+                <h:outputLink value="../administracionBase/inicioAdministracionBase.xhtml">Administracion Base</h:outputLink>
+                <h:outputLink value="#menuv">Ventas y Facturacion</h:outputLink>
+                <h:outputLink value="#menuv">Cuentas a Cobrar</h:outputLink>
+                <h:outputLink value="#menuv">Tesoreria y Bancos</h:outputLink>
+                <h:outputLink value="#menuv">Control de Stock</h:outputLink>
+                <h:outputLink value="../fuerzaVentas/inicioFuerzaVentas.xhtml">Fuerza de Ventas</h:outputLink>
+                <h:outputLink value="../gestionDistribucion/inicioGestionDistribucion.xhtml">Gestion de Distribucion</h:outputLink>
+                <h:outputLink value="#menu">Cuentas a Pagar</h:outputLink>
+                <h:outputLink value="#menuv">Fondo Fijo</h:outputLink>
+                <h:outputLink value="#menuv">Importaciones</h:outputLink>
+                <h:outputLink value="#menuv">Compras Locales</h:outputLink>
+                <h:outputLink value="#menuv">Recursos Humanos</h:outputLink>
+                <h:outputLink value="#menuv">Servicios Mecanicos</h:outputLink>
+                <h:outputLink value="#menuv">Contabilidad</h:outputLink>
+                <h:outputLink value="#menuv">Activo Fijo</h:outputLink>
+            </h:form>
+        </div>
+        <!-- FIN COLUMNA MENU -->
+    </ui:component>
+
+

@@ -1,0 +1,413 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="./../../resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="./../../resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <link href="./../../resources/css/metre-style.css" rel="stylesheet" type="text/css" />
+        <title>Rios Repuestos</title>
+
+        <script type="text/javascript">
+        function cUpper(cObj){
+            cObj.value=cObj.value.toUpperCase();
+        }
+     
+        </script>
+        <script language="JavaScript">
+function puedeImprimir(){
+
+
+    if(document.getElementById('descSuc').value=="" || document.getElementById('descSucHasta').value=="" || document.getElementById('fechaInicial').value=="" || document.getElementById('fechaFinal').value=="")
+    {
+        Avisos.show()
+        return false;
+    }
+    return true;
+}
+function mueveReloj(){
+    if(document.getElementById('serieRec')!=null)
+        verificaTalonarios();
+    momentoActual = new Date()
+    hora = momentoActual.getHours()
+    minuto = momentoActual.getMinutes()
+    segundo = momentoActual.getSeconds()
+    horaImprimible = hora + " : " + minuto + " : " + segundo
+    document.getElementById('reloj').value=horaImprimible
+    
+    setTimeout("mueveReloj()",1000)
+}
+function abrirDialogo(){
+   // alert(document.getElementById('estadoSeleccionado').value)
+    if (document.getElementById('estadoSeleccionado').value=='DEB'){
+      
+        dialogoDebitosList.show()
+    }
+    else if (document.getElementById('estadoSeleccionado').value!='REC'){
+        
+            dialogoComprobantesList.show()
+
+        
+    }
+    else if (document.getElementById('estadoSeleccionado').value=='REC'){
+        dialogoRecibosList.show()
+    }
+    
+
+}
+
+function verificaCampo(obj){
+
+if(obj.id=='cantidad'){
+if(isNaN(obj.value)){
+    valorNumerico.show()
+    obj.value=null
+    document.getElementById('iva').value=null
+    document.getElementById('iva').value=null
+    document.getElementById('precioUnitario').value=null
+    obj.onFocus()
+}
+}
+else if(obj.id=='facNumero'){
+if(isNaN(obj.value)){
+    valorNumerico.show()
+    obj.value=null
+    obj.onFocus()
+}
+
+}
+
+
+}
+
+function verificaValores(){
+
+if(document.getElementById('cuota').value=="" || document.getElementById('nroFactura').value=="" || document.getElementById('descTransaccion').value=="" || document.getElementById('serieFactura').value=="" || document.getElementById('tipoFactura').value=="")
+              {
+
+                  AvisoCamposVacios.show();
+
+                   return false;
+
+              }
+else
+        dialogoAddFormaPagoRec.hide();
+}
+
+ function verificaMontos()
+ {
+
+   
+        esCheque=false
+    if (document.getElementById('banco').disabled==true)
+    {
+        esCheque=true
+    }
+    if(!esCheque)
+        {
+            
+            if(document.getElementById('banco').value=="" || fechaEmisionCheque.getDate()==null || fechaVencimientoCheque==null)
+              {
+                  
+                  AvisoCamposVacios.show();
+                 
+                   return false;
+
+              }
+        }
+
+
+    if(document.getElementById('montoPago').value==0)
+      {
+          
+          AvisoMonto.show();
+          return false;
+
+      }
+ 
+      if(document.getElementById('tipoTransaccion').value=='')
+      {
+
+          AvisoTransaccionNoSeleccionada.show();
+          return false;
+
+      }
+       if(document.getElementById('codMonedaFormPag').value=='')
+      {
+
+          AvisoMonedaNoSeleccionada.show();
+          return false;
+
+      }
+      else dialogoAddFormaPago.hide();
+}
+
+
+function verificaMontosDEBCRE()
+ {
+
+
+
+      if(document.getElementById('tipoTransaccion').value=='')
+      {
+
+          AvisoTransaccionNoSeleccionada.show();
+          return false;
+
+      }
+       if(document.getElementById('importePago').value=='')
+      {
+
+          AvisoImporte.show();
+          return false;
+
+      }
+      else dialogoAddFormaPago.hide();
+}
+
+
+
+var botonPresionado="";
+function botonClick(nombreBoton){
+
+botonPresionado=nombreBoton;
+}
+
+function capturaF10(){
+
+ var obj = document.getElementById('botonNuevo');
+ 
+  obj.click()
+
+}
+
+function puedeSubmitir()
+ {
+   
+   if(botonPresionado=='botonGuardar'){
+    botonPresionado="";
+   
+    if(0>parseInt((document.getElementById('CompListVista:importeCompTotalOut').value)*100))
+    {
+        AvisoImporteNegativo.show();
+        return false;
+    }
+    if(document.getElementById('formPagoList:importeFormTotalOut').value!=document.getElementById('CompListVista:importeCompTotalOut').value)
+    {
+        AvisoImporteTotal.show();
+        return false;
+    }
+
+   
+    //importeFormaPagoTotal=parseInt(document.getElementById('formPagoList:importeFormTotalOut').value)*1000000000
+    //importeCompTotal=parseInt(document.getElementById('CompListVista:importeCompTotalOut').value)*1000000000
+    else{
+
+        return true;
+    }
+   
+   }
+
+}
+
+function puedeSubmitirCliente()
+ {
+   
+   if(botonPresionado=='botonGuardar'){
+    botonPresionado="";
+   
+   if(document.getElementById('codVendedor').value=="" || document.getElementById('descVendedor').value=="")
+   {
+
+           AvisoVendedorNoSeleccionado.show();
+           return false;
+    }
+    else if(document.getElementById('CodPersona').value=="" || document.getElementById('nombre').value=="")
+   {
+
+           AvisoPersonaNoSeleccionado.show();
+           return false;
+    }
+     else if(document.getElementById('CodPersonaMOD').value=="" || document.getElementById('nombre').value=="")
+   {
+
+           AvisoPersonaNoSeleccionado.show();
+           return false;
+    }
+  
+   return true;
+   }
+
+ 
+}
+
+function puedeSubmitirRecibo(){
+
+if (botonPresionado=='botonGuardar')
+    if(document.getElementById('serieRec').value==""){
+    avisoTalonario.show()
+    return false;
+
+    }
+else if (botonPresionado=='botonAnular')
+    if(document.getElementById('serieRec').value==""){
+    avisoA.show()
+    return false;
+
+    }
+else
+    return true;
+else
+    return true;
+}
+
+function puedeSubmitirNota()
+ {
+
+   if(botonPresionado=='botonGuardar'){
+    botonPresionado="";
+
+   if(document.getElementById('Cliente').value=="" || document.getElementById('nombreCliente').value=="")
+   {
+
+           AvisoClienteNoSeleccionado.show();
+           return false;
+    }
+
+    else if(document.getElementById('facTipo').value=="" || document.getElementById('facSerie').value=="" || document.getElementById('facNumero').value=="")
+   {
+
+           AvisoCompNoSeleccionado.show();
+           return false;
+    }
+
+   return true;
+   }
+
+
+}
+function puedeSubmitirPlanilla(){
+
+if (botonPresionado=='botonGuardar' || botonPresionado=='botonModificar')
+    if(document.getElementById('codcobrador').value=="" || document.getElementById('descCobrador').value=="" || document.getElementById('codSucursal').value=="" || document.getElementById('descSucursal').value==""){
+    avisoCobrador.show()
+    botonPresionado='';
+    return false;
+
+    }
+
+else
+    return true;
+else
+    return true;
+}
+
+function verificaTalonarios(){
+
+    if (document.getElementById('serieRec').value=="")
+    dialogoTalonariosList.show()
+}
+function ejecutarBuscar(e){
+
+
+var obj = document.getElementById('botonBuscarLupa')
+  if(e.keyCode == 13){
+      obj.click()
+    
+}
+
+}
+function ejecutarLimpiar(){
+var obj = document.getElementById('botonLimpiar')
+if(obj){
+   
+    obj.click()
+
+}
+
+}
+
+function ejecutarGuardarNuevo(){
+
+var obj = document.getElementById('botonGuardarNuevo');
+    if(obj){
+
+        obj.click();
+
+    }
+}
+
+function ejecutarGuardarViejo(){
+
+var obj = document.getElementById('botonGuardarViejo');
+    if(obj){
+
+        obj.click();
+
+    }
+}
+
+
+
+
+
+function esNumero(e){
+    if (isNaN(e.value)){
+        AvisoPlazoNumerico.show();
+        e.value="";
+
+    }
+}
+
+    function openDialog(e, win){
+        if(e.keyCode == 120)
+            win.show();
+    }
+   
+    function pulsar(e) {
+            tecla=(document.all) ? e.keyCode : e.which;
+            if(tecla==13) {
+                return false;
+            }else if(tecla == 121){
+                ejecutarGuardarNuevo();
+                ejecutarGuardarViejo();
+            }else if(tecla == 118){
+                ejecutar('botonBusqueda');
+            }else if (tecla == 119){
+                ejecutar('botonBuscar');
+            }
+        }
+        
+        function ejecutar(boton){
+            var obj = document.getElementById(boton);
+            if(obj){
+                obj.click();
+            }
+        }
+        </script>
+    </h:head>
+
+    <h:body  onload="mueveReloj();" onkeydown="return pulsar(event);">
+
+
+        <div id="top" class="top">
+            <ui:insert name="top">
+                <ui:include src="./../componentes/menuCuentasCobrar.xhtml"/>
+            </ui:insert>
+        </div>
+        <div>
+            <div id="left">
+                <ui:insert name="left">
+                    <ui:include src="./../componentes/menuPrimeFacesModulos.xhtml"/>
+                </ui:insert>
+            </div>
+            <div id="content" class="left_content">
+                <ui:insert name="content"></ui:insert>
+            </div>
+        </div>
+    </h:body>
+
+</html>

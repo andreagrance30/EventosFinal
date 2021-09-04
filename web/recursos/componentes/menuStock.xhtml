@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<ui:component>
+           <div id="menu_horizontal">
+            <h:form id="menubase">
+                <p:menubar styleClass="menuTipoLetra">
+                    <p:submenu label="#{i18n.st_DEFINICIONES}" >
+                   <p:submenu label="#{i18n.st_articulos}" >
+                       <p:menuitem value="#{i18n.st_articulos}" url="StwArticulos.xhtml" rendered="#{stwArticulosControlador.puedeConsultar}"  />
+                       <p:menuitem value="#{i18n.st_marcas}" url="StwMarcas.xhtml"  rendered="#{stwMarcasControlador.puedeConsultar}"  />
+                        <p:menuitem value="#{i18n.st_linea}" url="linea.xhtml"  rendered="#{stwLineaControlador.puedeConsultar}" />
+                        <p:menuitem value="#{i18n.st_familia}"  url="StwFamilia.xhtml" rendered="#{stwFamiliaControlador.puedeConsultar}" />
+                        <p:menuitem value="#{i18n.st_grupos_de_articulos}"  url="StwGruposArt.xhtml" rendered="#{stwGruposArtControlador.puedeConsultar}"/>
+                    </p:submenu>
+                        <p:menuitem value="#{i18n.st_envases}"   url="StwEnvases.xhtml"  rendered="#{stwEnvasesControlador.puedeConsultar}"  />
+                        <p:menuitem value="#{i18n.st_unidades_de_medida}" url="StwUnidadesMedidas.xhtml"  rendered="#{stwUnidadesMedidasControlador.puedeConsultar}"   />
+                        <p:menuitem value="#{i18n.st_rubro}" url="StwRubro.xhtml" rendered="#{stwRubroControlador.puedeConsultar}"/>
+                        <p:menuitem value="#{i18n.st_partidas_arancelarias}"  url="StwPartidasArancelarias.xhtml" rendered="#{stwPartidasArancelariasControlador.puedeConsultar}" />
+                        <p:menuitem value="#{i18n.st_articulos_equivalentes}" url="StwArticulosEquivalentes.xhtml" rendered="#{stwArticulosEquivalentesControlador.puedeConsultar}"/>
+                     
+                        <p:menuitem value="#{i18n.st_iva}" url="StwIva.xhtml"  rendered="#{stwIvaControlador.puedeConsultar}" />
+                        <p:menuitem value="#{i18n.st_motivos_de_ES}" url="StwMotivosEntSal.xhtml" rendered="#{stwMotivoEntSalControlador.puedeConsultar}"/>
+                        <p:menuitem value="#{i18n.st_restriccion_de_articulos_por_usuarios}" url="StwRestriccionesArticulosUsuarios.xhtml" rendered="#{stwRestriccionesArticulosControlador.puedeConsultar}"/>
+               
+                        <p:menuitem value="#{i18n.st_permisos}" url="PermisosOpcionesUsuarios.xhtml" rendered="#{bswPermisosOpcionesControlador.puedeConsultar}"  />
+                        <p:menuitem value="#{i18n.menu_salir}" url="./../administracionBase/inicio.xhtml"  />
+                    </p:submenu>
+
+                    <p:submenu label="#{i18n.st_MOVIMIENTOS}">
+                        <p:menuitem value="#{i18n.st_ES_de_articulos_en_stock}" url="StwEntSal.xhtml"  rendered="#{stwEntSalControlador.puedeConsultar}"/>
+                        <p:menuitem value="#{i18n.st_bloqueo_articulos}" url="StwBloqueoArticulos.xhtml" rendered="#{stwBloqueoArticulosControlador.puedeConsultar}" />
+                        <p:menuitem value="#{i18n.st_notas_de_pedidos}" url="StwNotasPedido.xhtml" rendered="#{stwNotasPedidoControlador.puedeConsultar}" />
+                        <p:menuitem value="#{i18n.st_notas_de_remisiones}" url="StwNotasEnvio.xhtml" rendered="#{stwNotasEnvioControlador.puedeConsultar}"/>
+                        <p:menuitem value="#{i18n.st_entrada_de_articulos_en_desuso}" url="StwEntradaArtDesuso.xhtml" rendered="#{stwEntradaArtDesusoControlador.puedeConsultar}"  />
+                        <p:menuitem value="#{i18n.st_reserva_de_articulos}" url="StwReservaArticulos.xhtml" rendered="#{stwReservaArtControlador.puedeConsultar}" />
+                        <p:menuitem value="#{i18n.st_consulta_de_stock}" url="StwConsultaStock.xhtml" rendered="#{stwConsultaStockControlador.puedeConsultar}"  />
+                        <p:menuitem value="#{i18n.st_consulta_de_stock_comprometido}"  rendered="#{stwStockComprometidoControlador.puedeConsultar}"/>
+                        <p:menuitem value="#{i18n.st_consulta_ultimo_inventario_practicado}"  rendered="#{stwUltInvPracticadoControlador.puedeConsultar}"  url="StwUltimoInventarioPracticado.xhtml"/>
+                        <p:menuitem value="#{i18n.st_consulta_articulos_duplicados_en_inventario}" url="StwArticulosDuplicados.xhtml" rendered="#{stwArticulosDupControlador.puedeConsultar}"  />
+                        <p:menuitem value="#{i18n.st_inventario}"  url="StwInventario.xhtml" rendered="#{stwInventarioControlador.puedeConsultar}"/>
+                        <p:menuitem value="#{i18n.st_recalcular_stock}" url="StwRecalcularStock.xhtml" rendered="#{stwRecalcularStockControlador.puedeConsultar}"  />
+                        <p:menuitem value="#{i18n.st_planilla_de_actualizacion_de_precios}" url="StwPlanillaPrecios.xhtml" rendered="#{stwPlanillaPreciosControlador.puedeConsultar}"/>
+                        <p:menuitem value="Ubicación de Articulos" url="StwUbicArticulos.xhtml" rendered="#{stwPlanillaPreciosControlador.puedeConsultar}"/>
+                    </p:submenu>
+
+                    <p:submenu label="#{i18n.st_REPORTES}">
+                        <p:submenu label="#{i18n.st_DEFINICIONES}">
+                            <p:menuitem value="#{i18n.st_articulos}" url="StwReporteArticulos.xhtml" rendered="#{stwReporteArticulosControlador.puedeConsultar}" />
+                            <p:menuitem value="#{i18n.st_marcas}" url="StwRptMarcas.xhtml" rendered="#{stwRptMarcasControlador.puedeConsultar}" />
+                            <p:menuitem value="#{i18n.st_linea}" url="StwRptLineas.xhtml"  rendered="#{stwRptLineasControlador.puedeConsultar}"/>
+                        </p:submenu>
+                        <p:menuitem value="#{i18n.st_articulo_por_debajo_del_minimo}" url="StwReporteArticulosDebajoMinimo.xhtml" rendered="#{stwReporteArticulosDebajoMinimoControlador.puedeConsultar}" />
+                        <p:menuitem value="#{i18n.st_ES_de_articulos_en_stock}" url="StwReporteEntSalArticulos.xhtml" rendered="#{stwReporteEntSalArticulosControlador.puedeConsultar}"  />
+                        <p:menuitem value="#{i18n.st_ES_de_articulos_en_stock_por_sucursales}" url="StwRptMovEntSalArticulosxSuc.xhtml" rendered="#{stwRptMovEntSalArticulosxSucControlador.puedeConsultar}" />
+                        <p:menuitem value="#{i18n.st_pedidos_de_envio_a_sucursales}" url="StwRptPedidoEnvioSuc.xhtml" rendered="#{stwRptPedidoEnvioSucControlador.puedeConsultar}" />
+                        <p:menuitem value="#{i18n.st_movimientos_de_productos_por_motivo}" url="StwRptMovProdxMotivo.xhtml" rendered="#{stwRptMovProdxMotControlador.puedeConsultar}"  />
+                        <p:menuitem value="#{i18n.st_movimientos_de_ES_stock}" url="StwReporteMovEntradaSalidaStock.xhtml" rendered="#{stwReporteMovEntradaSalidaStockControlador.puedeConsultar}"/>
+                        <p:menuitem value="#{i18n.st_ficha_de_articulos_con_comprobantes_anulados}" 
+                                    url="StwReporteArtConComprobAnulado.xhtml"
+                                    rendered="#{stwReporteArtConComprobAnuladoControlador.puedeConsultar}"  />
+                        <p:menuitem value="#{i18n.st_listado_de_articulos_en_excel}"
+                                    url="Startexc.xhtml" rendered="#{stwRptListadoArticulosExcelControlador.puedeConsultar}" />
+                        <p:menuitem value="#{i18n.st_historico_de_variacion_de_precios_en_excel}" url="StwRptHistorialVarPrecios.xhtml" rendered="#{stwRptHistorialVarPreciosControlador.puedeConsultar}" />
+                        <p:submenu label="#{i18n.st_REPORTES_existencias}">
+                            <p:menuitem value="#{i18n.st_existencia_de_articulos}" url="StwExistenciaArticulos.xhtml" rendered="#{stwExistenciaArticulosControlador.puedeConsultar}" />
+                            <p:menuitem value="#{i18n.st_existencia_valorizada}" url="StwExistenciaValorizada.xhtml" rendered="#{stwExistenciaValorizadaControlador.puedeConsultar}" />
+                            <p:menuitem value="#{i18n.st_existencia_de_articulos_por_sucursales}" url="StwRptExistArtXsucursales.xhtml" rendered="#{stwRptExistArtXsucControlador.puedeConsultar}" />
+                            <p:menuitem value="#{i18n.st_existencia_de_articulos_costos_en_stock}" url="StwExistenciaArticulosCostos.xhtml" rendered="#{stwExistenciaArticulosCostosControlador.puedeConsultar}"  />
+                            <p:menuitem value="#{i18n.st_existencia_de_articulos_en_litros}" url="StwExistenciaArtLitros.xhtml" rendered="#{stwExistenciaArtLitrosControlador.puedeConsultar}" />
+                        </p:submenu>
+                        <p:menuitem value="#{i18n.st_ventas_por_sucursal}" url="StwRptVentasXsucursales.xhtml" rendered="#{stwRptVentasXsucursal.puedeConsultar}" />
+                        <p:menuitem value="#{i18n.st_ventas_por_sucursal_por_comprobante}" url="StwRptVentasXsucursalesXtipComprobante.xhtml" rendered="#{stwRptVentasXsucXtipComControlador.puedeConsultar}" />
+
+                    </p:submenu>
+                    <p:submenu label="#{i18n.st_REPORTES}">
+                        <p:menuitem value="#{i18n.st_saldo_de_articulos}"  url="StwRptSaldoArticulos.xhtml" rendered="#{stwRptSaldoArticulosControlador.puedeConsultar}" />
+                        <p:menuitem value="#{i18n.st_saldos_de_articulos_con_costos}" url="StwRptSaldoArticulosCostos.xhtml" rendered="#{stwRptSaldoArticulosCostosControlador.puedeConsultar}" />
+                        <p:menuitem value="#{i18n.st_articulos_comprometidos}" url="StwReporteArticulosComprometidos.xhtml" rendered="#{stwReporteArticulosComprometidosControlador.puedeConsultar}"/>
+                        <p:menuitem value="#{i18n.st_articulos_bloqueados}" url="StwArticulosBloqueados.xhtml" rendered="#{stwArticulosBloqueadosControlador.puedeConsultar}" />
+                        <p:menuitem value="#{i18n.st_reserva_de_articulos}" url="StwRptReservaArticulos.xhtml" rendered="#{stwRptReservaArticulosControlador.puedeConsultar}" />
+                        <p:submenu label="#{i18n.st_inventario}">
+                            <p:menuitem value="#{i18n.st_inventario_para_existencia_de_articulos}" url="StwRptInvExistenciaArticulos.xhtml" rendered="#{stwRptExistArticInventarioControlador.puedeConsultar}" />
+                            <p:menuitem value="#{i18n.st_listado_de_articulos_para_inventarios}"  url="StwRptListaArticulosInventario.xhtml" rendered="#{stwRptListaArticulosInvControlador.puedeConsultar}"/>
+                            <p:menuitem value="#{i18n.st_inventario}"  url="StwReporteInventario.xhtml" rendered="#{stwReporteInventarioControlador.puedeConsultar}" />
+                            <p:menuitem value="#{i18n.st_diferencia_de_inventario}"  url="StwDiferenciaInventario.xhtml" rendered="#{stwDiferenciaInventarioControlador.puedeConsultar}"/>
+                            <p:menuitem value="#{i18n.st_diferencia_de_inventario_valorizado}"  url="StwDiferenciaInventarioValorizado.xhtml" rendered="#{stwDiferenciaInventarioControlador.puedeConsultar}"/>
+                            <p:menuitem value="#{i18n.st_inventario_valorizado}" url="StwReporteInvValorizadoExcel.xhtml" rendered="#{stwReporteInvValorizadoExcelControlador.puedeConsultar}" />
+                            <p:menuitem value="#{i18n.st_inventario_anual_valorizado_en_excel}" url="StwRptInvAnualVal.xhtml" rendered="#{stwRptInvAnualValControlador.puedeConsultar}" />
+                            <p:menuitem value="#{i18n.st_listado_de_inventario_realizados}"  url="StwRptInventarioRealizados.xhtml" rendered="#{stwRptInvRealizadosControlador.puedeConsultar}"/>
+                        </p:submenu>
+                        <p:menuitem value="#{i18n.st_notas_de_envio_no_recepcionadas}" url="StwRptNotaEnvNRecepcionadas.xhtml" rendered="#{stwRptNotaEnvNRecepControlador.puedeConsultar}" />
+                        <p:menuitem value="#{i18n.st_notas_de_remisiones}" url="StwReporteNotasRemision.xhtml" rendered="#{stwReporteNotasRemisionControlador.puedeConsultar}" />
+                        <p:menuitem value="#{i18n.st_etiqueta_articulos}" url="StwReporteEtiquetaArticulos.xhtml" rendered="#{stwReporteEtiquetaArticulosControlador.puedeConsultar}" />
+                    </p:submenu>
+                </p:menubar>
+            </h:form>
+        </div>
+        <div align="right">
+            <h:form>
+                <h:outputText value="#{menuControlador.userNombre}"   styleClass="etiqueta"/>
+                <h:outputText value="|" styleClass="etiqueta"/>
+                <h:commandLink value="#{i18n.cambio_pass}" action="../administracionBase/BswCambioClave.xhtml" styleClass="etiqueta"/>
+                <h:outputText value="|" styleClass="etiqueta"/>
+                <h:commandLink value="#{i18n.cerrar_sesion}" action="#{menuControlador.logout}" styleClass="etiqueta"/>
+            </h:form>
+        </div>
+    </ui:component>
+</html>

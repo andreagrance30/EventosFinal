@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <head>
+        <meta name="viewport" content="width=250; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+    </head>
+    <body>
+        <div>
+            <h:form>
+                <div>
+                    <div style="position:absolute; left:10px; top: 10px; font-size: 20px; color: #D20005">
+                        El sistema se ha desconectado. Vuelva a ingresar.
+                    </div>
+
+                    <div style="position:absolute; left:10px; top: 100px; font-size: 20px; color: #D20005">
+                        Eventos - Módulo Administrador
+                    </div>
+                </div>
+                <h:inputTextarea style="width: 100%;" rows="20" readonly="true" value="#{ErrorControlador.stackTrace}"/>
+            </h:form>
+        </div>
+    </body>
+</html>
+

@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jstl/core"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <p:dataTable var="per" value="#{empresaControlador.lazyListPersonas}"  paginator="true" rows="10" lazy="true"
+                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                 rowsPerPageTemplate="10,15"  selection="#{empresaControlador.selectedPersona}"
+                 update="EmpresapersJurdisplay EmpresapersJurNombredisplay EmpresaNuevapersJurdisplay EmpresaNuevapersJurNombredisplay"
+                 onselectComplete="dialogSelectPersona.hide()" selectionMode="single">
+      <p:column filterBy="#{per.nombre}">
+        <f:facet name="header">
+          <h:outputText value="Nombres" />
+        </f:facet>
+        <h:outputText value="#{per.nombre}" />
+      </p:column>
+      <p:column filterBy="#{per.codPersona}">
+        <f:facet name="header">
+          <h:outputText value="Cod. Persona" />
+        </f:facet>
+        <h:outputText value="#{per.codPersona}" />
+      </p:column>
+    </p:dataTable>
+  </ui:composition>

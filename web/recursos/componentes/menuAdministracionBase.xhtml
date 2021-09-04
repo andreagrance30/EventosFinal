@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <ui:component>   
+        <div id="menu_horizontal">   
+            <h:form id="menubase">
+                <p:menubar styleClass="menuTipoLetra">
+                    <p:submenu label="ABM">
+                            <p:menuitem value="Paises" url="ControladorPaises.xhtml?faces-redirect=true"/>
+                            <p:menuitem value="Perfil de Usuario" url="ControPerfilUsuario.xhtml?faces-redirect=true"/>
+                            <p:menuitem value="Ciudad" url="ControCiudad.xhtml?faces-redirect=true"/>
+                            <p:menuitem value="Barrio" url="ControBarrio.xhtml?faces-redirect=true"/>
+                            <p:menuitem value="Proveedor" url="ControProveedor.xhtml?faces-redirect=true"/> 
+                            <p:menuitem value="Cliente" url="ControCliente.xhtml?faces-redirect=true"/>
+                            <p:menuitem value="Usuarios" url="Usuarios.xhtml?faces-redirect=true"/>
+                            <p:menuitem value="Tipo de Producto" url="ControTipoProducto.xhtml?faces-redirect=true"/>
+                    </p:submenu>
+                    
+                     <p:submenu label="ABeee">
+                           <p:menuitem value="Clasificacion de Productos" url="ControClasi.xhtml?faces-redirect=true"/>
+                            <p:menuitem value="Unidad de Medida" url="ControUnidadMedida.xhtml?faces-redirect=true"/>
+                            <p:menuitem value="Sucursal" url="ControSucursal.xhtml?faces-redirect=true"/>
+                            <p:menuitem value="Forma de Pago" url="ControFormaPago.xhtml?faces-redirect=true"/>
+                            <p:menuitem value="Forma de Cobro" url="ControFormaCobro.xhtml?faces-redirect=true"/>
+                            <p:menuitem value="Caja" url="ControCaja.xhtml?faces-redirect=true"/>
+                         
+                     </p:submenu>
+                    
+                        <p:submenu label="Inventario">
+                           <p:menuitem value="Productos" url="ControProducto.xhtml?faces-redirect=true"/>
+                           <p:menuitem value="Ajustes" url="ControAjustes.xhtml?faces-redirect=true"/>
+                         </p:submenu>
+                    
+                    <p:submenu label="Movimientos">
+                         <p:menuitem value="Compras" url="ControCompras.xhtml?faces-redirect=true" />
+                         <p:menuitem value="Ventas" url="ControVentas.xhtml?faces-redirect=true" />
+                         <p:menuitem value="Cuentas a Pagar" url="ControCtasPagar.xhtml?faces-redirect=true" />
+                         <p:menuitem value="Cuentas a Cobrar" url="ControCtasCobrar.xhtml?faces-redirect=true" />
+                         </p:submenu>
+                    
+                    <p:submenu label="Eventos">
+                          <p:menuitem value="Presupuestos" url="ControPresu.xhtml?faces-redirect=true"/>
+                          <p:menuitem value="Recetas" url="ControReceta.xhtml?faces-redirect=true"/>
+                         </p:submenu>
+                        
+                     <p:submenu label="Cobranzas">
+                        <p:menuitem value="Apertura Cierre de Caja" url="ControAperCierr.xhtml?faces-redirect=true" />
+                   <!--     <p:menuitem value="Arqueo de Caja" url="ControArqueoCaja.xhtml?faces-redirect=true" /> -->
+                        <p:menuitem value="Cobros" url="ControCobros.xhtml?faces-redirect=true" />                        
+                     </p:submenu>
+                    
+                    <p:submenu label="Informes">
+                        <p:menuitem value="Clientes" url="InformeClientes.xhtml?faces-redirect=true"/> 
+                        <p:menuitem value="Eventos" url="InformeClientes.xhtml?faces-redirect=true"/> 
+                        <p:menuitem value="Proveedores" url="InformeClientes.xhtml?faces-redirect=true"/> 
+                        <p:menuitem value="Ventas" url="InformeClientes.xhtml?faces-redirect=true"/> 
+                        <p:menuitem value="Compras" url="ResumenCompras.xhtml?faces-redirect=true"/> 
+                        <p:menuitem value="Movimiento de Articulos" url="InformeClientes.xhtml?faces-redirect=true"/> 
+                        <p:menuitem value="Insumos" url="InformeClientes.xhtml?faces-redirect=true"/> 
+                        <p:menuitem value="Cobros" url="InformeClientes.xhtml?faces-redirect=true"/> 
+                        <p:menuitem value="Apertura y Cierre de Caja" url="InformeClientes.xhtml?faces-redirect=true"/> 
+                    </p:submenu>
+                    <!--
+                    <p:submenu label="Administración">
+                        <p:menuitem value="Resumen de Caja" url="FacturacionPeriodo.xhtml?faces-redirect=true"/>
+                        <p:menuitem value="Detalle de Ventas" url="DetalleVentas.xhtml?faces-redirect=true" />
+                        <p:menuitem value="Tickets en detalle" url="DetalleTickets.xhtml?faces-redirect=true" />
+                        <p:submenu label="Facturas">
+                        <p:menuitem value="Facturas emitidas" url="DetalleFacturas.xhtml?faces-redirect=true" />
+                        <p:menuitem value="Resumen de compras" url="ResumenCompras.xhtml?faces-redirect=true" />
+                        <p:menuitem value="Detalle de compras" url="DetalleCompras.xhtml?faces-redirect=true" />
+                        </p:submenu> -->
+                       
+                        <!--p:menuitem value="Ventas de Pizzas" url="DetallePizzas.xhtml?faces-redirect=true" /-->
+                        <!--p:menuitem value="Pedidos salidos de Cocina" url="PedidosCocinados.xhtml?faces-redirect=true" /-->
+           <!--         </p:submenu> -->
+                    <!--
+                    <p:submenu label="Estadísticas">
+                        <p:menuitem value="Comentarios de Clientes" url="ConsultaPuntuaciones.xhtml?faces-redirect=true" />
+                        <p:menuitem value="Productos más pedidos" url="ProductosMasVendidos.xhtml?faces-redirect=true" />
+                        <p:menuitem value="Cancelaciones del período" url="CancelacionesPeriodo.xhtml?faces-redirect=true" />
+                        <p:menuitem value="Cantidad de personas en el local" url="CantidadPersonas.xhtml?faces-redirect=true" />
+                    </p:submenu> -->
+                    <!--
+                    <p:submenu label="Inventario">
+              
+                        <p:submenu label="Reportes">
+                            <p:menuitem value="Existencia esperada de insumos" url="InventarioRptExistencia.xhtml?faces-redirect=true" />
+                        </p:submenu>
+                        <p:menuitem value="Producto" url="ControProducto.xhtml?faces-redirect=true"/>
+                        <p:menuitem value="Insumos" url="InventarioInsumos.xhtml?faces-redirect=true" />
+                        <p:menuitem value="Recetas" url="InventarioRecetas.xhtml?faces-redirect=true" />   
+                        <p:menuitem value="Ajustes de stock" url="InventarioAjustes.xhtml?faces-redirect=true" />
+                        <p:menuitem value="Proveedores" url="InventarioProveedores.xhtml?faces-redirect=true" />
+                       
+                    </p:submenu> -->
+                    
+                    <p:submenu label="Sesión" >
+                        <p:menuitem value="#{i18n.cerrar_sesion}" action="#{loginControlador.logout}" />
+                        <p:menuitem value="#{i18n.cambio_pass}" url="CambioClave.xhtml?faces-redirect=true" />
+                    </p:submenu>
+                </p:menubar>
+            </h:form>
+        </div>
+    </ui:component>
+</html>
+

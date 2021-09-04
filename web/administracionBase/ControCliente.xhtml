@@ -1,0 +1,268 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="plantilla.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:define name="content">
+
+        <h:form>
+            <p:growl id="growl" showDetail="false" />
+            <h:panelGrid id="pg">
+                <h:panelGroup>
+                    <h:outputText id="cliente"
+                                  value="Lista de Clientes Registrados"
+                                  styleClass="tituloTabla" />
+                    <br/><br/>
+                    <p:toolbar>
+                        <p:toolbarGroup align="left">
+                            <p:commandButton type="push"
+                                             value="#{i18n.boton_nuevo}"
+                                             image="ui-icon-document"
+                                             onclick="dialogoAgregar.show()"/>
+                        </p:toolbarGroup>
+
+                    </p:toolbar>
+                </h:panelGroup>
+
+
+                <p:dataTable id="formasTabla2"  paginator="true" selectionMode="single" rows="15"
+                             paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown} " 
+                             rowsPerPageTemplate="10,15,20" var="cliente"  value="#{controladorCliente.listaCliente}"
+                             rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx"
+                             update="display panelGridModificar" onselectComplete="dialogoModificar.show()"
+                             selection="#{controladorCliente.clienteSeleccionado}">
+                    <p:column id="colnombreCli" style="width: 14%;" sortBy="#{cliente.nombre}" filterBy="#{cliente.nombre}">
+                        <f:facet name="header">Nombre*</f:facet>
+                        <h:outputText id="nombreCliente" value="#{cliente.nombre}">
+                        </h:outputText>
+                    </p:column>
+                      <p:column id="colapellidoCli" style="width: 14%" sortBy="#{cliente.apellido}" filterBy="#{cliente.apellido}">
+                        <f:facet name="header">Apellido*</f:facet>
+                        <h:outputText id="nombreApellido" value="#{cliente.apellido}">
+                        </h:outputText>
+                    </p:column>
+                    <p:column id="colDireccionCli" style="width: 14%" sortBy="#{cliente.direccion}" filterBy="#{cliente.direccion}">
+                        <f:facet name="header">Direccion</f:facet>
+                        <h:outputText id="nombreDireccionCli" value="#{cliente.direccion}">
+                        </h:outputText>
+                    </p:column>
+                    <p:column id="colTelefonoCli" style="width: 14%" sortBy="#{cliente.telefono}" filterBy="#{cliente.telefono}">
+                        <f:facet name="header">Telefono</f:facet>
+                        <h:outputText id="nombreTelefonoCli" value="#{cliente.telefono}">
+                        </h:outputText>
+                    </p:column>
+                    <p:column id="colEmailCli" style="width: 14%" sortBy="#{cliente.email}" filterBy="#{cliente.email}">
+                        <f:facet name="header">Email</f:facet>
+                        <h:outputText id="nombreEmailCli" value="#{cliente.email}">
+                        </h:outputText>
+                    </p:column>
+                    <p:column id="colRucCli" style="width: 14%" sortBy="#{cliente.ruc}" filterBy="#{cliente.ruc}">
+                        <f:facet name="header">Ruc</f:facet>
+                        <h:outputText id="RucCli" value="#{cliente.ruc}">
+                        </h:outputText>
+                    </p:column>
+                    <p:column id="colBarrioCli" style="width: 14%" sortBy="#{cliente.barrioid.descripcion}" filterBy="#{cliente.barrioid.descripcion}">
+                        <f:facet name="header">Barrio</f:facet>
+                        <h:outputText id="nombreBarrioCli" value="#{cliente.barrioid.descripcion}">
+                        </h:outputText>
+                    </p:column>
+                </p:dataTable>
+
+            </h:panelGrid>
+
+            <p:dialog header="Selección de Barrio" widgetVar="selectBarrioDialog"  width="400" styleClass="outputpanel" height="500" closable="true" closeOnEscape="true" modal="true">
+                <p:dataTable var="barrio" value="#{controladorCliente.barrio}"  paginator="true" rows="10"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             rowsPerPageTemplate="10,15"  selection="#{controladorCliente.barrioSeleccionado}"
+                             update="inputBarrioCli inputModBarrioCli" onselectComplete="selectBarrioDialog.hide()" selectionMode="single">
+                    <p:column filterBy="#{barrio.descripcion}">
+                        <f:facet name="header"> Barrio </f:facet>
+                        <h:outputText id="nombreBarrio" value="#{barrio.descripcion}"></h:outputText>
+                    </p:column>
+                </p:dataTable>
+            </p:dialog>
+
+            <p:dialog header="Modificar datos de cliente2"
+                      widgetVar="dialogoModificar"
+                      width="400"
+                      styleClass="outputpanel"
+                      height="320"
+                      closable="true"
+                      closeOnEscape="true"
+                      modal="true">
+
+                <p:outputPanel id="panelModificar"
+                               layout="inline">
+                    <h:panelGrid id="panelGridModificar"
+                                 columns="3"
+                                 styleClass="bgpanelgrid">
+                      
+                        <h:outputText styleClass="etiqueta"  value="Nombre" />
+                        <h:inputText  id="inputNombreCliente" value="#{controladorCliente.clienteSeleccionado.nombre}" />
+                        <h:panelGroup/>
+                        
+                        <h:outputText styleClass="etiqueta"  value="Apellido" />
+                        <h:inputText  id="inputApelliCliente" value="#{controladorCliente.clienteSeleccionado.apellido}" />
+                        <h:panelGroup/>
+
+                        <h:outputText styleClass="etiqueta"  value="Direccion" />
+                        <h:inputText  id="inputDireccion" value="#{controladorCliente.clienteSeleccionado.direccion}" />
+                         <h:panelGroup/> 
+                         
+                         <h:outputText styleClass="etiqueta"  value="Telefono" />
+                         <h:inputText  id="inputTelefonocli" value="#{controladorCliente.clienteSeleccionado.telefono}" />
+                         <h:panelGroup/> 
+                         
+                          <h:outputText styleClass="etiqueta"  value="Email" />
+                          <h:inputText  id="inputEmailcli" value="#{controladorCliente.clienteSeleccionado.email}" />
+                         <h:panelGroup/> 
+                         
+                          <h:outputText styleClass="etiqueta"  value="RUC/CI" />
+                          <h:inputText  id="inputRUCcli" value="#{controladorCliente.clienteSeleccionado.ruc}" />
+                         <h:panelGroup/> 
+        
+                                <h:outputText styleClass="etiqueta"  value="Barrio" />         
+                                <h:inputText  id="inputModBarrioCli"
+                                              readonly="true"
+                                              value="#{controladorCliente.clienteSeleccionado.barrioid.descripcion}" />
+                                <p:commandButton    image="ui-icon-search"
+                                                    style="margin-left: 10px; font-size: 12px;"
+                                                    onclick="selectBarrioDialog.show()" />
+                              
+                    </h:panelGrid>
+
+                    <h:panelGroup>
+                        <p:commandButton image="ui-icon-disk"
+                                         value="#{i18n.boton_guardar}"
+                                         action="#{controladorCliente.update()}"
+                                         style="position: absolute; left: 30px; width: 100px"
+                                         onclick="cliente" />
+
+                        <p:commandButton image="ui-icon-trash"
+                                         value="#{i18n.boton_eliminar}"
+                                         style="position: absolute; left: 150px; width: 100px"
+                                         action="#{controladorCliente.delete}"
+                                         onclick="cliente"
+                                         update="pg"/>
+                        <p:commandButton image="ui-icon ui-icon-close"
+                                         value="#{i18n.boton_salir}"
+                                         style="position: absolute; left: 270px; width: 100px"
+                                         onclick="dialogoModificar.hide()"/>
+
+                    </h:panelGroup>
+                </p:outputPanel>
+            </p:dialog>
+
+
+            <p:dialog header="Registrar nuevo cliente"
+                      widgetVar="dialogoAgregar"
+                      width="350"
+                      styleClass="outputpanel"
+                      height="320"
+                      closable="true"
+                      closeOnEscape="true"
+                      modal="true">
+
+                <p:outputPanel id="panelAgregar"
+                               layout="inline">
+                    <h:panelGrid id="panelGridAgregar"
+                                 columns="1"
+                                 styleClass="bgpanelgrid" >
+                        <p:row>
+                            <p:column> 
+                                <h:outputText styleClass="etiqueta"  value="Nombre" />
+                            </p:column>
+                            <p:column>       
+                                <h:inputText  id="addNombreCli" value="#{controladorCliente.clienteNuevo.nombre}"
+                                              style="margin-left: 15px"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column> 
+                                <h:outputText styleClass="etiqueta"  value="Apellido" />
+                            </p:column>
+                            <p:column>       
+                                <h:inputText  id="addApellidoCli" value="#{controladorCliente.clienteNuevo.apellido}"
+                                              style="margin-left: 12px"/>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>       
+                                <h:outputText styleClass="etiqueta"  value="Direccion" />
+                            </p:column>
+                            <p:column>       
+                                <h:inputText  id="addDireccionCli" value="#{controladorCliente.clienteNuevo.direccion}" 
+                                              style="margin-left: 5px" />
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>       
+                                <h:outputText styleClass="etiqueta"  value="Telefono" />
+                            </p:column>
+                            <p:column>       
+                                <h:inputText  id="addTelefonoCli" value="#{controladorCliente.clienteNuevo.telefono}"
+                                              style="margin-left: 10px"/>
+                            </p:column>
+                        </p:row>
+                       
+                            <p:row>
+                            <p:column>       
+                                <h:outputText styleClass="etiqueta"  value="Email" />
+                            </p:column>
+                            <p:column>       
+                                <h:inputText  id="addEmailCli" value="#{controladorCliente.clienteNuevo.email}" 
+                                              style="margin-left: 28px"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>       
+                                <h:outputText styleClass="etiqueta"  value="RUC" />
+                            </p:column>
+                            <p:column>       
+                                <h:inputText  id="addRucCli" value="#{controladorCliente.clienteNuevo.ruc}" 
+                                              style="margin-left: 33px"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>        
+                                <h:outputText styleClass="etiqueta"  value="Barrio" />
+                            </p:column>
+                            <p:column>           
+                                <h:inputText  id="inputBarrioCli"
+                                              readonly="true"
+                                              value="#{controladorCliente.barrioSeleccionado.descripcion}" 
+                                              style="margin-left: 23px"/>
+                                <p:commandButton    image="ui-icon-search"
+                                                    style="margin-left: 10px; font-size: 12px;"
+                                                    onclick="selectBarrioDialog.show()" /> 
+                            </p:column>
+                        </p:row>
+                    </h:panelGrid>
+
+                    <h:panelGroup>
+                        <p:commandButton image="ui-icon-disk"
+                                         value="Guardar"
+                                         action="#{controladorCliente.add}"
+                                         style="position: absolute; left: 50px; width: 100px"
+                                         onclick="cliente"
+                                         update="grilla"/>
+
+                        <p:commandButton image="ui-icon ui-icon-close"
+                                         value="Salir"
+                                         style="position: absolute; left: 170px; width: 100px"
+                                         onclick="dialogoAgregar.hide()"
+                                         action="#{controladorCliente.resetearCampos}"
+                                         update="panelGridAgregar"/>
+
+                    </h:panelGroup>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

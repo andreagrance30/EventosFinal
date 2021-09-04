@@ -1,0 +1,194 @@
+
+root { 
+    display: block;
+}
+
+#login{
+    position:absolute;
+    left: 40%;
+    top: 35%;
+    color: #3366CC;
+    background: #F0F7FC;
+    display: block;
+    padding: 3px 6px;
+    border: 1px solid #ACCFE8;
+    border-width: 1px 1px 1px 1px;
+    height: 480px;
+    width: 800px;
+    font: 80% "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+
+
+#menuv {
+    border: 1px solid #ACCFE8;
+    border-width: 1px 1px 1px 1px;
+    width: 50px;
+    font: 80% "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+
+#menuv a {
+    border-bottom: 1px solid #ACCFE8;
+    text-decoration: none;
+    color: #3366CC;
+    background: #F0F7FC;
+    display: block;
+    padding: 3px 6px;
+    width: 50px;
+}
+
+#menuv a:hover {
+    background: #DBEBF6;
+}
+
+.boton {
+    color: #FFF;
+    font-weight: bold;
+    background-color: #3366CC;
+    font-family: Arial;
+    font-size: 12px;
+    text-align: center;
+    border: 0; padding: 3px 12px;
+}
+
+h1 {
+    font-size: 35px;
+    position:absolute;
+    top: 10px;
+    font-family: Arial;
+}
+
+table{
+    border-top: 1px solid #EAF0FB;
+    border-left: 1px solid #EAF0FB;
+    width: 100%; margin: 10px auto;
+    font-size: 11px;
+    background: #FFF;
+}
+
+th{
+    border-right: 1px solid #EAF0FB;
+    border-bottom: 1px solid #EAF0FB;
+    padding: 4px 6px;
+    width:50%;
+    background: #EAF0FB;
+    color: #005985;
+    font-weight: bold;
+    font-size: 13px;
+    text-align: left;
+}
+
+td{
+    border-right: 1px solid #EAF0FB;
+    border-bottom: 1px solid #EAF0FB;
+    padding: 4px 6px;
+    width:25%
+}
+
+.label{
+    border-right: 1px solid #EAF0FB;
+    border-bottom: 1px solid #EAF0FB;
+    padding: 4px 6px;
+    width:14%;
+    background: #EAF0FB;
+    color: #005985;
+    font-weight: bold;
+    font-size: 13px;
+    text-align: left;
+    font-family: Arial;
+}
+
+.etiqueta{
+
+    padding: 4px 6px;
+    width:14%;
+    color: #005985;
+    font-weight: bold;
+    font-size: 13px;
+    text-align: left;
+    font-family: Arial;
+}
+.etiquetaG{
+
+    padding: 4px 6px;
+    width:14%;
+    color: #696969;
+    font-weight: bold;
+    font-size: 13px;
+    text-align: left;
+    font-family: Arial;
+}
+.loginMensaje{
+    padding: 4px 6px;
+    width:50%;
+    color: #D20005;
+    font-weight: bold;
+    font-size: 23px;
+    text-align: left;
+    font-family: Arial;
+    position: relative;
+    left: 35%;
+}
+
+.tituloTabla{
+    color: Gray;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: left;
+    padding: 3px 6px;
+    font-family: Arial;
+}
+
+.menuItems{
+    color: grey;
+    background-color: lightgray;
+    font-weight: bold;
+    font-size: 13px;
+    text-align: left;
+    padding: 3px 6px;
+    font-family: Arial;
+    border-right: 1px solid grey;
+    border-bottom: 1px solid lightgray;
+    border-left: 1px solid grey;
+    border-top: 1px solid grey;
+    border: 1px solid grey;
+}
+
+.outputpanel {
+width:300px;
+height:100px;
+display:block;
+font-size: 13px;
+font-family: Arial;
+}
+.bgpanelgrid {
+background-color: #ACCFE8
+}
+.bgpanelgridGray {
+background-color: #D3D3D3;
+}
+
+.ui-datatable .ui-datatable-data .even-row td{
+background-color:#DDE3FD;
+}
+
+.ui-datatable .ui-datatable-data .odd-row td{
+background-color:#FFFFF;
+}
+
+
+.menuTipoLetra {
+ font-size: 11px;
+ font-weight: bold;
+ font-family: Arial;
+ color: Gray;
+}
+
+.textoNumerico{
+   color: #006699;
+   text-align: right;
+}
+
+
+
+

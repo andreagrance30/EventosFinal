@@ -1,0 +1,214 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="plantilla.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:define name="content">
+
+        <h:form>
+            <p:growl id="growl" showDetail="false" />
+            <h:panelGrid id="pg">
+                <h:panelGroup>
+                    <h:outputText id="caracteristicas"
+                                  value="Lista de Caracteristicas Registradas"
+                                  styleClass="tituloTabla" />
+                    <br/><br/>
+                    <p:toolbar>
+                        <p:toolbarGroup align="left">
+                            <p:commandButton type="push"
+                                             value="#{i18n.boton_nuevo}"
+                                             image="ui-icon-document"
+                                             onclick="dialogoAgregar.show();"/>
+                        </p:toolbarGroup>
+
+                    </p:toolbar>
+                </h:panelGroup>
+
+
+                <p:dataTable id="formasTabla2"  paginator="true" selectionMode="single" rows="15"
+                             paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown} " 
+                             rowsPerPageTemplate="10,15,20" var="caracteristicas"  value="#{controladorCaracteristicas.listaCaracteri}"
+                             rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx"
+                             update="display panelGridModificar" onselectComplete="dialogoModificar.show()"
+                             selection="#{controladorCaracteristicas.caracteriSeleccionado}">
+                    <p:column id="colValorCar" style="width: 50%" sortBy="#{caracteristicas.valor}" filterBy="#{caracteristicas.valor}">
+                        <f:facet name="header">valor</f:facet>
+                        <h:outputText id="descriCaracteristicas" value="#{caracteristicas.valor}">
+                        </h:outputText>
+                    </p:column>
+                   
+                    <p:column id="colProducto" style="width: 50%" sortBy="#{caracteristicas.idProducto.descripcion}" filterBy="#{caracteristicas.idProducto.descripcion}">
+                        <f:facet name="header">Producto</f:facet>
+                        <h:outputText id="nombreProducto" value="#{caracteristicas.idProducto.descripcion}">
+                        </h:outputText>
+                    </p:column>
+                    <p:column id="colAtributo" style="width: 50%" sortBy="#{caracteristicas.idAtributo.descripcion}" filterBy="#{caracteristicas.idAtributo.descripcion}">
+                        <f:facet name="header">Atributo</f:facet>
+                        <h:outputText id="nombreAtributo" value="#{caracteristicas.idAtributo.descripcion}">
+                        </h:outputText>
+                    </p:column>
+                </p:dataTable>
+
+
+            </h:panelGrid>
+
+            <p:dialog header="Selección de Producto" widgetVar="selectProductoDialog"  width="400" styleClass="outputpanel" height="500" closable="true" closeOnEscape="true" modal="true">
+                <p:dataTable var="producto" value="#{controladorCaracteristicas.producto}"  paginator="true" rows="10"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             rowsPerPageTemplate="10,15"  selection="#{controladorCaracteristicas.productoSeleccionado}"
+                             update="inputProducto inputModProducto" onselectComplete="selectProductoDialog.hide()" selectionMode="single">
+                    <p:column filterBy="#{producto.descripcion}">
+                        <f:facet name="header"> Producto </f:facet>
+                        <h:outputText id="nombreProducto" value="#{producto.descripcion}"></h:outputText>
+                    </p:column>
+                </p:dataTable>
+            </p:dialog>
+            
+              <p:dialog header="Selección de Atributo" widgetVar="selectAtributoDialog"  width="400" styleClass="outputpanel" height="500" closable="true" closeOnEscape="true" modal="true">
+                  <p:dataTable var="atributo" value="#{controladorCaracteristicas.atributo}"  paginator="true" rows="10"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             rowsPerPageTemplate="10,15"  selection="#{controladorCaracteristicas.atributoSeleccionado}"
+                             update="inputAtributo inputModAtributo" onselectComplete="selectAtributoDialog.hide()" selectionMode="single">
+                    <p:column filterBy="#{atributo.descripcion}">
+                        <f:facet name="header"> Producto </f:facet>
+                        <h:outputText id="nombreAtributo" value="#{atributo.descripcion}"></h:outputText>
+                    </p:column>
+                </p:dataTable>
+            </p:dialog>
+
+            <p:dialog header="Modificar datos de caracteristicas2"
+                      widgetVar="dialogoModificar"
+                      width="390"
+                      styleClass="outputpanel"
+                      height="210"
+                      closable="true"
+                      closeOnEscape="true"
+                      modal="true">
+
+                <p:outputPanel id="panelModificar"
+                               layout="inline">
+                    <h:panelGrid id="panelGridModificar"
+                                 columns="3"
+                                 styleClass="bgpanelgrid">
+
+                        <h:outputText styleClass="etiqueta"  value="Descripcion" />
+                        <h:inputText  id="inputNombreCaracteristicas" value="#{controladorCaracteristicas.caracteriSeleccionado.valor}" />
+                        <h:panelGroup />
+
+                        <h:outputText styleClass="etiqueta"  value="Producto" />
+                        <h:inputText  id="inputModProducto"  readonly="true" value="#{controladorCaracteristicas.caracteriSeleccionado.idProducto.descripcion}" />
+                        <p:commandButton    image="ui-icon-search"
+                                            style="margin-left: 10px; font-size: 12px;"
+                                            onclick="selectProductoDialog.show()" /> 
+                        
+                        <h:outputText styleClass="etiqueta"  value="Atributo" />
+                        <h:inputText  id="inputModAtributo"  readonly="true" value="#{controladorCaracteristicas.caracteriSeleccionado.idAtributo.descripcion}" />
+                        <p:commandButton    image="ui-icon-search"
+                                            style="margin-left: 10px; font-size: 12px;"
+                                            onclick="selectAtributoDialog.show()" /> 
+
+                    </h:panelGrid>
+
+                    <h:panelGroup>
+                        <p:commandButton image="ui-icon-disk"
+                                         value="#{i18n.boton_guardar}"
+                                         action="#{controladorCaracteristicas.update()}"
+                                         style="position: absolute; left: 25px; width: 100px"
+                                         onclick="caracteristicas" />
+
+                        <p:commandButton image="ui-icon-trash"
+                                         value="#{i18n.boton_eliminar}"
+                                         style="position: absolute; left: 145px; width: 100px"
+                                         action="#{controladorCaracteristicas.delete}"
+                                         onclick="caracteristicas"
+                                         update="pg"/>
+                        <p:commandButton image="ui-icon ui-icon-close"
+                                         value="#{i18n.boton_salir}"
+                                         style="position: absolute; left: 265px; width: 100px"
+                                         onclick="dialogoModificar.hide()"/>
+
+                    </h:panelGroup>
+                </p:outputPanel>
+            </p:dialog>
+
+
+            <p:dialog header="Registrar Nuevas Caracteristicas"
+                      widgetVar="dialogoAgregar"
+                      width="330"
+                      styleClass="outputpanel"
+                      height="210"
+                      closable="true"
+                      closeOnEscape="true"
+                      modal="true">
+
+                <p:outputPanel id="panelAgregar"
+                               layout="inline">
+                    <h:panelGrid id="panelGridAgregar"
+                                 columns="1"
+                                 styleClass="bgpanelgrid" >
+                        <p:row>
+                            <p:column> 
+                                <h:outputText styleClass="etiqueta"  value="Valor" />
+                            </p:column>
+                            <p:column>       
+                                <h:inputText  id="addNombreCaracteristicas" value="#{controladorCaracteristicas.caracteriNuevo.valor}" 
+                                              style="margin-left: 25px;"/>
+                            </p:column>
+                        </p:row>
+                    
+                        <p:row>
+                            <p:column>        
+                                <h:outputText styleClass="etiqueta"  value="Producto" />
+                            </p:column>
+                            <p:column>           
+                                <h:inputText  id="inputProducto"
+                                              readonly="true"
+                                              value="#{controladorCaracteristicas.productoSeleccionado.descripcion}" />
+                                <p:commandButton    image="ui-icon-search"
+                                                    style="margin-left: 10px; font-size: 12px;"
+                                                    onclick="selectProductoDialog.show()" /> 
+                            </p:column>
+                        </p:row>
+                        
+                         <p:row>
+                            <p:column>        
+                                <h:outputText styleClass="etiqueta"  value="Atributo" />
+                            </p:column>
+                            <p:column>           
+                                <h:inputText  id="inputAtributo"
+                                              readonly="true"
+                                              value="#{controladorCaracteristicas.atributoSeleccionado.descripcion}"
+                                               style="margin-left: 6px;"/>
+                                <p:commandButton    image="ui-icon-search"
+                                                    style="margin-left: 10px; font-size: 12px;"
+                                                    onclick="selectAtributoDialog.show()" /> 
+                            </p:column>
+                        </p:row>
+                    </h:panelGrid>
+
+                    <h:panelGroup>
+                        <p:commandButton image="ui-icon-disk"
+                                         value="Guardar"
+                                         action="#{controladorCaracteristicas.add}"
+                                         style="position: absolute; left: 60px; width: 100px"
+                                         onclick="caracteristicas"
+                                         update="grilla"/>
+
+                        <p:commandButton image="ui-icon ui-icon-close"
+                                         value="Salir"
+                                         style="position: absolute; left: 180px; width: 100px"
+                                         onclick="dialogoAgregar.hide()"
+                                         action="#{controladorCaracteristicas.resetearCampos}"
+                                         update="panelGridAgregar"/>
+
+                    </h:panelGroup>
+                </p:outputPanel>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+</ui:composition>
+

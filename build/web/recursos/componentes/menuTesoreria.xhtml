@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:component>
+        <div id="menu_horizontal">
+             <h:form id="menuTesoreria">
+                 <p:menubar styleClass="menuTipoLetra">
+                        <p:submenu label="Definiciones">
+                            <p:menuitem value="Cuentas Bancarias" rendered="#{chwCuentasBancariasControlador.puedeConsultar}" url="../tesoreriaBancos/ChwCuentasBancarias.xhtml"/>
+                            <p:menuitem value="Motivos para valores al Cobro" rendered="#{chwMotivosCobrosControlador.puedeConsultar}" url="../tesoreriaBancos/ChwMotivosCobros.xhtml"/>
+                            <p:menuitem value="Parametros para Resumen de Depositos" rendered="#{chwReportesDepositosControlador.puedeConsultar}"  url="../tesoreriaBancos/ChwReportesDepositos.xhtml"/>
+                            <p:menuitem value="Tipos de Cuentas" rendered="#{chwTiposCuentasControlador.puedeConsultar}" url="../tesoreriaBancos/ChwTiposCuentas.xhtml"/>
+                            <p:menuitem>
+                             <h:link value="Permisos" rendered="#{bswPermisosOpcionesControlador.puedeConsultar}"  outcome="../controlStock/PermisosOpcionesUsuarios.xhtml">
+                                <f:param name="menu" value="/recursos/componentes/menuTesoreria.xhtml"/>
+                            </h:link>
+                            </p:menuitem>                      
+                        </p:submenu>
+                        <p:submenu label="Movimientos">
+                            <p:menuitem value="Depositos" rendered="#{chwDepositosBancariosControlador.puedeConsultar}" url="../tesoreriaBancos/ChwDepositosBancarios.xhtml"/>
+                            <p:menuitem value="Movimiento de Valores" rendered="#{chwMovimientoChequesControlador.puedeConsultar}" url="../tesoreriaBancos/ChwMovimientoCheques.xhtml"/>
+                            <p:menuitem>
+                                 <h:link value="Impresion de Cheques" rendered="#{cpwImprimirChequesControlador.puedeConsultar}" outcome="../cuentasPagar/CpwImprimirCheques.xhtml">
+                                    <f:param name="menu" value="/recursos/componentes/menuTesoreria.xhtml"/>
+                                </h:link>
+                            </p:menuitem>
+                            <p:menuitem value="Movimiento de Tarjetas" rendered="#{chwMovimientoTarjetasControlador.puedeConsultar}" url="../tesoreriaBancos/ChwMovimientoTarjetas.xhtml"/>
+                            <p:menuitem value="Carga de Cheques a Emitir" rendered="#{chwEmisionChequeControlador.puedeConsultar}" url="../tesoreriaBancos/ChwEmisionCheque.xhtml"/>
+                            <p:menuitem value="Debitos y Creditos Bancarios" rendered="#{chwDebitosCreditosBancariosControlador.puedeConsultar}" url="../tesoreriaBancos/ChwDebitosCreditosBancarios.xhtml"/>
+                            <p:menuitem value="Cambio de Fecha Cobro" rendered="#{chwCambioFechaChequesControlador.puedeConsultar}" url="../tesoreriaBancos/ChwCambioFechaCheques.xhtml"/>
+                            <p:menuitem value="Cambio de Estado Cheque" rendered="#{chwCambioEstadoChequesControlador.puedeConsultar}" url="../tesoreriaBancos/ChwCambioEstadoCheques.xhtml"/>
+                            <p:menuitem value="Consulta de Cheque" rendered="#{chwConsultaChequeControlador.puedeConsultar}" url="../tesoreriaBancos/ChwConsultaCheque.xhtml"/>
+                             <p:menuitem>
+                             <h:link value="Consulta de Movimientos de Valores"  outcome="../cuentasCobrar/CcwConsultaMovValores.xhtml">
+                                <f:param name="menu" value="/recursos/componentes/menuTesoreria.xhtml"/>
+                            </h:link>
+                            </p:menuitem>
+                            <p:menuitem value="Valores al Cobro" rendered="#{chwValoresAlCobroControlador.puedeConsultar}" url="../tesoreriaBancos/ChwValoresAlCobro.xhtml"/>
+                        </p:submenu>
+                        
+                    <p:submenu label="Reportes">
+                         <p:menuitem value="Cheques emitidos" rendered="#{chwRptChequesEmitidosControlador.puedeConsultar}" url="../tesoreriaBancos/ChwRptChequesEmitidos.xhtml"/>
+                         <p:menuitem value="Cheques en Cartera" rendered="#{chwChequesCarteraClienteControlador.puedeConsultar}" url="../tesoreriaBancos/ChwRptChequesCartera.xhtml"/>
+                         <p:menuitem value="Cheques en Cartera - Recibidos en Caja" rendered="#{chwRptChequesRecibidosCajaControlador.puedeConsultar}" url="../tesoreriaBancos/ChwRptChequesRecibidosCaja.xhtml"/>
+                         <p:menuitem value="Cheques en Cartera Ordenado por Banco" rendered="#{chwRptChequesCarteraBancoControlador.puedeConsultar}" url="ChwRptChequesCarteraBanco.xhtml"/>
+                         <p:menuitem value="Cheques en Cartera Ordenados por Cliente" rendered="#{chwRptChequesCarteraClienteControlador.puedeConsultar}" url="../tesoreriaBancos/ChwRptChequesCarteraCliente.xhtml"/>
+                         <p:menuitem value="Cheques al Cobro" rendered="#{chwRptChequesCobroControlador.puedeConsultar}" url="../tesoreriaBancos/ChwRptChequesCobro.xhtml"/>
+                         <p:menuitem value="Detalle de Movimiento de Valores por Comprobante" rendered="#{chwRptDetalleMovValCompControlador.puedeConsultar}" url="../tesoreriaBancos/ChwRptDetalleMovValComp.xhtml"/>
+                         <p:menuitem value="Resumen de Movimientos de Valores" rendered="#{chwRptResumenMovValControlador.puedeConsultar}" url="../tesoreriaBancos/ChwRptResumenMovVal.xhtml"/>
+                         <p:menuitem value="Resumen de Dépositos por Boleta de Déposito" rendered="#{chwRptResumenDepositosBoletaControlador.puedeConsultar}" url="../tesoreriaBancos/ChwRptResumenDepositosBoleta.xhtml"/>
+                         <p:menuitem value="Detalle de Dépositos" rendered="#{chwRptDetalleDepositosControlador.puedeConsultar}" url="../tesoreriaBancos/ChwRptDetalleDepositos.xhtml"/>
+                         <p:menuitem value="Detalle de Dépositos para Contabilidad" rendered="#{chwRptDetalleDepositosConControlador.puedeConsultar}" url="../tesoreriaBancos/ChwRptDetalleDepositosCon.xhtml"/>
+                         <p:menuitem value="Resumen de Dépositos para Contabilidad" rendered="#{chwRptResumenDepositosConControlador.puedeConsultar}" url="../tesoreriaBancos/ChwRptResumenDepositosCon.xhtml"/>
+                    </p:submenu>
+                     <p:submenu label="Reportes">
+                         <p:menuitem value="Extracto de Cuentas Bancarias" rendered="#{chwRptExtractoCuentaBancariaControlador.puedeConsultar}" url="../tesoreriaBancos/ChwRptExtractoCuentaBancaria.xhtml"/>
+                         <p:menuitem value="Debitos y Creditos Bancarios" rendered="#{chwRptDebitosCreditosControlador.puedeConsultar}" url="../tesoreriaBancos/ChwRptDebitosCreditos.xhtml"/>
+                         <p:menuitem value="Saldos de Cuentas Bancarias" rendered="#{chwRptSaldosBancariosControlador.puedeConsultar}" url="../tesoreriaBancos/ChwRptSaldosBancarios.xhtml"/>
+                         <p:menuitem value="Cupones de Tarjetas" rendered="#{chwRptCuponesTarjetasControlador.puedeConsultar}" url="ChwRptCuponesTarjetas.xhtml"/>
+                         <p:menuitem value="Tarjetas Depositadas" rendered="#{chwRptTarjetasDepositadasControlador.puedeConsultar}" url="../tesoreriaBancos/ChwRptTarjetasDepositadas.xhtml"/>
+                         <p:menuitem value="Movimiento de Tarjetas de Crédito" rendered="#{chwRptMovTarjetaCreditoControlador.puedeConsultar}" url="../tesoreriaBancos/ChwRptMovTarjetaCredito.xhtml"/>
+                         <p:menuitem value="Cheques en Cartera por tipo de Cheque" rendered="#{chwRptChequesCarteraPorTipoControlador.puedeConsultar}" url="../tesoreriaBancos/ChwRptChequesCarteraPorTipo.xhtml"/>
+                         <p:menuitem value="Movimientos por Tipo de Comprobante" rendered="#{chwRptMovTiposCompControlador.puedeConsultar}" url="../tesoreriaBancos/ChwRptMovTiposComp.xhtml"/>
+                         <p:menuitem value="Movimientos de Cobros de Clientes" rendered="#{chwRptMovCobroClienteControlador.puedeConsultar}" url="../tesoreriaBancos/ChwRptMovCobroCliente.xhtml"/>
+                         <p:menuitem value="Movimiento de Cobros a Clientes" rendered="#{chwRptMovCobroClienteControlador.puedeConsultar}" url="../tesoreriaBancos/ChwRptMovCobroCliente.xhtml"/>
+                         <p:menuitem>
+                            <h:link value="Resumen de Ingresos" 
+                                    outcome="../cuentasCobrar/CcwRptResumenIngresos.xhtml"
+                                    rendered="#{ccwRptResumenIngresosControlador.puedeConsultar}">
+                                <f:param name="menu" value="/recursos/componentes/menuTesoreria.xhtml"/>
+                            </h:link>
+                        </p:menuitem>
+                          <p:menuitem value="Detalle de Movimientos de Valores" rendered="#{chwRptDetalleMovValControlador.puedeConsultar}" url="../tesoreriaBancos/ChwRptDetalleMovVal.xhtml"/>
+                    </p:submenu>
+
+                <p:submenu label="Ventana">
+                    <p:menuitem value="Cascada" url="http://www.youtube.com" />
+                    <p:menuitem value="Mosaico" url="http://www.break.com" />
+                    <p:menuitem value="Organizar Iconos" url="http://www.break.com" />
+                    <p:menuitem value="1. Menu Inicial del Sistema" url="http://www.break.com" />
+                </p:submenu>
+                </p:menubar>
+            </h:form>
+        </div>
+        <div align="right">
+            <h:form>
+                <h:outputText value="#{menuControlador.userNombre}"   styleClass="etiqueta"/>
+                <h:outputText value="|" styleClass="etiqueta"/>
+                <h:commandLink value="#{i18n.cambio_pass}" action="../administracionBase/BswCambioClave.xhtml" styleClass="etiqueta"/>
+                <h:outputText value="|" styleClass="etiqueta"/>
+                <h:commandLink value="#{i18n.cerrar_sesion}" action="#{menuControlador.logout}" styleClass="etiqueta"/>
+            </h:form>
+        </div>
+    </ui:component>
+</html>
+
+
+

@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jstl/core"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <h:panelGrid id="TipoCambioNuevoPanelGriddisplay" columns="2">
+      <h:outputText id="monedaLabel" styleClass="label" value="Moneda: " />
+      <h:inputText  id="monedaInput" value="#{tiposCambioControlador.codMoneda}" size="40" onclick="dialogSelectMoneda.show()" />
+      <h:outputText id="monedadescripcionLabel" styleClass="label" value="Descripcion: " />
+      <h:inputText  id="monedadescripcionInput" value="#{tiposCambioControlador.descripcionMoneda}" size="40" disabled="true" />
+
+      <h:outputText id="tipoLabel" styleClass="label" value="Tipo: " />
+      <h:selectOneMenu id="tiposCambiotipoList" value="#{tiposCambioControlador.tipo}" title="Tipo">
+        <f:selectItem id="t1" itemLabel="Defecto" itemValue="D"/>
+        <f:selectItem id="t2" itemLabel="Facturacion" itemValue="F"/>
+        <f:selectItem id="t3" itemLabel="Contabilidad" itemValue="C"/>
+      </h:selectOneMenu>
+
+      <h:outputText id="fechalabel" styleClass="label" value="Fecha: " />
+      <p:calendar id="fecTipoCambiodisplay" value="#{tiposCambioControlador.fecTipoCambio}" pattern="dd/MM/yyyy" onSelectUpdate="growl" />
+
+      <h:outputText id="ventaLabel" styleClass="label" value="Venta: " />
+      <h:inputText  id="ventaInput" value="#{tiposCambioControlador.valVenta}" size="40" />
+      <h:outputText id="compraLabel" styleClass="label" value="Compra: " />
+      <h:inputText  id="compraInput" value="#{tiposCambioControlador.valCompra}" size="40" />
+      <h:outputText id="altaporLabel" styleClass="label" value="Creado por: " />
+      <h:inputText  id="altaporInput" value="#{tiposCambioControlador.altaPor}" size="40" disabled="true" />
+      <h:outputText id="fechaaltaLabel" styleClass="label" value="Fecha Alta: " />
+      <h:inputText  id="fechaaltaInput" value="#{tiposCambioControlador.fecAlta}" size="40" disabled="true" />
+
+    </h:panelGrid>
+
+    <h:panelGrid id="TipoCambioNuevoBotonesPanelGriddisplay" columns="3" style=" ">
+      <h:commandButton styleClass="boton" value="Guardar"  action="#{tiposCambioControlador.grabarNuevo}" style="position: relative"  />
+      <h:commandButton styleClass="boton" value="Cancelar" onclick="dialogNuevoTipoCambio.hide()" action="#{tiposCambioControlador.limpiarCampos}" />
+    </h:panelGrid>
+</ui:composition>

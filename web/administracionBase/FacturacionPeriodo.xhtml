@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="plantilla.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:define name="content">
+
+        <h:form id="facturacionPeriodoForm">
+            <p:growl id="growl" showDetail="false" />
+
+            <h:panelGroup>
+                <h:outputText value="Desde: "/>
+                <p:calendar value="#{facturacionPeriodo.fechaInicial}" effect="fadeIn" pattern="dd/MM/yyyy">
+                    <p:ajax event="change" listener="#{facturacionPeriodo.actualizarFechaInicio}"/>
+                </p:calendar>
+            </h:panelGroup>
+            <br/><br/>
+            <h:panelGroup>
+                <h:outputText style="" value="Hasta: "/>
+                <p:calendar value="#{facturacionPeriodo.fechaFinal}" effect="fadeIn" pattern="dd/MM/yyyy">
+                    <p:ajax event="change" listener="#{facturacionPeriodo.actualizarFechaFin}"/>
+                </p:calendar>
+            </h:panelGroup>
+            <br/><br/>
+
+            <p:commandButton
+                style=""
+                ajax="false"
+                value="Ver en Pantalla"
+                image="ui-icon ui-icon-print"
+                action="#{facturacionPeriodo.actualizarResultado}">
+            </p:commandButton>
+            <p:commandButton
+                style="margin-left:1em"
+                ajax="false"
+                value="Generar PDF"
+                image="ui-icon ui-icon-print"
+                action="#{facturacionPeriodo.generarPDF}">
+            </p:commandButton>
+
+
+            <br/><br/>
+            <h:outputText value="Opciones rápidas: "/>
+            <br/><br/>
+            <p:commandButton
+                style=""
+                ajax="false"
+                value="Semana"
+                image="ui-icon ui-icon-print"
+                action="#{facturacionPeriodo.setPeriodoSemana}">
+            </p:commandButton>
+            <p:commandButton
+                style="margin-left:1em"
+                ajax="false"
+                value="Mes"
+                image="ui-icon ui-icon-print"
+                action="#{facturacionPeriodo.setPeriodoMes}">
+            </p:commandButton>
+            <p:commandButton
+                style="margin-left:1em"
+                ajax="false"
+                value="Año"
+                image="ui-icon ui-icon-print"
+                action="#{facturacionPeriodo.setPeriodoAnho}">
+            </p:commandButton>
+
+
+            <br/><br/>
+            <h:outputText value="Facturación del Período: "/>
+            <br/>
+            <h:outputText value="#{facturacionPeriodo.facturacionPeriodo} Gs."/>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+

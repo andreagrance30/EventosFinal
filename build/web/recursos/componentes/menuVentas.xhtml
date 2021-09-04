@@ -1,0 +1,390 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:component xmlns="http://www.w3.org/1999/xhtml"
+              xmlns:ui="http://java.sun.com/jsf/facelets"
+              xmlns:root="http://java.sun.com/jsf/composite/root"
+              xmlns:h="http://java.sun.com/jsf/html"
+              xmlns:c="http://java.sun.com/jsp/jstl/core"
+              xmlns:f="http://java.sun.com/jsf/core"
+              xmlns:p="http://primefaces.prime.com.tr/ui">
+    <div id="menu_horizontal">
+        <h:form id="menuventa">
+            <p:menubar styleClass="menuTipoLetra">
+                <p:submenu label="Definiciones">
+                    <p:menuitem>
+                        <h:link value="Personas"  rendered="#{bswPersonasControlador.puedeConsultar}" outcome="../administracionBase/BswPersonas.xhtml">
+                            <f:param name="menu" value="/recursos/componentes/menuVentas.xhtml"/>
+                        </h:link>
+                    </p:menuitem>
+                    <p:menuitem>
+                        <h:link value="Clientes" rendered="#{ccwClientesControlador.puedeConsultar}"  outcome="../cuentasCobrar/CcwClientes.xhtml">
+                            <f:param name="menu" value="/recursos/componentes/menuVentas.xhtml"/>
+                        </h:link>
+                    </p:menuitem>
+                    <p:menuitem>
+                        <h:link value="Vendedores" rendered="#{fvwVendedorControlador.puedeConsultar}" outcome="../fuerzaVentas/FvwVendedores.xhtml">
+                            <f:param name="menu" value="/recursos/componentes/menuVentas.xhtml"/>
+                        </h:link>
+                    </p:menuitem>
+
+                    <p:menuitem>
+                        <h:link value="Condición de ventas" rendered="#{ccwCondicionesVentasControlador.puedeConsultar}"  outcome="../cuentasCobrar/CcwCondicionesVentas.xhtml">
+                            <f:param name="menu" value="/recursos/componentes/menuVentas.xhtml"/>
+                        </h:link>
+                    </p:menuitem>
+
+                    <p:menuitem value="Retenciones" rendered="#{vtwRetencionesControlador.puedeConsultar}"  url="../ventasFacturacion/VtwRetenciones.xhtml" />
+                    <p:menuitem value="Cajas" rendered="#{ccwCajasControlador.puedeConsultar}"  url="../ventasFacturacion/CcwCajas.xhtml" />
+                    <p:menuitem value="Sector de Ventas" url="../ventasFacturacion/VtwSectorVentas.xhtml" rendered="#{vtwSectorVentasControlador.puedeConsultar}"/>
+                    <p:menuitem value="Titulos de Listas de Precios" url="../ventasFacturacion/VtwTitulosLitasPrecios.xhtml" rendered="#{vtwTitulosListasPreciosControlador.puedeConsultar}"/>
+                    <p:menuitem value="Definicion de Listas de Precios" url="../ventasFacturacion/VtwListasPrecios.xhtml" rendered="#{vtwListaPreciosControlador.puedeConsultar}" />
+                    <p:menuitem value="Carga de Talonarios" url="../ventasFacturacion/BswTalonarios.xhtml" rendered="#{talonariosControlador.puedeConsultar}" />
+                    <p:menuitem value="Timbrados" url="../ventasFacturacion/VtwTimbrados.xhtml" rendered="#{talonariosControlador.puedeConsultar}" />
+                    <p:menuitem value="Restricciones de Articulos A Clientes"  url="../ventasFacturacion/VtwRestriccionesClientesArt.xhtml" rendered="#{vtwRestriccionesClientesArtControlador.puedeConsultar}"/>
+
+                    <p:menuitem>
+                        <h:link value="Actualizar Fecha del Modulo" outcome="../administracionBase/BswSumaDia.xhtml">
+                            <f:param name="menu" value="/recursos/componentes/menuVentas.xhtml"/>
+                        </h:link>
+                    </p:menuitem>
+                    <p:menuitem value="Motivo de Anulacion" rendered="#{motivoAnuControlador.puedeConsultar}" url="../ventasFacturacion/vtwMotivoAnulacion.xhtml" />
+                    <p:menuitem>
+                        <h:link value="Permisos" rendered="#{permisosFormasControlador.puedeConsultar}" outcome="../administracionBase/BswPermisosFormas.xhtml">
+                            <f:param name="menu" value="/recursos/componentes/menuVentas.xhtml"/>
+                        </h:link>
+                    </p:menuitem>
+                    <p:menuitem>
+                        <h:link value="Articulos" rendered="#{stwArticulosControlador.puedeConsultar}" outcome="../controlStock/StwArticulos.xhtml">
+                            <f:param name="menu" value="/recursos/componentes/menuVentas.xhtml"/>
+                        </h:link>
+                    </p:menuitem>
+                    <p:menuitem value="Porcentaje de Descuentos" url="../ventasFacturacion/VtwPorcentajeDescuento.xhtml" rendered="#{vtwPorcentajeDescuentoControlador.puedeConsultar}" />
+                    <p:menuitem value="Hab. Impresoras" url="../ventasFacturacion/VtwImpresorasHabilitadas.xhtml" />
+
+
+                </p:submenu>
+                <p:submenu label="Movimientos">
+                    <p:submenu label="Consultas">
+                        <p:menuitem value="De precios tipo factura" rendered="#{vtwPreciosTipoFacturaControlador.puedeConsultar}" url="../ventasFacturacion/VtwPreciosTipoFactura.xhtml" />
+                        <p:menuitem rendered="#{stwConsultaStockControlador.puedeConsultar}">
+                            <h:link value="Existencias en Sucursales" outcome="../controlStock/StwConsultaStock.xhtml">
+                                <f:param name="menu" value="/recursos/componentes/menuVentas.xhtml"/>
+                            </h:link>
+                        </p:menuitem>
+                    </p:submenu>
+                    <p:menuitem value="Presupuesto" url="../ventasFacturacion/VtwPresupuestos.xhtml" rendered="#{vtwPresupuestoControlador.puedeConsultar}"/>
+                    <p:menuitem value="Pedido" url="../ventasFacturacion/VtwMovimientosPedidos.xhtml" rendered="#{vtwMovimientosPedidoControlador.puedeConsultar}"/>
+                    <p:menuitem value="Nota de Credito" url="../ventasFacturacion/VtwNotasCredito.xhtml" rendered="#{vtwFacturaControlador.puedeConsultar}"/>
+                    <p:menuitem value="Factura" url="../ventasFacturacion/VtwFacturas.xhtml" rendered="#{vtwFacturaControlador.puedeConsultar}"/>
+
+                    <p:menuitem value="Autorizacion para Cierre de Caja"  rendered="#{vtwAutorizacionCierreCajasControlador.puedeConsultar}"
+                                url="../ventasFacturacion/VtwAutorizacionCierreCajas.xhtml" />
+                    <p:menuitem value="Autorización de Ventas" url="../ventasFacturacion/VtwAutoVenta.xhtml" rendered="#{vtwAutVenControlador.puedeConsultar}"/>
+                    <p:menuitem value="Autorización de Recibos" url="../ventasFacturacion/CcwAutRecibo.xhtml"
+                                rendered="#{vtwAutorizacionPedControlador.puedeConsultar}"/>
+                    <p:menuitem value="Anular-Desanular Comprobantes" url="../ventasFacturacion/VtwAnularComprobantes.xhtml"
+                                rendered="#{vtwAnularComprobantesControlador.puedeConsultar}"/>
+                    <p:menuitem value="Facturas Alternativas" url="../ventasFacturacion/VtwFacturasRepDet.xhtml" rendered="#{vtwFacturaRepDetControlador.puedeConsultar}"/>
+
+                </p:submenu>
+
+                <p:submenu label="Movimientos">
+                    <p:menuitem value="Ruta de Vendedores" url="../ventasFacturacion/VtwRutaVendedores.xhtml"
+                                rendered="#{vtwRutaVendControlador.puedeConsultar}"/>
+                    <p:menuitem value="Bloqueos de Pedidos" url="../ventasFacturacion/VtwBloqueoPedido.xhtml" rendered="#{vtwBloquoPedidoControlador.puedeConsultar}"/>
+                    <p:menuitem value="Consulta de Precios" url="../ventasFacturacion/VtwConsultaPrecios.xhtml" rendered="#{vtwConsultaPreciosControlador.puedeConsultar}"/>
+                    <p:menuitem value="Impresion de Notas de Credito" url="../ventasFacturacion/VtwImpresionNotasCredito.xhtml"
+                                rendered="#{vtwImpresionNotasCreditoControlador.puedeConsultar}"/>
+                    <p:menuitem value="Consultar Comprobantes" url="../ventasFacturacion/VtwConsultaComprobantes.xhtml" rendered="#{vtwConsultaComprobantesControlador.puedeConsultar}"/>
+                    <p:menuitem value="Planilla de Visitas a Clientes" url="../ventasFacturacion/VtwPlanillasVisitasClientes.xhtml"
+                                rendered="#{vtwPlanillaVisitasClientesControlador.puedeConsultar}"/>
+                    <p:menuitem value="Reimpresion de Comprobantes" url="../ventasFacturacion/VtwReimpresionComprobantes.xhtml"
+                                rendered="#{vtwReimpresionComprobantesControlador.puedeConsultar}"/>
+                    <p:menuitem value="Autorizacion de Reimpresion de Comprobantes" url="../ventasFacturacion/VtwAutorizacionReimpresionComprobantes.xhtml" rendered="#{vtwAutorizacionReimpresionComprobantesControlador.puedeConsultar}"/>
+                    <p:menuitem value="Autorizacion Cierre de Cajas" url="../ventasFacturacion/VtwAutorizacionCierreCajas.xhtml" rendered="#{vtwAutorizacionCierreCajasControlador.puedeConsultar}"/>
+                    <p:menuitem>
+                        <h:link value="Reserva de Articulos" rendered="#{stwReservaArtControlador.puedeConsultar}" outcome="../controlStock/StwReservaArticulos.xhtml">
+                            <f:param name="menu" value="/recursos/componentes/menuVentas.xhtml"/>
+                        </h:link>
+                    </p:menuitem>
+                    <p:menuitem value="Parametro de Contra Entrega (Autorizacion)" url="../ventasFacturacion/VtwParametrosContraEntrega.xhtml"
+                                rendered="#{vtwParametrosContraEntregaControlador.puedeConsultar}" />
+                </p:submenu>
+
+                <p:submenu label="Reportes">
+                    <p:submenu label="Reportes por Vendedores">                        
+                        <p:menuitem value="Ultimas Ventas a Clientes por Vendedor" url="../ventasFacturacion/VtwReporteVentasClientesPorVendedor.xhtml" rendered="#{vtwReporteVentasClientesPorVendedorControlador.puedeConsultar}"/>
+                        <p:menuitem value="Ventas por producto" url="../ventasFacturacion/VtwVentasVendedoresProductos.xhtml"  rendered="#{vtwVentasVendedoresProductosControlador.puedeConsultar}" />
+                        <p:menuitem value="Ranking de Ventas de Articulos por Vendedores" url="../ventasFacturacion/VtwRankingVentas.xhtml" rendered="#{vtwRankingVentasControlador.puedeConsultar}"/>
+                        <p:menuitem value="Artículos Vendidos y sin Movimientos de Ventas" url="../ventasFacturacion/VtwArtVendidosYSinVentas.xhtml" rendered="#{vtwArtVendidosYSinVentasControlador.puedeConsultar}"/>
+                        <p:menuitem>
+                            <h:link value="Saldos de Clientes" rendered="#{ccwRptSaldosClientesControlador.puedeConsultar}"  outcome="../cuentasCobrar/CcwRptSaldosClientes.xhtml">
+                                <f:param name="menu" value="/recursos/componentes/menuVentas.xhtml"/>
+                            </h:link>
+                        </p:menuitem>
+                        <p:menuitem value="Resumen de Ventas en US$" url="../ventasFacturacion/VtwResumenVentasDolares.xhtml"
+                                    rendered="#{vtwResumenVentasDolaresControlador.puedeConsultar}"/>
+                        <p:menuitem  rendered="#{ccwRptExtractoClientesControlador.puedeConsultar}">
+                            <h:link value="Extracto de Clientes" outcome="../cuentasCobrar/CcwExtractoCuentasCliente.xhtml">
+                                <f:param name="menu" value="/recursos/componentes/menuVentas.xhtml"/>
+                            </h:link>
+                        </p:menuitem>
+                        <p:menuitem value="Detalle de facturas emitidas por vendedor (en Gs.)" url="../ventasFacturacion/VtwDetalleFacturasEmitidasVendedor.xhtml"
+                                    rendered="#{vtwDetalleFacturasEmitidasVendedorControlador.puedeConsultar}"/>
+                        <p:menuitem value="Facturas emitidas por Vendedores" url="../ventasFacturacion/VtwReporteFacturasEmitidasVendedor.xhtml"
+                                    rendered="#{vtwReporteFacturasEmitidasVendedorControlador.puedeConsultar}"/>
+                        <p:menuitem value="Ventas por Linea por Vendedor" url="../ventasFacturacion/VtwVentasLineasVendedor.xhtml"
+                                    rendered="#{vtwVentasLineasVendedorControlador.puedeConsultar}"/>
+                        <p:menuitem value="Ventas por linea y marca por vendedor" url="../ventasFacturacion/VtwRptVentasLineaMarca.xhtml"
+                                    rendered="#{vtwRptVentasLineaMarcaControlador.puedeConsultar}"/>
+                        <p:menuitem value="Ventas en Cantidades y Litros" url="VtwReporteVentasCantidadesLitrosVendedor.xhtml"
+                                    rendered="#{vtwReporteVentasCantidadesLitrosVendedorControlador.puedeConsultar}"/>
+                    </p:submenu>
+                    <p:submenu label="Reportes de Ventas">
+                        <p:submenu label="Resúmenes">
+                            <p:menuitem value="Resumen por Grupos de Articulos (en USS)" url="../ventasFacturacion/VtwReporteResumenVentasGruposArticulosUSS.xhtml"
+                                        rendered="#{vtwReporteResumenVentasGruposArticulosUSSControlador.puedeConsultar}"/>
+                            <p:menuitem value="Resumen por origen y líneas con costos (USS)" url="../ventasFacturacion/VtwVentasPaisLineaCostos.xhtml"
+                                        rendered="#{vtwVentasPaisLineaCostosControlador.puedeConsultar}"/>
+                            <p:menuitem value="Resumen de Ventas por Zonas y Grupos (en US$)"
+                                        url="../ventasFacturacion/Vtwrepzonas.xhtml"
+                                        rendered="#{vtwrepzonasControlador.puedeConsultar}"/>
+                            <p:menuitem value="Resumen por origen y grupos de articulos (USS)" url="../ventasFacturacion/VtwVentasOrigenGrupoArticulos.xhtml"
+                                        rendered="#{vtwVentasOrigenGrupoArticulosControlador.puedeConsultar}"/>
+                            <p:menuitem value="Resumen de Ventas por Sector de Ventas" url="../ventasFacturacion/VtwReporteResumenVentasSectorVentas.xhtml"
+                                        rendered="#{vtwReporteResumenVentasSectorVentasControlador.puedeConsultar}"/>
+                            <p:menuitem value="Resumen de ventas por sucursal" url="../ventasFacturacion/VtwResumenVentasSucursal.xhtml"
+                                        rendered="#{vtwResumenVentasSucursalControlador.puedeConsultar}" />
+                            <p:menuitem value="Resumen de ventas por clientes (Cantidades y Litros)" url="../ventasFacturacion/VtwResumenClientesCantLitros.xhtml"
+                                        rendered="#{vtwResumenClientesCantLitrosControlador.puedeConsultar}" />
+                            <p:menuitem value="Resumen de ventas por clientes" url="../ventasFacturacion/VtwReporteResumenVentasClientes.xhtml"
+                                        rendered="#{vtwReporteResumenVentasClientesControlador.puedeConsultar}"/>
+                            <p:menuitem value="Resumen de ventas por clientes y líneas" url="../ventasFacturacion/VtwResumenVentasClienteLineas.xhtml"
+                                        rendered="#{vtwResumenVentasClienteLineasControlador.puedeConsultar}"/>
+                            <p:menuitem value="Resumen por condición de ventas" url="../ventasFacturacion/VtwComprobantesEmitidosCondicion.xhtml"
+                                        rendered="#{vtwComprobantesEmitidosCondicionControlador.puedeConsultar}"/>
+                            <p:menuitem value="Resumen de Ventas por Condicion "
+                                        url="../ventasFacturacion/VtwVentasporCondicion.xhtml"
+                                        rendered="#{vtwVentasporCondicionControlador.puedeConsultar}"/>
+                        </p:submenu>
+                        <p:submenu label="Comparativos">
+                            <p:menuitem value="Comparativo mensual por Lineas (Cant.)" url="../ventasFacturacion/VtwReporteComparativoVentasMensualesLineas.xhtml"
+                                        rendered="#{vtwReporteComparativoVentasMensualesLineasControlador.puedeConsultar}" />
+                            <p:menuitem value="Ventas vs. Devoluciones por Líneas y Grupos (US$)" url="../ventasFacturacion/VtwDevolucionesLineasCostos.xhtml"
+                                        rendered="#{vtwDevolucionesLineasCostosControlador.puedeConsultar}"/>
+                            <p:menuitem value="Comparativo Mensual por Líneas (Monto)" url="../ventasFacturacion/VtwComparativoVentasMensualesMonto.xhtml"
+                                        rendered="#{vtwComparativoVentasMensualesMontoControlador.puedeConsultar}" />
+                            <p:menuitem value="Comparativo de Ventas Mensuales por Vendedor" url="../ventasFacturacion/VtwReporteComparativoVentasMensualesVendedor.xhtml"
+                                        rendered="#{vtwReporteComparativoVentasMensualesVendedorControlador.puedeConsultar}"/>
+                        </p:submenu>
+                        <p:submenu label="Detalle">
+                            <p:menuitem value="Detalle por Artículos" url="../ventasFacturacion/VtwDetalleVentasArticulos.xhtml"
+                                        rendered="#{vtwDetalleVentasArticulosControlador.puedeConsultar}"/>
+                            <p:menuitem value="Detalle por Cantidades y Litros" url="../ventasFacturacion/VtwReporteDetalleCantidadLitros.xhtml"
+                                        rendered="#{vtwReporteDetalleCantidadLitrosControlador.puedeConsultar}"/>
+                            <p:menuitem value="Detalle por Cantidades y Litros por Vendedor y Clientes" url="../ventasFacturacion/VtwDetalleCantidadLitrosxClixVend.xhtml"
+                                        rendered="#{vtwDetalleCantidadLitrosxClixVenControlador.puedeConsultar}"/>
+                        </p:submenu>
+                        <p:menuitem value="Resumen por Cantidades por Articulos" url="../ventasFacturacion/VtwReporteResumenCantidadesArticulos.xhtml"
+                                    rendered="#{vtwReporteResumenCantidadesArticulosControlador.puedeConsultar}"/>
+                        <p:menuitem value="Origen y grupos de artículos (USS)(Ránking)" url="../ventasFacturacion/VtwOrigenGrupoRanking.xhtml"
+                                    rendered="#{vtwOrigenGrupoRankingControlador.puedeConsultar}"/>
+                        <p:menuitem value="Venta mensual por líneas (Cant)"
+                                    url="../ventasFacturacion/VtwVentasMensualesLineas.xhtml"
+                                    rendered="#{vtwVentasMensualesLineasControlador.puedeConsultar}"/>
+                        <p:menuitem value="Venta diaria" url="../ventasFacturacion/VtwRptVentaDiaria.xhtml"
+                                    rendered="#{vtwRptVentaDiariaControlador.puedeConsultar}"/>
+                        <p:menuitem value="Restricciones de Articulos a Clientes" url="../ventasFacturacion/VtwReporteRestriccionesArticulosClientes.xhtml"
+                                    rendered="#{vtwReporteRestricconesArticulosClientesControlador.puedeConsultar}"/>
+                        <p:menuitem value="Monto Facturado fuera de horario normal" url="../ventasFacturacion/VtwVentasFueraHorario.xhtml"
+                                    rendered="#{vtwFueraHorarioControlador.puedeConsultar}"/>
+                    </p:submenu>
+                    <p:submenu label="Reportes de Facturas">
+                        <p:submenu label="Resúmenes">
+                            <p:menuitem value="Resumen de Facturas emitidas por Sucursal"
+                                        url="../ventasFacturacion/VtwReporteFacturasEmitidasSucursal.xhtml"
+                                        rendered="#{vtwReporteFacturasEmitidasSucursalControlador.puedeConsultar}"/>
+                            <p:menuitem value="Resumen de Facturas Emitidas"
+                                        url="../ventasFacturacion/VtwResumenFacturasEmitidas.xhtml"
+                                        rendered="#{vtwResumenFacturasControlador.puedeConsultar}"/>
+                            <p:menuitem value="Resumen de Notas de Crédito Emitidas" url="../ventasFacturacion/VtwResumenNotasCreditoEmitidas.xhtml"
+                                        rendered="#{vtwResumenNotasCreditoEmitidasControlador.puedeConsultar}"/>
+                            <p:menuitem value="Resumen de Facturas Emitidas a Clientes"
+                                        url="../ventasFacturacion/VtwResumenFacturasClientes.xhtml"
+                                        rendered="#{vtwResumenFacturasClientesControlador.puedeConsultar}"/>
+                        </p:submenu>
+                        <p:menuitem value="Cantidad de Facturas por Rango de Montos"
+                                    url="../ventasFacturacion/VtwCantidadComprobantesRango.xhtml"
+                                    rendered="#{vtwCantRangoComprobantesControlador.puedeConsultar}"/>
+                        <p:menuitem value="Detalle de Facturas Emitidas a Clientes" url="../ventasFacturacion/VtwReporteDetalleFacturasEmitidas.xhtml"
+                                    rendered="#{vtwReporteDetalleFacturasEmitidasControlador.puedeConsultar}"/>
+                        <p:menuitem>
+                            <h:link value="Listado de Comprobantes Pendientes de Cobro" rendered="#{vtwComprobantesPendientesCobroControlador.puedeConsultar}" outcome="../cuentasCobrar/VtwComprobantesPendientesCobro.xhtml">
+                                <f:param name="menu" value="/recursos/componentes/menuVentas.xhtml"/>
+                            </h:link>
+                        </p:menuitem>
+                        <p:menuitem value="Facturas Anuladas por Sucursal" url="../ventasFacturacion/VtwReporteFacturasAnuladasSucursal.xhtml"
+                                    rendered="#{vtwReporteFacturasAnuladasSucursalControlador.puedeConsultar}"/>
+                        <p:menuitem value="Facturas Anuladas por Vendedores"
+                                    url="VtwAnuladasporVendedor.xhtml"
+                                    rendered="#{vtwFacAnuladasVenControlador.puedeConsultar}"/>
+                        <p:menuitem value="Comprobantes anulados por montos" url="../ventasFacturacion/VtwComprobantesAnuladosMontos.xhtml"
+                                    rendered="#{vtwComprobantesAnuladosMontosControlador.puedeConsultar}"/>
+                        <p:menuitem value="Notas de Credito emitidas por Vendedor" url="../ventasFacturacion/VtwReporteNotasCreditoVendedor.xhtml"
+                                    rendered="#{vtwReporteNotasCreditoVendedorControlador.puedeConsultar}"/>
+                        <p:menuitem value="Facturas Contado No Cobradas"
+                                    url="../ventasFacturacion/VtwFacturasNoCobradas.xhtml"
+                                    rendered="#{vtwFacturasNoCobradasControlador.puedeConsultar}"/>
+                        <p:menuitem value="Facturas a crédito pendientes de cobro" url="../ventasFacturacion/VtwFCRPendientesCobro.xhtml"
+                                    rendered="#{vtwFCRPendientesCobroControlador.puedeConsultar}"/>
+                        <p:menuitem value="Facturas Emitidas (Formato Factura)" url="../ventasFacturacion/VtwReporteFacturasEmitidasFormatoFactura.xhtml"
+                                    rendered="#{vtwReporteFacturasEmitidasFormatoFacturaControlador.puedeConsultar}"/>
+                    </p:submenu>
+                    <p:submenu label="Reportes por Vendedores y Grupos">
+                        <p:menuitem value="Ventas semanal por Vendedores y Grupos" url="../ventasFacturacion/VtwReporteVentaSemanalGrupoVendedores.xhtml"
+                                    rendered="#{vtwReporteVentaSemanalGrupoVendedoresControlador.puedeConsultar}"/>
+                        <p:menuitem value="Ventas por vendedor y grupo" url="../ventasFacturacion/VtwVentasGrupoVend.xhtml"
+                                    rendered="#{vtwVentasGrupoVendControlador.puedeConsultar}"/>
+                        <p:menuitem value="Comparativo de Ventas por Grupo y periodo de Ventas (Vendedores)" url="../ventasFacturacion/VtwReporteComparativoVentasGruposPeriodoVendedores.xhtml"
+                                    rendered="#{vtwReporteComparativoVentasGruposPeriodoVendedoresControlador.puedeConsultar}"/>
+                        <p:menuitem value="Comparativo de Ventas por Grupo y periodo de Ventas (Clientes)" url="../ventasFacturacion/VtwComparativoGrupoVendedor.xhtml"
+                                    rendered="#{vtwComparativoGrupoVendedorControlador.puedeConsultar}"/>
+                        <p:menuitem value="Ventas vs. Metas Diarias" url="../ventasFacturacion/VtwVentasVsMetasDiarias.xhtml"
+                                    rendered="#{vtwVentasVsMetasDiariasControlador.puedeConsultar}"/>
+                        <p:menuitem value="Comparativo de Ventas Mensuales por Grupo" url="../ventasFacturacion/VtwComparativoVentasMensualesGrupo.xhtml"
+                                    rendered="#{vtwComparativoVentasMensualesGrupoControlador.puedeConsultar}"/>
+                    </p:submenu>
+                    <p:submenu label="Reportes de Visitas a Clientes">
+                        <p:menuitem value="Clientes Visitados" url="../ventasFacturacion/VtwReporteClientesVisitados.xhtml" rendered="#{vtwReporteClientesVisitadosControlador.puedeConsultar}"/>
+                        <p:menuitem value="Clientes No Visitados" url="../ventasFacturacion/VtwClientesNoVisitados.xhtml"
+                                    rendered="#{vtwClientesNoVisitadosControlador.puedeConsultar}"/>
+                        <p:menuitem value="Clientes Visitados con ventas en US$" url="../ventasFacturacion/VtwClientesVisitadosUS.xhtml"
+                                    rendered="#{vtwClientesVisitadosUSControlador.puedeConsultar}"/>
+                        <p:menuitem value="Resumen de Clientes Visitados" url="../ventasFacturacion/VtwResumenClientesVisitados.xhtml"
+                                    rendered="#{vtwResumenClientesVisitadosControlador.puedeConsultar}"/>
+                        <p:menuitem value="Ruta de Vendedores" url="../ventasFacturacion/VtwRptRutaVendedores.xhtml"
+                                    rendered="#{vtwRptRutaVendedoresControlador.puedeConsultar}"/>
+                        <p:menuitem value="Clientes en Cartera no Visitados" url="../ventasFacturacion/VtwReporteCarteraClientesNoVisitados.xhtml"
+                                    rendered="#{vtwReporteCarteraClientesNoVisitadosControlador.puedeConsultar}"/>
+                    </p:submenu>
+                    <p:submenu label="Reportes de Clientes">
+                        <p:submenu label="Listados">
+                            <p:menuitem>
+                                <h:link value="Listado de Clientes"
+                                        outcome="../cuentasCobrar/CcwRptListadoClientes.xhtml"
+                                        rendered="#{ccwRptListadoClientesControlador.puedeConsultar}">
+                                    <f:param name="menu" value="/recursos/componentes/menuVentas.xhtml"/>
+                                </h:link>
+                            </p:menuitem>
+                            <p:menuitem value="Listado de Clientes por Sectores" url="../ventasFacturacion/VtwClientesSectores.xhtml"
+                                        rendered="#{vtwClientesSectoresControlador.puedeConsultar}"/>
+                            <p:menuitem value="Listado de Clientes por Vendedor" url="../ventasFacturacion/VtwReporteListadoClientesVendedor.xhtml"
+                                        rendered="#{vtwReporteListadoClientesVendedorControlador.puedeConsultar}"/>
+                            <p:menuitem value="Listado de Clientes por Vendedor con Saldo"
+                                        url="VtwClientesSaldo.xhtml"
+                                        rendered="#{vtwClientesSaldoControlador.puedeConsultar}"/>
+
+                        </p:submenu>
+                        <p:menuitem>
+                            <h:link value="Reserva de Articulos" rendered="#{stwReservaArtControlador.puedeConsultar}" outcome="../controlStock/StwReservaArticulos.xhtml">
+                                <f:param name="menu" value="/recursos/componentes/menuVentas.xhtml"/>
+                            </h:link>
+                        </p:menuitem>
+                        <p:menuitem value="Parametro de Contra Entrega (Autorizacion)" url="../ventasFacturacion/VtwParametrosContraEntrega.xhtml"
+                                    rendered="#{vtwParametrosContraEntregaControlador.puedeConsultar}"/>
+                        <p:menuitem value="Clientes sin Movimientos de Ventas" url="../ventasFacturacion/VtwClientesSinMovVentas.xhtml"
+                                    rendered="#{vtwClientesSinMovVentasControlador.puedeConsultar}"/>
+                        <p:menuitem>
+                            <h:link value="Cartera de clientes por vendedor" outcome="../cuentasCobrar/CcwRptCarteraClientesVendedor.xhtml" rendered="#{ccwRptCarteraClientesVendedorControlador.puedeConsultar}">
+                                <f:param name="menu" value="/recursos/componentes/menuVentas.xhtml"/>
+                            </h:link>
+                        </p:menuitem>
+                        <p:menuitem>
+                            <h:link value="Clientes por condición de ventas" rendered="#{ccwRptClientesCondVentaControlador.puedeConsultar}" outcome="../cuentasCobrar/CcwRptClientesCondVenta.xhtml">
+                                <f:param name="menu" value="/recursos/componentes/menuVentas.xhtml"/>
+                            </h:link>
+                        </p:menuitem>
+                    </p:submenu>
+                    <p:submenu label="Reportes de Pedidos">
+                        <p:menuitem value="Pedidos Emitidos" url="../ventasFacturacion/VtwRptPedidosEmitidos.xhtml"
+                                    rendered="#{vtwRptPedidosEmitidosControlador.puedeConsultar}"/>
+                        <p:menuitem value="Pedidos Pendientes" url="../ventasFacturacion/VtwReportePedidosPendientes.xhtml"
+                                    rendered="#{vtwReportePedidosPendientesControlador.puedeConsultar}"/>
+                    </p:submenu>
+                    <p:submenu label="Reportes Libro IVA">
+                        <p:menuitem value="Libro IVA Ventas Ley 125/91" url="../ventasFacturacion/VtwReporteLibroIvaVentasLey125_91.xhtml" rendered="#{vtwReporteLibroIvaVentasLey125_91Controlador.puedeConsultar}"/>
+                        <p:menuitem value="Libro IVA Ventas HECHAUKA" url="../ventasFacturacion/VtwReporteLibroVentasHechauka.xhtml" rendered="#{vtwReporteLibroVentasHechaukaControlador.puedeConsultar}" />
+                        <p:menuitem value="Libro Iva Ventas Ley 125/91 (Provisorio)"
+                                url="../ventasFacturacion/VtwLibroIvaProvisorio.xhtml"
+                                rendered="#{vtwLibroIvaProvisorioControlador.puedeConsultar}"/>
+                    </p:submenu>
+                    <p:menuitem value="Costos de Articulos por Ventas"
+                                url="../ventasFacturacion/VtwCostosArticulosVentas.xhtml"
+                                rendered="#{vtwCostosArticulosControlador.puedeConsultar}"/>
+                    <p:menuitem value="Resumen de Articulos Nuevos"
+                                url="../ventasFacturacion/VtwArticulosNuevos.xhtml"
+                                rendered="#{vtwArticulosNuevosControlador.puedeConsultar}"/>
+                    <p:menuitem value="Histórico de Variación de Precios" url="../ventasFacturacion/VtwHistVariacionPrecios.xhtml"
+                                rendered="#{vtwHistVariacionPreciosControlador.puedeConsultar}"/>
+                    <p:menuitem value="Listados de Con. Ventas por Jerarquia"
+                                url="../ventasFacturacion/Vtwlijeco.xhtml"
+                                rendered="#{vtwlijecoControlador.puedeConsultar}"/>
+                    <p:menuitem value="Listados de NCR Emitidas (contabilidad)"
+                                url="../ventasFacturacion/VtwRptNCREmitidasContabilidad.xhtml"
+                                rendered="#{vtwNCREmitidasControlador.puedeConsultar}"/>
+                    
+                </p:submenu>
+                <p:submenu label="Reportes">
+                    <p:submenu label='Ranking de clientes'> 
+                        <p:menuitem value="Ranking de Clientes" url="../ventasFacturacion/VtwRankingClientes.xhtml"
+                                    rendered="#{vtwRankingClientesControlador.puedeConsultar}"/>
+                        <p:menuitem value="Ranking de Clientes por Promocion" url="../ventasFacturacion/VtwClientesPromocion.xhtml"
+                                    rendered="#{vtwRankingClientesPromocionControlador.puedeConsultar}"/>
+                        <p:menuitem value="Ranking de Clientes con Exclusion" url="../ventasFacturacion/VtwReporteRankingClientesExclusion.xhtml"
+                                    rendered="#{vtwReporteRankingClientesExclusionControlador.puedeConsultar}"/>
+                    </p:submenu>
+                    <p:menuitem value="Detalle de Ventas por Articulos a Clientes" url="../ventasFacturacion/VtwVentasXArticulosClientes.xhtml"
+                                rendered="#{vtwArtClientesControlador.puedeConsultar}"/>
+                    <p:menuitem value="Autorización de Ventas" url="../ventasFacturacion/VtwAutorizacionVentas.xhtml"
+                                rendered="#{vtwAutorizacionVentasControlador.puedeConsultar}"/>
+                    <p:menuitem value="Cobertura de Productos" url="../ventasFacturacion/VtwCoberturaProductos.xhtml"
+                                rendered="#{vtwCoberturaProductosControlador.puedeConsultar}"/>
+                    <p:menuitem value="Correlatividad de Comprobantes (sin verif. sucursal)" url="../ventasFacturacion/VtwCorrelatividadCompSinSuc.xhtml"
+                                rendered="#{vtwCorrelatividadCompSinSucControlador.puedeConsultar}"/>
+                    <p:menuitem value="Correlatividad de Comprobantes"
+                                url="../ventasFacturacion/VtwCorrelatividadComprobantes.xhtml"
+                                rendered="#{vtwCorrelatividadComprobantesControlador.puedeConsultar}"/>
+                    <p:menuitem value="Listado de Precios - Coeficientes" url="../ventasFacturacion/VtwReporteListadoPreciosCoeficientes.xhtml"
+                                rendered="#{vtwReporteListadoPreciosCoeficientesControlador.puedeConsultar}"/>
+                    <p:menuitem value="Listado de Vendedores" url="../ventasFacturacion/VtwListadoVendedores.xhtml"
+                                rendered="#{vtwListadoVendedoresControlador.puedeConsultar}"/>
+                    <p:menuitem value="Notas de Credito" url="../ventasFacturacion/VtwReporteNotasCredito.xhtml"
+                                rendered="#{vtwReporteNotasCreditoControlador.puedeConsultar}"/>
+                    <p:menuitem value="Reimpresion de Facturas Premiadas" url="../ventasFacturacion/VtwReporteReimpresionFacturasPremiadas.xhtml" />
+                    <p:menuitem value="Impresion de Listas de Precios" url="../ventasFacturacion/VtwReporteListasPrecios.xhtml"
+                                rendered="#{vtwReporteListasPreciosControlador.puedeConsultar}"/>
+                    <p:menuitem value="Consulta de Auditoría Rep." url="../ventasFacturacion/VtwRptConsultaAuditoria.xhtml"
+                                rendered="#{vtwRptConsultaAuditoriaControlador.puedeConsultar}"/>
+                </p:submenu>
+                <p:submenu label="Ventana">
+                    <p:menuitem value="Cascada" url="http://www.youtube.com" />
+                    <p:menuitem value="Mosaico" url="http://www.break.com" />
+                    <p:menuitem value="Organizar Iconos" url="http://www.break.com" />
+                    <p:menuitem value="1. Menu Inicial del Sistema" url="http://www.break.com" />
+                </p:submenu>
+            </p:menubar>
+        </h:form>
+    </div>
+    <div align="right">
+        <h:form>
+            <h:outputText value="#{menuControlador.userNombre}"   styleClass="etiqueta"/>
+            <h:outputText value="|" styleClass="etiqueta"/>
+            <h:commandLink value="#{i18n.cambio_pass}" action="../administracionBase/BswCambioClave.xhtml" styleClass="etiqueta"/>
+            <h:outputText value="|" styleClass="etiqueta"/>
+            <h:commandLink value="#{i18n.cerrar_sesion}" action="#{menuControlador.logout}" styleClass="etiqueta"/>
+        </h:form>
+    </div>
+</ui:component>
+
+
+

@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="plantilla.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:define name="content">
+
+        <h:form id="detalleComprasForm">
+            <p:growl id="growl" showDetail="false" />
+
+            <h:panelGroup>
+                <h:outputText styleClass="etiqueta" value="Desde: "/>
+                <p:calendar value="#{detalleCompras.fechaInicial}" effect="fadeIn" pattern="dd/MM/yyyy">
+                    <p:ajax event="change" listener="#{detalleCompras.actualizarFechaInicio}"/>
+                </p:calendar>
+            </h:panelGroup>
+            <br/><br/>
+            <h:panelGroup>
+                <h:outputText styleClass="etiqueta" value="Hasta: "/>
+                <p:calendar value="#{detalleCompras.fechaFinal}" effect="fadeIn" pattern="dd/MM/yyyy">
+                    <p:ajax event="change" listener="#{detalleCompras.actualizarFechaFin}"/>
+                </p:calendar>
+            </h:panelGroup>
+            <br/><br/>
+            
+            //////////////////////////////////////////////////////////////////
+            <h:panelGroup>
+            <h:outputText styleClass="etiqueta"  value="Proveedor:" />
+                <h:inputText  id="inputProveedor"
+                              readonly="true"
+                              value="#{detalleCompras.proveedorSeleccionado.nombre}" />
+                <p:commandButton    image="ui-icon-search"
+                                    style="margin-left: 10px; font-size: 12px;"
+                                    onclick="selectProveedorDialog.show()" />
+            </h:panelGroup>
+               /////////////////////////////////////////////////////////////////////////////
+            <br/><br/>
+
+            <p:commandButton
+                style="margin-left:1em"
+                ajax="false"
+                value="Generar PDF"
+                image="ui-icon ui-icon-print"
+                action="#{detalleCompras.generarPDF}">
+            </p:commandButton>
+
+
+            <br/><br/>
+            <h:outputText value="Opciones rápidas: "/>
+            <br/><br/>
+            <p:commandButton
+                style=""
+                ajax="false"
+                value="Semana"
+                image="ui-icon ui-icon-print"
+                action="#{detalleCompras.setPeriodoSemana}">
+            </p:commandButton>
+            <p:commandButton
+                style="margin-left:1em"
+                ajax="false"
+                value="Mes"
+                image="ui-icon ui-icon-print"
+                action="#{detalleCompras.setPeriodoMes}">
+            </p:commandButton>
+            <p:commandButton
+                style="margin-left:1em"
+                ajax="false"
+                value="Año"
+                image="ui-icon ui-icon-print"
+                action="#{detalleCompras.setPeriodoAnho}">
+            </p:commandButton>
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+             <p:dialog header="Selección de Proveedor" widgetVar="selectProveedorDialog"  width="400" styleClass="outputpanel" height="500" closable="true" closeOnEscape="true" modal="true">
+                <p:dataTable var="proveedor" value="#{detalleCompras.proveedores}"  paginator="true" rows="10"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             rowsPerPageTemplate="10,15"  selection="#{detalleCompras.proveedorSeleccionado}"
+                             update="inputProveedor" onselectComplete="selectProveedorDialog.hide()" selectionMode="single">
+                    <p:column filterBy="#{proveedor.nombre}">
+                        <f:facet name="header">
+                            <h:outputText value="Nombre" />
+                        </f:facet>
+                        <h:outputText value="#{proveedor.nombre}" />
+                    </p:column>
+                    <p:column filterBy="#{proveedor.ruc}">
+                        <f:facet name="header">
+                            <h:outputText value="RUC" />
+                        </f:facet>
+                        <h:outputText value="#{proveedor.ruc}" />
+                    </p:column>
+                </p:dataTable>
+            </p:dialog>
+          //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+

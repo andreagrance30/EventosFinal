@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:component>
+        <div id="menu_horizontal">
+            <h:form id="menucuentaspagar">
+                <p:menubar styleClass="menuTipoLetra">
+                    <p:submenu label="Definiciones">
+                        <p:menuitem>
+                            <h:link value="Proveedores" rendered="#{cmwProveedoresControlador.puedeConsultar}"  outcome="../importaciones/CmwProveedores.xhtml">
+                                <f:param name="menu" value="/recursos/componentes/menuCuentaspagar.xhtml"/>
+                            </h:link>
+                        </p:menuitem>
+                        <p:menuitem>
+                            <h:link value="Proveedores-Carga Rapida" rendered="#{cpwProveedoresRapControlador.puedeConsultar}" outcome="../cuentasPagar/CpwProveedoresRap.xhtml">
+                                <f:param name="menu" value="/recursos/componentes/menuCuentasPagar.xhtml"/>
+                            </h:link>
+                        </p:menuitem>
+                        <p:menuitem>
+                            <h:link value="Conceptos de Compras" rendered="#{cpwConceptosComprasControlador.puedeConsultar}" outcome="../cuentasPagar/CpwConceptosCompras.xhtml">
+                                <f:param name="menu" value="/recursos/componentes/menuCuentasPagar.xhtml"/>
+                            </h:link>
+                        </p:menuitem>
+                        <p:menuitem>
+                            <h:link value="Personas" rendered="#{bswPersonasControlador.puedeConsultar}" outcome="../administracionBase/BswPersonas.xhtml">
+                                <f:param name="menu" value="/recursos/componentes/menuCuentasPagar.xhtml"/>
+                            </h:link>
+                        </p:menuitem>
+                        <p:menuitem>
+                            <h:link value="Permisos" rendered="#{bswPermisosOpcionesControlador.puedeConsultar}" outcome="../controlStock/PermisosOpcionesUsuarios.xhtml">
+                                <f:param name="menu" value="/recursos/componentes/menuCuentasPagar.xhtml"/>
+                            </h:link>
+                        </p:menuitem>
+                        <p:menuitem value="Planillas de Cheques"  rendered="#{cpwPlanillaChequesControlador.puedeConsultar}" url="../cuentasPagar/CpwPlanillasCheques.xhtml"/>
+
+                    </p:submenu>
+
+                    <p:submenu label="Movimientos">
+                        <p:menuitem value="Compras Proveedores" rendered="#{cpwCompraDetProveedoresControlador.puedeConsultar}" url="CpwCompraDetProveedores.xhtml"/>
+                        <p:menuitem value="Movimientos de Caja" rendered="#{cpwMovCajasControlador.puedeConsultar}" url="CpwMovCajas.xhtml"/>
+                        <p:menuitem value="Ordenes de Compras" rendered="#{cpwOrdenesCompraControlador.puedeConsultar}" url="../cuentasPagar/CpwOrdenesCompra.xhtml"/>
+                        <p:menuitem value="Ordenes de Pago" rendered="#{cpwOrdenesPagosControlador.puedeConsultar}"  url="CpwOrdenPago.xhtml"/>
+                        <p:menuitem value="Definiciones de Impresion" rendered="#{cpwDefinicionesImpresionControlador.puedeConsultar}"  url="../cuentasPagar/CpwDefinicionesImpresion.xhtml"/>
+                        <p:menuitem value="Valores Emitidos"   rendered="#{cpwValoresEmitidosControlador.puedeConsultar}" url="../cuentasPagar/CpwValoresEmitidos.xhtml"/>
+                        <p:menuitem value="Valores Depositados" rendered="#{cpwValoresDepositadosControlador.puedeConsultar}" url="../cuentasPagar/CpwValoresDepositados.xhtml"/>
+                        <p:menuitem value="Compras (solo consulta)" rendered="#{cpwCompProvConsultaControlador.puedeConsultar}" url="../cuentasPagar/CpwCompProveedoresConsulta.xhtml"/>
+                        <p:menuitem value="Impresion de Retenciones" rendered="#{cpwImpresionRetencionesControlador.puedeConsultar}"  url="CpwImpresionRetenciones.xhtml"/>
+                        <p:menuitem value="Autorizacion de Reimpresion de Retenciones" rendered="#{cpwAutorizaImpresionRetencionesControlador.puedeConsultar}"  url="CpwAutorizaReImpresionReten.xhtml"/>
+                        <p:menuitem value="Carga de Gastos-Gerencial" rendered="#{cpwCuadroCargaGastosGeneralesControlador.puedeConsultar}" url="CpwCuadroGastosGenerales.xhtml"/>
+                    </p:submenu>
+                    <p:submenu label="Reportes">
+                        <p:menuitem value="Imprimir Cheques" rendered="#{cpwImprimirChequesControlador.puedeConsultar}"  url="../cuentasPagar/CpwImprimirCheques.xhtml"/>
+                        <p:menuitem value="Vencimientos por fechas" rendered="#{cpwVencimientosFacturasControlador.puedeConsultar}" url="../cuentasPagar/CpwVencimientosFacturas.xhtml"/>
+
+                        <p:menuitem value="Analisis por fecha" rendered="#{cpwAnalisisCompFechasControlador.puedeConsultar}" url="../cuentasPagar/CpwAnalisisCompFechas.xhtml" />
+                        <p:submenu label="Libros" >
+                            <p:menuitem value="Libro de Compras"  rendered="#{cpwLibroCompraProvControlador.puedeConsultar}" url="../cuentasPagar/CpwLibroCompra.xhtml"/>
+                            <p:menuitem value="Libro de Compras (Provisorio)" rendered="#{cpwLibroCompraProvControlador.puedeConsultar}" url="../cuentasPagar/CpwLibroCompraProvisorio.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="Proveedores" >
+                            <p:menuitem value="Total de Compras por Proveedor" rendered="#{cpwTotalComprasProvControlador.puedeConsultar}" url="../cuentasPagar/CpwTotalComprasProv.xhtml"/>
+                            <p:menuitem value="Extracto de Proveedores" rendered="#{cpwExtractoProveedoresControlador.puedeConsultar}" url="../cuentasPagar/CpwExtractoProveedores.xhtml"/>
+                            <p:menuitem value="Saldo de Proveedores" rendered="#{cpwSaldosProveedoresControlador.puedeConsultar}"  url="../cuentasPagar/CpwSaldosProveedores.xhtml"/>
+                        </p:submenu>
+                        <p:menuitem>
+                            <h:link value="Cheques Emitidos" rendered="#{chwRptChequesEmitidosControlador.puedeConsultar}" outcome="../tesoreriaBancos/ChwRptChequesEmitidos.xhtml">
+                                <f:param name="menu" value="/recursos/componentes/menuCuentasPagar.xhtml"/>
+                            </h:link>
+                        </p:menuitem>
+                        <p:menuitem value="Retenciones" rendered="#{cpwRetencionesControlador.puedeConsultar}" url="CpwRetenciones.xhtml"/>
+                        <p:submenu label="Pagos" >
+                            <p:menuitem value="Solicitud de Pagos" url="../cuentasPagar/CpwSolicitudPagos.xhtml" rendered="#{cpwSolicitudPagosControlador.puedeConsultar}"/>
+                            <p:menuitem value="Ordenes de Pagos" url="../cuentasPagar/CpwOrdenesPagos.xhtml" rendered="#{cpwOrdenesPagosControlador.puedeConsultar}"/>
+                            <p:menuitem value="Listado de Ordenes de Pagos" url="../cuentasPagar/CpwListadoOrdenesPagos.xhtml" rendered="#{cpwListadoOrdenesPagosControlador.puedeConsultar}"/>
+                            <p:menuitem value="Detalle Orden de Pago" url="../cuentasPagar/CpwDetalleOrdenesPagos.xhtml" rendered="#{cpwDetalleOrdenesPagosControlador.puedeConsultar}" />
+                        </p:submenu>
+
+                        <p:submenu label="Contabilidad" >
+                            <p:menuitem value="Compras por Periodo" rendered="#{cpwComprasPeriodoContabControlador.puedeConsultar}"  url="../cuentasPagar/CpwComprasPeriodoContab.xhtml"/>
+                            <p:menuitem value="Cheques Emitidos" rendered="#{cpwChequesEmitidosContabControlador.puedeConsultar}"  url="../cuentasPagar/CpwChequesEmitidosContab.xhtml"/>
+                        </p:submenu>
+                        <p:submenu label="Extracto de Cuentas Bancarias" >
+                            <p:menuitem value="Provisorio" rendered="#{cpwExtractoCuentaBancProvControlador.puedeConsultar}" url="CpwExtractoCuentaBancariaProv.xhtml"/>
+                            <p:menuitem value="Por Motivos" rendered="#{cpwExtractoCuentaBancControlador.puedeConsultar}" url="CpwExtractoCuentaBancaria.xhtml"/>
+                        </p:submenu>
+                    </p:submenu>
+
+                    <p:submenu label="Ventana">
+                        <p:menuitem value="Cascada" url="http://www.youtube.com" />
+                        <p:menuitem value="Mosaico" url="http://www.break.com" />
+                        <p:menuitem value="Organizar Iconos" url="http://www.break.com" />
+                        <p:menuitem value="1. Menu Inicial del Sistema" url="http://www.break.com" />
+                    </p:submenu>
+                </p:menubar>
+            </h:form>
+        </div>
+        <div align="right">
+            <h:form>
+                <h:outputText value="#{menuControlador.userNombre}"   styleClass="etiqueta"/>
+                <h:outputText value="|" styleClass="etiqueta"/>
+                <h:commandLink value="#{i18n.cambio_pass}" action="../administracionBase/BswCambioClave.xhtml" styleClass="etiqueta"/>
+                <h:outputText value="|" styleClass="etiqueta"/>
+                <h:commandLink value="#{i18n.cerrar_sesion}" action="#{menuControlador.logout}" styleClass="etiqueta"/>
+            </h:form>
+        </div>
+    </ui:component>
+</html>
+
+
+

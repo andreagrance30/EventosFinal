@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jstl/core"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <p:dataTable var="moneda" value="#{empresaControlador.listaMonedas}"  paginator="true" rows="10"
+                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                 rowsPerPageTemplate="10,15"  selection="#{empresaControlador.monedaSeleccionada}"
+                 update="EmpresaMonedadisplay EmpresaMonedaNombredisplay EmpresaNuevaMonedadisplay 
+                 EmpresaNuevaMonedaNombredisplay"
+                 onselectComplete="dialogSelectMoneda.hide()" selectionMode="single">
+      <p:column filterBy="#{moneda.descripcion}">
+        <f:facet name="header">
+          <h:outputText value="Moneda" />
+        </f:facet>
+        <h:outputText value="#{moneda.descripcion}" />
+      </p:column>
+      <p:column filterBy="#{moneda.codMoneda}">
+        <f:facet name="header">
+          <h:outputText value="Cod. Moneda" />
+        </f:facet>
+        <h:outputText value="#{moneda.codMoneda}" />
+      </p:column>
+    </p:dataTable>
+  </ui:composition>

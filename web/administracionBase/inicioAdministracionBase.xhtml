@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:p="http://primefaces.prime.com.tr/ui"
+       xmlns:h="http://java.sun.com/jsf/html"
+       xmlns:ui="http://java.sun.com/jsf/facelets"
+       xmlns:f="http://java.sun.com/jsf/core">
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=250; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+    </head>
+    <body>
+        
+        <ui:composition template="./../recursos/plantillas/formAdministracionBasePlantilla.xhtml">
+                        
+            <ui:define name="content">
+              <h:form>
+                <br/><br/>
+                <h:graphicImage style="position:relative; left:44%;" width="172px" height="174px" alt="logo" id="logoImagen2" url="#{loginControlador.imagen}"/>
+                <div style="position:relative; text-align:center; font-size: 15px; color: #FFBF00">
+                    <br/><br/>
+                    <b>     Eventos Administrador </b>
+                    <br/><br/>
+                    <div style="position:relative; text-align:center; font-size: 15px; color: black" >     <b>  <h:outputText value="Sesión del usuario: #{loginControlador.userNombre}" /> </b> </div>
+                </div>
+
+              </h:form>
+            </ui:define>
+
+        </ui:composition>
+        
+    </body>
+</html>

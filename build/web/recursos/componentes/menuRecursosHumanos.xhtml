@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:component>
+        <div id="menu_horizontal">
+            <h:form id="menuRecursosHumanos">
+                <p:menubar styleClass="menuTipoLetra">
+                    <p:submenu label="Definiciones">
+                        <p:menuitem value="Conceptos"  rendered="#{rhwConceptosControlador.puedeConsultar}"  url="../recursosHumanos/RhwConceptos.xhtml"/>
+                        <p:menuitem value="Seccion"  rendered="#{rhwSeccionControlador.puedeConsultar}"  url="../recursosHumanos/RhwSeccion.xhtml"/>
+                        <p:menuitem value="Centros de Pagos"  rendered="#{rhwCentrosPagosControlador.puedeConsultar}" url="../recursosHumanos/RhwCentrosPagos.xhtml"/>
+                        <p:menuitem value="Motivos de Salida"  rendered="#{rhwMotivosSalidaControlador.puedeConsultar}" url="../recursosHumanos/RhwMotivosSalida.xhtml"/>
+                        <p:menuitem>
+                            <h:link value="Personas Fisicas" rendered="#{bswPersonasControlador.puedeConsultar}" outcome="../administracionBase/BswPersonas.xhtml">
+                                <f:param name="menu" value="/recursos/componentes/menuRecursosHumanos.xhtml"/>
+                            </h:link>
+                        </p:menuitem>
+                        <p:menuitem value="Estados de Asistencias"  rendered="#{rhwEstadosAsistenciasControlador.puedeConsultar}" url="../recursosHumanos/RhwEstadosAsistencias.xhtml"/>
+                        <p:menuitem value="Horarios"  rendered="#{rhwHorariosControlador.puedeConsultar}" url="../recursosHumanos/RhwHorarios.xhtml"/>
+                        <p:menuitem value="Parametros de Salida"  rendered="#{rhwParametrosSalidaControlador.puedeConsultar}" url="../recursosHumanos/RhwParametrosSalida.xhtml"/>
+                        <p:menuitem value="Conceptos para planillas"  rendered="#{rhwPlanillaConceptosControlador.puedeConsultar}" url="../recursosHumanos/RhwPlanillas.xhtml"/>
+                        <p:menuitem value="Motivos de Estados"  rendered="#{rhwMotivosControlador.puedeConsultar}" url="../recursosHumanos/RhwMotivos.xhtml"/>
+
+                    </p:submenu>
+                    <p:submenu label="Movimientos">
+                        <p:menuitem value="Generacion de Adelantos" url="../recursosHumanos/RhwProcesoGeneracionAdelantos.xhtml" rendered="#{rhwProcesoGeneracionAdelantosControlador.puedeConsultar}"/>
+                        <p:menuitem value="Debitos y Creditos a Empleados" url="../recursosHumanos/RhwCargarDebitosCreditosEmpleados.xhtml" rendered="#{rhwCargarDebitosCreditosEmpleadosControlador.puedeConsultar}"/>
+                        <p:menuitem value="Proceso de Liquidacion de Sueldos" url="../recursosHumanos/RhwProcesoLiquidacionSueldos.xhtml" rendered="#{rhwProcesoLiquidacionSueldosControlador.puedeConsultar}"/>
+                        <p:menuitem value="Eliminar Debitos y Creditos" url="../recursosHumanos/RhwEliminarDebitosCreditos.xhtml" rendered="#{rhwEliminarDebitosCreditosControlador.puedeConsultar}"/>
+                    </p:submenu>
+
+                    <p:submenu label="Reportes">
+                        <p:menuitem value="Desglose de Billetes y Monedas" url="../recursosHumanos/RhwRptDesgloseBilletesMonedas.xhtml" rendered="#{rhwRptDesgloseBilletesMonedasControlador.puedeConsultar}"/>
+                        <p:menuitem value="Control del Horario de Almuerzo" url="../recursosHumanos/RhwRptControlHoraAlmuerzo.xhtml" rendered="#{rhwRptControlHoraAlmuerzoControlador.puedeConsultar}"/>
+                        <p:menuitem value="Movimientos de Liquidacion (Conceptos)" url="../recursosHumanos/RhwMovimientosPorLiquidacion.xhtml" rendered="#{rhwMovimientosLiquidacionControlador.puedeConsultar}"/>
+                        <p:menuitem value="Resumen de Liquidacion de Sueldo" url="../recursosHumanos/RhwResumenLiquidacionSalarios.xhtml" rendered="#{rhwResumenLiquidacionSueldosControlador.puedeConsultar}"/>
+                        <p:menuitem value="Resumen de Liquidaciones por Conceptos" url="../recursosHumanos/RhwLiquidacionesPorConceptos.xhtml" rendered="#{rhwLiquidacionesPorConceptoControlador.puedeConsultar}"/>
+                        <p:menuitem value="Recibos" url="../recursosHumanos/RhwRecibos.xhtml" rendered="#{rhwRecibosControlador.puedeConsultar}"/>
+                        <p:menuitem value="Planilla Anual de Pago de Salarios" url="../recursosHumanos/RhwPagoAnualSalarios.xhtml" rendered="#{rhwpagoAnualSalariosControlador.puedeConsultar}"/>
+                        <p:menuitem value="Planilla de Sueldos" url="../recursosHumanos/RhwPlanillaSueldos.xhtml" rendered="#{rhwPlanillaSueldosControlador.puedeConsultar}"/>
+                        <p:menuitem value="Listado de Empleado - Cliente " url="../recursosHumanos/RhwRptListadoEmpleadoCliente.xhtml" rendered="#{rhwRptListadoEmpleadoClienteControlador.puedeConsultar}"/>
+                        <p:menuitem value="Listado de Empleados" url="../recursosHumanos/RhwRptListadoEmpleado.xhtml" rendered="#{rhwRptListadoEmpleadoControlador.puedeConsultar}"/>
+                        <p:menuitem value="Planilla de Aguinaldos" url="../recursosHumanos/RhwPlanillaAguinaldos.xhtml" rendered="#{rhwPlanillaAguinaldosControlador.puedeConsultar}"/> fg
+                        <p:menuitem value="Detalle de Debitos y Creditos por Concepto" url="../recursosHumanos/RhwReporteDetalleDebitosCreditosConceptos.xhtml" rendered="#{rhwReporteDetalleDebitosCreditosConceptosControlador.puedeConsultar}"/>
+                        <p:menuitem value="Reporte de Asistencia" url="../recursosHumanos/RhwReporteAsistenciaPersonal.xhtml" rendered="#{rhwReporteAsistenciaPersonalControlador.puedeConsultar}"/>
+                        <p:menuitem value="Liquidacion de Sueldos (Detalle)" url="../recursosHumanos/RhwReporteLiquidacionSueldosDetalle.xhtml" rendered="#{rhwReporteLiquidacionSueldosDetalleControlador.puedeConsultar}"/>
+                        <p:menuitem value="Liquidacion por salida del Personal" url="../recursosHumanos/RhwReporteLiquidacionPersonal.xhtml" rendered="#{rhwReporteLiquidacionPersonalControlador.puedeConsultar}"/>
+                        <p:menuitem value="Saldos de Cuotas para Compras de RG" url="../recursosHumanos/RhwReporteSaldosCuotasPendientesEmpleados.xhtml" rendered="#{rhwReporteSaldosCuotasPendientesEmpleadosControlador.puedeConsultar}"/>
+                    </p:submenu>
+
+
+                    <p:submenu label="Ventana">
+                        <p:menuitem value="Cascada" url="http://www.youtube.com" />
+                        <p:menuitem value="Mosaico" url="http://www.break.com" />
+                        <p:menuitem value="Organizar Iconos" url="http://www.break.com" />
+                        <p:menuitem value="1. Menu Inicial del Sistema" url="http://www.break.com" />
+                    </p:submenu>
+                </p:menubar>
+            </h:form>
+        </div>
+        <div align="right">
+            <h:form>
+                <h:outputText value="#{menuControlador.userNombre}"   styleClass="etiqueta"/>
+                <h:outputText value="|" styleClass="etiqueta"/>
+                <h:commandLink value="#{i18n.cambio_pass}" action="../administracionBase/BswCambioClave.xhtml" styleClass="etiqueta"/>
+                <h:outputText value="|" styleClass="etiqueta"/>
+                <h:commandLink value="#{i18n.cerrar_sesion}" action="#{menuControlador.logout}" styleClass="etiqueta"/>
+            </h:form>
+        </div>
+    </ui:component>
+</html>
+
+
+

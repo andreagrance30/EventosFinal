@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jstl/core"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <p:dataTable var="g" value="#{reporteAccesoGruposControlador.grupoUsuarioLista}"  paginator="true" rows="10"
+                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                 rowsPerPageTemplate="10,15"  selection="#{reporteAccesoGruposControlador.grupoUsuarioSeleccionado}"
+                 update="atributo atributo2 CodGrupoDesde accesoGrupoCodGrupoInputDescripcionDesde CodGrupoHasta accesoGrupoCodGrupoInputDescripcionHasta"
+                 onselectComplete="selectAccesoGrupoDialog.hide()" selectionMode="single">
+    <p:column filterBy="#{g.codGrupo}">
+        <f:facet name="header">
+          <h:outputText value="Cod. Grupo" />
+        </f:facet>
+        <h:outputText value="#{g.codGrupo}" />
+      </p:column>
+    <p:column filterBy="#{g.descripcion}">
+        <f:facet name="header">
+          <h:outputText value="Descripcion" />
+        </f:facet>
+        <h:outputText value="#{g.descripcion}" />
+      </p:column>
+    </p:dataTable>
+  </ui:composition>

@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ <ui:component xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:root="http://java.sun.com/jsf/composite/root"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.prime.com.tr/ui">
+
+        <div id="menu_horizontal">
+             <h:form id="menuRepartos">
+                 <p:menubar styleClass="menuTipoLetra">
+                        <p:submenu label="Definiciones">
+                            <p:menuitem value="Vehiculos" rendered="#{rpwVehiculosControlador.puedeConsultar}" url="RpwVehiculos.xhtml"/>
+                            <p:menuitem value="Repartidores" rendered="#{rpwRepartidoresControlador.puedeConsultar}" url="RpwRepartidores.xhtml"/>
+                            <p:menuitem value="Zonas" rendered="#{rpwZonasControlador.puedeConsultar}" url="RpwZonas.xhtml"/>
+                        
+                            <p:menuitem>
+
+                             <h:link value="Permisos" rendered="#{bswPermisosOpcionesControlador.puedeConsultar}" outcome="../controlStock/PermisosOpcionesUsuarios.xhtml">
+                                <f:param name="menu" value="/recursos/componentes/menuRepartos.xhtml"/>
+                            </h:link>
+                            </p:menuitem>
+                            <p:menuitem value="Consulta de Comprobantes" rendered="#{rpwConsultaComprobantesControlador.puedeConsultar}" url="RpwConsultaComprobantes.xhtml"/>
+                            <p:menuitem value="Salir" url="./../administracionBase/inicio.xhtml"/>
+                        </p:submenu>
+
+                        <p:submenu label="Movimientos">
+                            <p:menuitem value="Planilla de Repartos" rendered="#{rpwPlanillaRepartoControlador.puedeConsultar}" url="RpwPlanillaReparto.xhtml"/>
+                            <p:menuitem value="Consolidado de Planillas" rendered="#{rpwConsolidadoPlanillasControlador.puedeConsultar}" url="RpwConsolidadoPlanilla.xhtml"/>
+                            <p:menuitem value="Autorizacion de Devolucion" rendered="#{rpwAutorizacionDevolucionControlador.puedeConsultar}" url="RpwAutorizaDevolucion.xhtml"/>
+                            <p:menuitem value="Generacion de Planillas" rendered="#{rpwGenerarPlanillaControlador.puedeConsultar}" url="RpwGeneracionPlanillas.xhtml"/>
+                            <p:menuitem value="Rendicion de Planillas de Repartos" rendered="#{rpwRendicionPlanillaControlador.puedeConsultar}" url="RpwRendicionPlanilla.xhtml"/>
+                            <p:menuitem value="Impresion Rapida de Notas de Remision" rendered="#{rpwPlanillaRepartoControlador.puedeConsultar}" url="RpwImprimeNotasPedido.xhtml"/>
+                        </p:submenu>
+
+                        <p:submenu label="Reportes">            
+                            <p:menuitem value="Planilla de Repartos" rendered="#{rpwReportePlanillaControlador.puedeConsultar}" url="RpwReportePlanillaReparto.xhtml"/>
+                            <p:menuitem value="Consolidado de Planillas" rendered="#{rpwReporteConsolidadoControlador.puedeConsultar}" url="RpwReporteConsolidadoReparto.xhtml"/>
+                            <p:menuitem value="Consolidado General de Articulos" rendered="#{rpwReporteConsolidadoArticulosControlador.puedeConsultar}" url="RpwReporteConsolidadoArticulos.xhtml"/>
+                            <p:menuitem value="Resumen de Facturas p/ Consolidado" rendered="#{rpwReporteFacturaConsolidadoControlador.puedeConsultar}" url="RpwReporteResumenFacturaConsolidado.xhtml"/>
+                            <p:menuitem value="Resumen de Facturas p/ Estados" rendered="#{rpwReporteEstadoFacturaControlador.puedeConsultar}" url="RpwReporteEstadosFacturas.xhtml"/>
+                            <p:menuitem value="Resumen de Facturas p/ Consolidado(Resultado)" rendered="#{rpwReporteListPlanillaResultControlador.puedeConsultar}"  url="RpwReporteListPlanillaRepResultado.xhtml"/>
+                        </p:submenu>
+                </p:menubar>
+            </h:form>
+        </div>
+        <div align="right">
+            <h:form>
+                <h:outputText value="#{menuControlador.userNombre}"   styleClass="etiqueta"/>
+                <h:outputText value="|" styleClass="etiqueta"/>
+                <h:commandLink value="#{i18n.cambio_pass}" action="../administracionBase/BswCambioClave.xhtml" styleClass="etiqueta"/>
+                <h:outputText value="|" styleClass="etiqueta"/>
+                <h:commandLink value="#{i18n.cerrar_sesion}" action="#{menuControlador.logout}" styleClass="etiqueta"/>
+            </h:form>
+        </div>
+    </ui:component>
+

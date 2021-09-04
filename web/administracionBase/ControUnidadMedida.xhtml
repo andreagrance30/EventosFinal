@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="plantilla.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:define name="content">
+
+        <h:form>
+            <p:growl id="growl" showDetail="false" />
+            <h:panelGrid id="pg">
+                <h:panelGroup>
+                    <h:outputText id="unidadMedidaes"
+                                  value="Lista de Unidades de Medida"
+                                  styleClass="tituloTabla" />
+                    <br/><br/>
+                    <p:toolbar>
+                        <p:toolbarGroup align="left">
+                            <p:commandButton type="push"
+                                             value="#{i18n.boton_nuevo}"
+                                             image="ui-icon-document"
+                                             onclick="dialogoAgregar.show();"/>
+                        </p:toolbarGroup>
+
+                    </p:toolbar>
+                </h:panelGroup>
+
+                <p:dataTable id="formasTabla2"  paginator="true" selectionMode="single" rows="15"
+                             paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown} " 
+                             rowsPerPageTemplate="10,15,20" var="unidadMedida"  value="#{controladorUnidad.listaUnidadDeMedida}"
+                             rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx"
+                             update="display panelGridModificar" onselectComplete="dialogoModificar.show()"
+                             selection="#{controladorUnidad.unidadDeMedidaSeleccionado}">
+                    <p:column id="colUnidad" style="width: 50%;text-align: center;" sortBy="#{unidadMedida.descripcion}" filterBy="#{unidadMedida.descripcion}"  >
+                        <f:facet name="header">Nombre</f:facet>
+                        <h:outputText id="nombrePais" value="#{unidadMedida.descripcion}" >
+                        </h:outputText>
+                    </p:column>
+                </p:dataTable>
+                
+                
+            </h:panelGrid>
+            
+            
+
+
+            <p:dialog header="Modificar datos de unidadMedida"
+                      widgetVar="dialogoModificar"
+                      width="420"
+                      styleClass="outputpanel"
+                      height="170"
+                      closable="true"
+                      closeOnEscape="true"
+                      modal="true">
+
+                <p:outputPanel id="panelModificar"
+                               layout="inline">
+                    <h:panelGrid id="panelGridModificar"
+                                 columns="2"
+                                 styleClass="bgpanelgrid">
+
+                        <h:outputText styleClass="etiqueta"  value="Nombre" />
+                        <h:inputText  id="inputUnidad" value="#{controladorUnidad.unidadDeMedidaSeleccionado.descripcion}" />
+
+                    </h:panelGrid>
+                   <br/>
+                    <h:panelGroup>
+                        <p:commandButton image="ui-icon-disk"
+                                         value="#{i18n.boton_guardar}"
+                                         action="#{controladorUnidad.update}"
+                                         style="position: absolute; left: 20px; width: 100px"
+                                         onclick="unidadMedida" />
+
+                        <p:commandButton image="ui-icon-trash"
+                                         value="#{i18n.boton_eliminar}"
+                                         style="position: absolute; left: 140px; width: 100px"
+                                         action="#{controladorUnidad.delete}"
+                                         onclick="unidadMedida"
+                                         update="pg"/>
+                        <p:commandButton image="ui-icon ui-icon-close"
+                                         value="#{i18n.boton_salir}"
+                                         style="position: absolute; left: 260px; width: 100px"
+                                         onclick="dialogoModificar.hide()"/>
+
+                    </h:panelGroup>
+                </p:outputPanel>
+            </p:dialog>
+
+
+            <p:dialog header="Registrar nueva unidadMedida"
+                      widgetVar="dialogoAgregar"
+                      width="320"
+                      styleClass="outputpanel"
+                      height="170"
+                      closable="true"
+                      closeOnEscape="true"
+                      modal="true">
+
+                <p:outputPanel id="panelAgregar"
+                               layout="inline">
+                    <h:panelGrid id="panelGridAgregar"
+                                 columns="2"
+                                 styleClass="bgpanelgrid">
+
+                        <h:outputText styleClass="etiqueta"  value="Nombre" />
+                        <h:inputText  id="addUnidad" value="#{controladorUnidad.unidadDeMedidaNuevo.descripcion}" />
+
+                    </h:panelGrid>
+                   
+                    <br/>
+                    
+                    <h:panelGroup>
+                        <p:commandButton image="ui-icon-disk"
+                                         value="Guardar"
+                                         action="#{controladorUnidad.add}"
+                                         style="position: absolute; left: 50px; width: 100px"
+                                         onclick="unidadMedida"
+                                         update="grilla"/>
+
+
+                        <p:commandButton image="ui-icon ui-icon-close"
+                                         value="Salir"
+                                         style="position: absolute; left: 170px; width: 100px"
+                                         onclick="dialogoAgregar.hide()"
+                                         action="#{controladorUnidad.resetearCampos}"
+                                         update="panelGridAgregar"/>
+
+                    </h:panelGroup>
+                </p:outputPanel>
+            </p:dialog>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+

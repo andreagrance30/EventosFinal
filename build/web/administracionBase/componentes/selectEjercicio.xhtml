@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jstl/core"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+
+        <p:dataTable id="ejercicioTabla"  paginator="true" selectionMode="single" rows="10"
+                                     paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown} " rowsPerPageTemplate="10,15"
+                                     var="ejercicio"  value="#{menuControlador.listaEjercicios}" rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}"
+                                     rowIndexVar="rowIx" update="ejercioActualDesde ejercioActualHasta"
+                                     onselectComplete="selectEjercicioDialog.hide()"  selection="#{menuControlador.ejercicioSeleccionado}">
+
+                           <p:column id="colEjercDesde" sortBy="#{ejercicio.fecInicio}" filterBy="#{ejercicio.fecInicio}" style="width: 390px">
+                                <f:facet name="header">Desde</f:facet>
+                                <h:outputText id="ejercDesde" value="#{ejercicio.fecInicio}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column id="colEjercHasta" sortBy="#{ejercicio.fecFinal}" filterBy="#{ejercicio.fecFinal}" style="width: 390px">
+                                <f:facet name="header">Hasta</f:facet>
+                                <h:outputText id="ejercHasta" value="#{ejercicio.fecFinal}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </p:column>
+
+
+                            <p:column id="colEjercicio" sortBy="#{ejercicio.codEjercicio}" filterBy="#{ejercicio.codEjercicio}" style="width: 10px ">
+                                <f:facet name="header">Ejercicio</f:facet>
+                                <h:outputText id="ejercicio" value="#{ejercicio.codEjercicio}">
+                                </h:outputText>
+                            </p:column>
+
+                            
+       </p:dataTable>
+  </ui:composition>
+

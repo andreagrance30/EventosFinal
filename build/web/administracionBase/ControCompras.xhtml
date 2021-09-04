@@ -1,0 +1,224 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="plantilla.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:define name="content">
+
+        <h:form id="comprasForm">
+            <p:growl id="growl" showDetail="false" />
+            <h:panelGrid styleClass="bgpanelgridGray" >
+                <h:panelGroup>
+                    <p:toolbar>
+                        <p:toolbarGroup align="left">
+
+                            <p:commandButton
+                                value="Guardar"
+                                image="ui-icon ui-icon-disk"
+                                onclick="confirmacionCompra.show()"
+                                >
+                            </p:commandButton>
+
+                            <p:divider/>
+
+                            <p:commandButton
+                                ajax="false"
+                                value="Limpiar"
+                                image="ui-icon ui-icon-document"
+                                action="#{controladorCompras.limpiar}">
+                            </p:commandButton>
+                        </p:toolbarGroup>
+                    </p:toolbar>
+                </h:panelGroup>
+            </h:panelGrid>
+
+            <h:panelGroup>
+                <b> <h:outputText value="Nueva Compra"/> </b> 
+                <p:outputPanel id="panelModificar"
+                               layout="inline">
+                    <h:panelGrid id="panelGridModificar" styleClass="bgpanelgridGray" columns="2" style="width: 40%; margin-left: 0;" >
+
+                        <h:outputText styleClass="etiqueta"  value="Proveedor:" />
+                        <h:panelGroup>
+                            <h:inputText  id="inputProveedor"
+                                          readonly="true"
+                                          value="#{controladorCompras.proveedorSeleccionado.nombre}" />
+                            <p:commandButton    image="ui-icon-search"
+                                                style="margin-left: 10px; font-size: 12px;"
+                                                onclick="selectProveedorDialog.show()" />
+                        </h:panelGroup>
+                        <h:outputText styleClass="etiqueta"  value="Medio de Pago:" />
+                        <h:panelGroup>
+                            <h:inputText  id="inputMedioPago"
+                                          readonly="true"
+                                          value="#{controladorCompras.formaPagoSeleccionado.descripcion}" />
+                            <p:commandButton    image="ui-icon-search"
+                                                style="margin-left: 10px; font-size: 12px;"
+                                                onclick="selectMedioPagoDialog.show()" />
+                        </h:panelGroup>
+                        <h:outputText styleClass="etiqueta"  value="Fecha de la factura:" />
+                        <p:calendar value="#{controladorCompras.fechaFactura}" effect="fadeIn" pattern="dd/MM/yyyy">
+                            <p:ajax event="change" listener="#{controladorCompras.actualizarFechaFactura}"/>
+                        </p:calendar>
+                        <h:outputText styleClass="etiqueta"  value="Número de factura:" />
+                        <h:inputText  id="txtNroFactura" value="#{controladorCompras.numeroFactura}" >
+                        </h:inputText>
+                        <h:outputText styleClass="etiqueta"  value="Monto Total:" />
+                        <h:inputText  disabled="true" id="txtTotalCompra" value="#{controladorCompras.montoTotalCompra}" >
+                        </h:inputText>
+                    </h:panelGrid>
+                </p:outputPanel>
+            </h:panelGroup>
+            <br/>
+
+            <b><h:outputText value="Detalles de la Compra"/></b>
+            <br/><br/>
+            <h:panelGroup>
+                <h:outputText value="Producto comprado:" style="font-size: 14px;" />
+                <h:inputText  id="inputProductoCompra"
+                              readonly="true"
+                              value="#{controladorCompras.productoSeleccionado.descripcion}"
+                              style="width: 30%; margin-left: 10px; margin-right: 10px;"  />
+                <p:commandButton image="ui-icon-search"
+                                 style="font-size: 12px;"
+                                 onclick="selectProductoDialog.show()" />
+                                     
+                <p:commandButton value="Agregar a lista"
+                                 image="ui-icon-plusthick"
+                                 style="margin-left: 10px; font-size: 12px;"
+                                 update="pgDetalles tablaDetalles txtTotalCompra"
+                                 ajax="false"
+                                 action="#{controladorCompras.agregarItem}"/>
+                <br/>
+                <h:outputText value="Cantidad:" style="font-size: 14px;" />
+                <h:inputText  id="inputCantidadProducto"
+                              value="#{controladorCompras.cantidadItem}"
+                              style="width: 30%; margin-left: 85px; margin-right: 10px;"  />
+                <br/>
+                <h:outputText value="Costo:" style="font-size: 14px;" />
+                <h:inputText  id="inputCostoProducto"
+                               readonly="true"
+                               value="#{controladorCompras.productoSeleccionado.precio}"
+                              style="width: 30%; margin-left: 107px; margin-right: 10px;"  />
+                <br/>
+
+                <br/>
+
+            </h:panelGroup>
+            <br/><br/>
+
+            <h:panelGrid id="pgDetalles" styleClass="bgpanelgridGray" >
+                <p:dataTable id="tablaDetalles"  paginator="false" selectionMode="single" rows="10" rowsPerPageTemplate="3,5,10"
+                             rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx"
+                             var="item" update="display panelGridModificar" selection="#{controladorCompras.detalleCompraSeleccionado}"
+                             value="#{controladorCompras.detallesCompra}">
+                    <p:column style="width: 40%">
+                        <f:facet name="header">Producto</f:facet>
+                        <h:outputText id="nombreProducto" value="#{item.productoid.descripcion}" />
+                    </p:column>
+                    <p:column style="width: 20%">
+                        <f:facet name="header">Cantidad</f:facet>
+                        <h:outputText id="categoriaProducto" value="#{item.cantidad}"/>
+                    </p:column>
+                    <p:column style="width: 20%">
+                        <f:facet name="header">Costo unitario</f:facet>
+                        <h:outputText id="costo" value="#{item.costoUnitario}">
+                            <f:convertNumber locale="es-PY" />
+                        </h:outputText>
+                    </p:column>
+
+                    <p:column style="width: 20%">
+                        <f:facet name="header">Costo Total</f:facet>
+                        <h:outputText id="costoTotal" value="#{item.costoTotal}" style="float: right;">
+                            <f:convertNumber locale="es-PY" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column id="colDelete" style="width: 15%">
+                        <!-- p:commandButton image="ui-icon-close"
+                                style="font-size: 12px;"
+                                onclick="confirmarBorrado.show()" / -->
+                        <p:commandButton image="ui-icon-close" style="font-size: 12px;"
+                                         action="#{controladorCompras.eliminarDetalle(item)}" ajax="false"/>
+
+                    </p:column>
+                </p:dataTable>
+            </h:panelGrid>
+
+            <p:confirmDialog message="¿Está seguro que desea registrar la compra según los detalles seleccionados?"
+                             hideEffect="explode" width="400" header="Confirmación" styleClass="panelConfirmacion"
+                             widgetVar="confirmacionCompra">
+
+                <p:commandButton value="Aceptar" style="font-size: 12px; margin-left: 75px;"  action="#{controladorCompras.guardar}" oncomplete="confirmacionCompra.hide()" ajax="false"/>
+                <p:commandButton value="Cancelar" style="font-size: 12px; margin-left: 75px;" onclick="confirmacionCompra.hide()" type="button" />
+
+            </p:confirmDialog>
+
+            <p:confirmDialog message="¿Está seguro que desea eliminar este ítem de la lista de compra?"
+                             hideEffect="explode" width="400" header="Confirmación" styleClass="panelConfirmacion"
+                             widgetVar="confirmarBorrado">
+
+                <p:commandButton value="SI" style="font-size: 12px; margin-left: 75px;"  action="#{controladorCompras.eliminarDetalle()}" oncomplete="confirmarBorrado.hide()" ajax="false"/>
+                <p:commandButton value="NO" style="font-size: 12px; margin-left: 75px;" onclick="confirmarBorrado.hide()" type="button" />
+
+            </p:confirmDialog>
+
+            <p:dialog header="Selección de Proveedor" widgetVar="selectProveedorDialog"  width="400" styleClass="outputpanel" height="500" closable="true" closeOnEscape="true" modal="true">
+                <p:dataTable var="proveedor" value="#{controladorCompras.proveedores}"  paginator="true" rows="10"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             rowsPerPageTemplate="10,15"  selection="#{controladorCompras.proveedorSeleccionado}"
+                             update="inputProveedor" onselectComplete="selectProveedorDialog.hide()" selectionMode="single">
+                    <p:column filterBy="#{proveedor.nombre}">
+                        <f:facet name="header">
+                            <h:outputText value="Nombre" />
+                        </f:facet>
+                        <h:outputText value="#{proveedor.nombre}" />
+                    </p:column>
+
+                </p:dataTable>
+            </p:dialog>
+            
+             <p:dialog header="Selección del Medio de Pago" widgetVar="selectMedioPagoDialog"  width="400" styleClass="outputpanel" height="500" closable="true" closeOnEscape="true" modal="true">
+                 <p:dataTable var="medioPago" value="#{controladorCompras.formaPago}"  paginator="true" rows="10"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             rowsPerPageTemplate="10,15"  selection="#{controladorCompras.formaPagoSeleccionado}"
+                             update="inputMedioPago" onselectComplete="selectMedioPagoDialog.hide()" selectionMode="single">
+                    <p:column filterBy="#{medioPago.descripcion}">
+                        <f:facet name="header">
+                            <h:outputText value="Usuario" />
+                        </f:facet>
+                        <h:outputText value="#{medioPago.descripcion}" />
+                    </p:column>
+
+                </p:dataTable>
+            </p:dialog>
+
+            <p:dialog header="Selección de Productos" widgetVar="selectProductoDialog"  width="400" styleClass="outputpanel" height="500" closable="true" closeOnEscape="true" modal="true">
+                <p:dataTable var="producto" value="#{controladorCompras.listaProducto}"  paginator="true" rows="10"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             rowsPerPageTemplate="10,15"  selection="#{controladorCompras.productoSeleccionado}"
+                             update="inputProductoCompra inputCostoProducto" onselectComplete="selectProductoDialog.hide()" selectionMode="single">
+                    <p:column filterBy="#{producto.descripcion}">
+                        <f:facet name="header">
+                            <h:outputText value="Nombre" />
+                        </f:facet>
+                        <h:outputText value="#{producto.descripcion}" />
+                    </p:column>
+                    <p:column filterBy="#{producto.precio}">
+                        <f:facet name="header">
+                            <h:outputText value="Precio" />
+                        </f:facet>
+                        <h:outputText value="#{producto.precio}" />
+                    </p:column>
+                </p:dataTable>
+            </p:dialog>
+                            <!-- PRODUCTO NUEVO -->
+         
+            
+        </h:form>
+    </ui:define>
+</ui:composition>
+

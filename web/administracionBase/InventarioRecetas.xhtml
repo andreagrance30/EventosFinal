@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="plantilla.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <ui:define name="content">
+
+        <h:form id="recetasForm">
+            <p:growl id="growl" showDetail="false" />
+
+            <h:panelGroup>
+                <h:outputText value="Administrar ingredientes del ítem de la carta: "/>
+                <h:inputText  id="inputItem"
+                              readonly="true"
+                              value="#{inventarioRecetas.itemSeleccionado.nombre}"
+                              style="width: 30%; margin-left: 20px; margin-right: 10px;"  />
+                <p:commandButton value="Buscar"
+                                 image="ui-icon-search"
+                                 style="font-size: 12px;"
+                                 onclick="cuadroSeleccionItem.show()" />
+            </h:panelGroup>
+            <br/><br/>
+
+            <p:commandButton
+                ajax="false"
+                style="font-size: 14px;"
+                value="Actualizar Planilla"
+                image="ui-icon ui-icon-print"
+                action="#{inventarioRecetas.actualizarResultado}">
+            </p:commandButton>
+
+            <h:panelGrid id="pg" >
+                <p:dataTable id="formasTabla2"  paginator="false" selectionMode="single" rows="10" rowsPerPageTemplate="3,5,10"
+                             rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}" rowIndexVar="rowIx"
+                             var="ingrediente" selection="#{inventarioRecetas.recetaSeleccionada}"  update="display panelGridModificar" onselectComplete="dialogoModificar.show()"
+                             value="#{inventarioRecetas.listaInsumosReceta}">
+                    <p:column id="colNombre" style="width: 50%">
+                        <f:facet name="header">Insumo</f:facet>
+                        <h:outputText id="nombreInsumo" value="#{ingrediente.insumos.nombre}" />
+                    </p:column>
+                    <p:column id="colConsumo" style=" width: 25%">
+                        <f:facet name="header">Consumo Estándar</f:facet>
+                        <h:outputText id="consumoItem" value="#{ingrediente.consumoEstandar}">
+                        </h:outputText>
+                    </p:column>
+                    <p:column id="colMedida" style=" width: 25%">
+                        <f:facet name="header">Medida</f:facet>
+                        <h:outputText id="consumoMedida" value="#{ingrediente.insumos.medida}">
+                        </h:outputText>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGrid>
+
+            <h:panelGroup>
+                <br/><br/>
+                <h:outputText value="CARGA DE NUEVO INGREDIENTE"
+                              style="color: blue; font-size: 12pt;"/>
+                <br/><br/>
+            </h:panelGroup>
+            <h:panelGroup>
+                <h:outputText value="Item:"/>
+                <h:inputText  disabled="true"
+                              value="#{inventarioRecetas.itemSeleccionado.nombre}"
+                              style="width: 30%; margin-left: 104px; margin-right: 10px;"  />
+                              <br/><br/>
+            </h:panelGroup>
+            <h:panelGroup>
+                <h:outputText value="Insumo:"/>
+                <h:inputText  id="inputInsumo"
+                              readonly="true"
+                              value="#{inventarioRecetas.insumoSeleccionado.nombre}"
+                              style="width: 30%; margin-left: 88px; margin-right: 10px;"  />
+                <p:commandButton value="Buscar"
+                                 image="ui-icon-search"
+                                 style="font-size: 12px;"
+                                 onclick="cuadroSeleccionInsumo.show()" />
+                <br/><br/>
+            </h:panelGroup>
+            <h:panelGroup>
+                <h:outputText value="Consumo Estándar:"/>
+                <h:inputText  value="#{inventarioRecetas.recetaNueva.consumoEstandar}"
+                              style="width: 30%; margin-left: 20px; margin-right: 10px;"  />
+                <br/><br/>
+            </h:panelGroup>
+            <h:panelGroup>
+                <p:commandButton value="Agregar a la receta"
+                                 action="#{inventarioRecetas.add}"
+                                 ajax = "false"
+                                 image="ui-icon-disk"
+                                 style="font-size: 12px;" />
+            </h:panelGroup>
+
+            <p:dialog header="EDITAR DATOS DE RECETA"
+                      widgetVar="dialogoModificar"
+                      width="500"
+                      styleClass="outputpanel"
+                      height="200"
+                      closable="true"
+                      closeOnEscape="true"
+                      modal="true">
+
+                <p:outputPanel id="panelModificar"
+                               layout="inline">
+                    <h:panelGrid id="panelGridModificar"
+                                 columns="2"
+                                 styleClass="bgpanelgrid">
+
+                        <h:outputText value="Item:" styleClass="etiqueta"/>
+                        <h:inputText  disabled="true" value="#{inventarioRecetas.recetaSeleccionada.item.nombre}"  />
+                        
+                        <h:outputText value="Insumo:" styleClass="etiqueta"/>
+                        <h:inputText  disabled="true" value="#{inventarioRecetas.recetaSeleccionada.insumos.nombre}" />
+                        
+                        <h:outputText value="Consumo Estándar:" styleClass="etiqueta"/>
+                        <h:inputText  value="#{inventarioRecetas.recetaSeleccionada.consumoEstandar}" />
+                        
+                    </h:panelGrid>
+
+                    <h:panelGroup>
+                        <p:commandButton value="Guardar"
+                                             action="#{inventarioRecetas.update}"
+                                             ajax = "false"
+                                             image="ui-icon-disk"
+                                             style="position: absolute; left: 140px; width: 100px" />
+                        <p:commandButton image="ui-icon-trash"
+                                         value="#{i18n.boton_eliminar}"
+                                         style="position: absolute; left: 260px; width: 100px"
+                                         ajax = "false"
+                                         action="#{inventarioRecetas.delete}"
+                                         update="pg"/>
+                        <p:commandButton image="ui-icon ui-icon-close"
+                                         value="#{i18n.boton_salir}"
+                                         style="position: absolute; left: 380px; width: 100px"
+                                         onclick="dialogoModificar.hide()"/>
+
+                    </h:panelGroup>
+                </p:outputPanel>
+            </p:dialog>
+
+            <p:dialog header="SELECCION DE ITEM" widgetVar="cuadroSeleccionItem"  width="400" styleClass="outputpanel" height="500" closable="true" closeOnEscape="true" modal="true">
+                <p:dataTable var="item" value="#{inventarioRecetas.listaItems}"  paginator="true" rows="10"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             rowsPerPageTemplate="10,15"  selection="#{inventarioRecetas.itemSeleccionado}"
+                             update="inputItem"
+                             onselectComplete="cuadroSeleccionItem.hide()" selectionMode="single">
+                    <p:column filterBy="#{item.nombre}">
+                        <f:facet name="header">
+                            <h:outputText value="Nombre" />
+                        </f:facet>
+                        <h:outputText value="#{item.nombre}" />
+                    </p:column>
+                    <p:column filterBy="#{item.categoria.nombre}">
+                        <f:facet name="header">
+                            <h:outputText value="Categoría" />
+                        </f:facet>
+                        <h:outputText value="#{item.categoria.nombre}" />
+                    </p:column>
+                </p:dataTable>
+            </p:dialog>
+
+            <p:dialog header="SELECCION DE INSUMO" widgetVar="cuadroSeleccionInsumo"  width="400" styleClass="outputpanel" height="500" closable="true" closeOnEscape="true" modal="true">
+                <p:dataTable var="insumo" value="#{inventarioRecetas.listaInsumos}"  paginator="true" rows="10"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             rowsPerPageTemplate="10,15"  selection="#{inventarioRecetas.insumoSeleccionado}"
+                             update="inputInsumo"
+                             onselectComplete="cuadroSeleccionInsumo.hide()" selectionMode="single">
+                    <p:column filterBy="#{insumo.nombre}">
+                        <f:facet name="header">
+                            <h:outputText value="Nombre" />
+                        </f:facet>
+                        <h:outputText value="#{insumo.nombre}" />
+                    </p:column>
+                    <p:column filterBy="#{insumo.medida}">
+                        <f:facet name="header">
+                            <h:outputText value="Medida" />
+                        </f:facet>
+                        <h:outputText value="#{insumo.medida}" />
+                    </p:column>
+                </p:dataTable>
+            </p:dialog>
+
+        </h:form>
+
+
+    </ui:define>
+
+
+
+</ui:composition>
+

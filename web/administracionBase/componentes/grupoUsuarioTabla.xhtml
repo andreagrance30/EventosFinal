@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jstl/core"
+    xmlns:p="http://primefaces.prime.com.tr/ui"
+    xmlns:f="http://java.sun.com/jsf/core">
+    
+    <h:panelGrid>
+        <h:outputText id="listadoDeGrupoUsuarios" styleClass="tituloTabla"  />
+        <p:dataTable id="grupoUsuarioTabla"  paginator="true" selectionMode="single" rows="10" style="width:800px"
+            paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown} " rowsPerPageTemplate="10,15,20"
+            var="g"  value="#{grupoUsuarioControlador.grupoUsuariosLista}" rowStyleClass="#{empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row'}"
+            rowIndexVar="rowIx" rendered="#{grupoUsuarioControlador.puedeConsultar}"
+            update="display" onselectComplete="dialog.show()"  selection="#{grupoUsuarioControlador.grupoUsuarioSeleccionado}">
+
+            <p:column id="codigoGrupo" sortBy="#{g.codGrupo}" filterBy="#{g.codGrupo}"   >
+                <f:facet name="header">Grupo</f:facet>
+                <h:outputText id="codigoGrupoActual"
+                    value="#{g.codGrupo}"/>
+            </p:column>
+
+            <p:column id="descripcion" sortBy="#{g.descripcion}" filterBy="#{g.descripcion}">
+                <f:facet name="header">Descripcion</f:facet>
+                <h:outputText id="descripcionActual" value="#{g.descripcion}">
+                </h:outputText>
+            </p:column>
+
+    </p:dataTable>
+    </h:panelGrid>
+
+</ui:composition>
+
